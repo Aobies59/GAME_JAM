@@ -14,6 +14,7 @@ var crouching = false
 var running = false
 
 var interactable_object = null
+var inventory_space = 4
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -57,12 +58,25 @@ func handle_other_inputs():
 		running = false
 		
 	if Input.is_action_just_pressed("interact") and interactable_object != null:
-		if interactable_object.name.begins_with("button") and interactable_object.interactable:
-			interactable_object.interact()
-			$HUD.display_popup("beware")
+		if interactable_object.name.begins_with("interactable") and interactable_object.interactable:
+			interactable_object.interact(self)
+		if interactable_object.name.begins_with("collectable") and inventory_space > 0:
+			inventory_space -= 1
+			$HUD.collect(interactable_object)
+			
+	if Input.is_action_just_pressed("interact2"):
+		var relative_position = self.position - $CamRoot/Camera3D.get_global_transform().basis.z
+		if $HUD.drop(relative_position, $CollisionShape3D) == 0:
+			inventory_space += 1
 		
 	if Input.is_action_just_pressed("escape"):
 		get_tree().quit()
+		
+	if Input.is_action_just_pressed("ScrollUp"):
+		$HUD.move_selected_slot_left()
+		
+	if Input.is_action_just_pressed("ScrollDown"):
+		$HUD.move_selected_slot_right()
 		
 func get_speed():
 	# return speed according to player's state
@@ -117,3 +131,6 @@ func _on_area_3d_body_entered(body):
 func _on_area_3d_body_exited(body):
 	if body in CloseObjects.objects_close:
 		CloseObjects.objects_close.remove_at(CloseObjects.objects_close.find(body))
+
+func display_popup(popup_name):
+	$HUD.display_popup(popup_name)

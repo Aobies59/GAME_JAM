@@ -128,5 +128,109 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 30
 text = "\"PRESS E TO INTERACT\""
 
+[node name="Objects" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = -55.0
+offset_right = 58.0
+offset_bottom = -15.0
+grow_vertical = 0
+
+[node name="Slot1Selected" type="ColorRect" parent="Objects"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 38.0
+offset_bottom = 38.0
+scale = Vector2(1.09609, 1.11001)
+color = Color(1, 0, 0, 1)
+
+[node name="Slot1Empty" type="ColorRect" parent="Objects"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Slot1Full" type="ColorRect" parent="Objects"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="Slot2Selected" type="ColorRect" parent="Objects"]
+visible = false
+layout_mode = 0
+offset_left = 47.0
+offset_top = -2.0
+offset_right = 87.0
+offset_bottom = 38.0
+scale = Vector2(1.09609, 1.11001)
+color = Color(1, 0, 0, 1)
+
+[node name="Slot2Empty" type="ColorRect" parent="Objects"]
+layout_mode = 0
+offset_left = 49.0
+offset_right = 89.0
+offset_bottom = 40.0
+
+[node name="Slot2Full" type="ColorRect" parent="Objects"]
+visible = false
+layout_mode = 0
+offset_left = 49.0
+offset_right = 89.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="Slot3Selected" type="ColorRect" parent="Objects"]
+visible = false
+layout_mode = 0
+offset_left = 97.0
+offset_top = -2.0
+offset_right = 137.0
+offset_bottom = 38.0
+scale = Vector2(1.09609, 1.11001)
+color = Color(1, 0, 0, 1)
+
+[node name="Slot3Empty" type="ColorRect" parent="Objects"]
+layout_mode = 0
+offset_left = 99.0
+offset_right = 139.0
+offset_bottom = 40.0
+
+[node name="Slot3Full" type="ColorRect" parent="Objects"]
+visible = false
+layout_mode = 0
+offset_left = 99.0
+offset_right = 139.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="Slot4Selected" type="ColorRect" parent="Objects"]
+visible = false
+layout_mode = 0
+offset_left = 148.0
+offset_top = -2.0
+offset_right = 188.0
+offset_bottom = 38.0
+scale = Vector2(1.09609, 1.11001)
+color = Color(1, 0, 0, 1)
+
+[node name="Slot4Empty" type="ColorRect" parent="Objects"]
+layout_mode = 0
+offset_left = 150.0
+offset_right = 190.0
+offset_bottom = 40.0
+
+[node name="Slot4Full" type="ColorRect" parent="Objects"]
+visible = false
+layout_mode = 0
+offset_left = 150.0
+offset_right = 190.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="mujeres_cachondas/close_button" to="mujeres_cachondas" method="_on_close_button_pressed"]
 [connection signal="pressed" from="beware/close_button" to="beware" method="_on_close_button_pressed"]

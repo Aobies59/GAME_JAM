@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqvea62eedgmi"]
+
+[ext_resource type="Script" path="res://Orb.gd" id="1_nr3ux"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy23x"]
+albedo_color = Color(1, 1, 0, 1)
+metallic = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_i53gg"]
+material = SubResource("StandardMaterial3D_fy23x")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7r2dk"]
+radius = 0.2
+
+[node name="Orb" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.205091, 0)
+script = ExtResource("1_nr3ux")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_i53gg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7r2dk")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(0.145727, 0, 0, 0, 0.088224, 0, 0, 0, 0.131425, 0, 0, 0)
+aabb = AABB(-0.708546, -1.11531, -1, 1.41709, 2.23062, 2)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

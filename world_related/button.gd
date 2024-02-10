@@ -1,13 +1,17 @@
-extends StaticBody3D
+extends "res://world_related/interactables_and_collectables.gd"
 var interactable = true
+var inventory_space = 4
 
 func _ready():
+	super._ready()
 	$MeshInstance3D2/AnimationPlayer.animation_finished.connect(_animation_finished)
-	self.name = "button"
+	self.name = "interactable_button"
+	floor_height = 0.507
 	
-func interact():
+func interact(player):
 	interactable = false
 	$MeshInstance3D2/AnimationPlayer.play("press_button")
+	player.display_popup("beware")
 
 func _animation_finished(anim_name):
 	if anim_name == "press_button":
