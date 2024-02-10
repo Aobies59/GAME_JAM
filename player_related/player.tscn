@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://wadayt3nt7ao"]
+[gd_scene load_steps=7 format=3 uid="uid://wadayt3nt7ao"]
 
 [ext_resource type="Script" path="res://player_related/player.gd" id="1_h6cke"]
 [ext_resource type="PackedScene" uid="uid://w0du2stt3g3j" path="res://player_related/hud_related/hud.tscn" id="2_7avxc"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4hqqd"]
 radius = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jyvg8"]
+size = Vector3(1.26462, 1.58159, 1.22519)
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -32,5 +35,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.349425, 0)
 [node name="ObjectDetection" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_4hqqd")
 
+[node name="Area3D2" type="Area3D" parent="."]
+
+[node name="ObjectInFront" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680525, -0.0817795, 0.0513756)
+shape = SubResource("BoxShape3D_jyvg8")
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]
+[connection signal="body_exited" from="Area3D2" to="." method="_on_area_3d_2_body_exited"]

@@ -14,6 +14,7 @@ var crouching = false
 var running = false
 
 var interactable_object = null
+var objects_in_front: Array
 var inventory_space = 4
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -21,6 +22,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	name = "Player"
 	
 func _process(_delta):
 	handle_other_inputs()
@@ -61,12 +63,15 @@ func handle_other_inputs():
 		if interactable_object.name.begins_with("interactable") and interactable_object.interactable:
 			interactable_object.interact(self)
 		if interactable_object.name.begins_with("collectable") and inventory_space > 0:
+			var object = interactable_object
+			if object in objects_in_front:
+				objects_in_front.remove_at(objects_in_front.find(object))
 			inventory_space -= 1
 			$HUD.collect(interactable_object)
 			
-	if Input.is_action_just_pressed("interact2"):
+	if Input.is_action_just_pressed("interact2") and len(objects_in_front) == 0:
 		var relative_position = self.position - $CamRoot/Camera3D.get_global_transform().basis.z
-		if $HUD.drop(relative_position, $CollisionShape3D) == 0:
+		if $HUD.drop(relative_position) == 0:
 			inventory_space += 1
 		
 	if Input.is_action_just_pressed("escape"):
@@ -134,3 +139,13 @@ func _on_area_3d_body_exited(body):
 
 func display_popup(popup_name):
 	$HUD.display_popup(popup_name)
+
+
+func _on_area_3d_2_body_entered(body):
+	if body not in objects_in_front and body.name != "Player":
+		objects_in_front.append(body)
+
+
+func _on_area_3d_2_body_exited(body):
+	if body in objects_in_front:
+		objects_in_front.remove_at(objects_in_front.find(body))

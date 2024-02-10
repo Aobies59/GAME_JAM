@@ -2,20 +2,22 @@ extends Node
 
 
 var used_spaces: Array
-# {"collision_shape" = CollisionShape3D, position = Vector3
+# "aabb" = AABB, position = Vector3
 	
-func append_space(space: CollisionShape3D):
-	if space not in used_spaces:
-		used_spaces.append(space)
+func append_space(space: AABB, position: Vector3):
+	var space_to_append = {"aabb": space, "position": position}
+	if space_to_append not in used_spaces:
+		used_spaces.append(space_to_append)
 
-func remove_space(space: CollisionShape3D):
-	if space in used_spaces:
-		used_spaces.remove_at(used_spaces.find(space))
+func remove_space(space: AABB, position: Vector3):
+	var space_to_append = {"aabb": space, "position": position}
+	if space_to_append in used_spaces:
+		used_spaces.remove_at(used_spaces.find(space_to_append))
 
-func position_is_free(test_space: CollisionShape3D):
-	var transform1 = test_space.global_transform
+func position_is_free(test_position: Vector3):
+	var ray_origin = test_position
 	for space in used_spaces:
-		var transform2 = space.global_transform
-		if test_space.shape.get_aabb(test_space.global_transform).intersects(space.shape, transform1, transform2):
+		var ray_direction = space["position"] - ray_origin
+		if space["aabb"].intersects_ray(ray_origin, ray_direction):
 			return false
 	return true

@@ -1,16 +1,15 @@
 extends Control
 
 var popups: Dictionary
-var open_popup: ColorRect = null
+var open_popup: Sprite2D = null
 var inventory = [null, null, null, null]
-@onready var selected_slot_markers = [$Objects/Slot1Selected, $Objects/Slot2Selected,\
- $Objects/Slot3Selected, $Objects/Slot4Selected]
-@onready var full_slot_markers = [$Objects/Slot1Full, $Objects/Slot2Full, $Objects/Slot3Full, $Objects/Slot4Full]
+@onready var selected_slot_markers = [$InventoryUI/Slot1Selected, $InventoryUI/Slot2Selected,\
+ $InventoryUI/Slot3Selected, $InventoryUI/Slot4Selected]
+@onready var full_slot_markers = [$InventoryUI/Slot1Full, $InventoryUI/Slot2Full, $InventoryUI/Slot3Full, $InventoryUI/Slot4Full]
 var selected_slot = 0
 
 func _ready():
-	popups["mujeres_cachondas"] = $mujeres_cachondas
-	popups["beware"] = $beware
+	popups["beware"] = $Beware
 	
 func _process(_delta):
 	for i in range(4):
@@ -51,6 +50,7 @@ func collect(item):
 	if inventory[selected_slot] == null:
 		inventory[selected_slot] = item
 		display_collected_item(selected_slot)
+		item.get_node("CollisionShape3D").disabled = true
 		item.visible = false
 		return
 	
@@ -61,13 +61,12 @@ func collect(item):
 			item.visible = false
 			break
 			
-func drop(relative_position: Vector3, shape: CollisionShape3D):
+func drop(relative_position: Vector3):
 	if inventory[selected_slot] == null:
-		return -1
-	if not UsedSpace.position_is_free(shape):
 		return -1
 	inventory[selected_slot].position = Vector3(relative_position.x, inventory[selected_slot].floor_height, relative_position.z)
 	inventory[selected_slot].visible = true
+	inventory[selected_slot].get_node("CollisionShape3D").disabled = false
 	hide_collected_item(selected_slot)
 	inventory[selected_slot] = null
 	return 0
