@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs6e64u7s34v5"]
+[gd_scene load_steps=5 format=3 uid="uid://cs6e64u7s34v5"]
 
 [ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="1_ah0k3"]
+[ext_resource type="PackedScene" uid="uid://2ybtpu3e4vfu" path="res://world_related/button.tscn" id="2_8dcpy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nniuc"]
 size = Vector3(20, 0.2, 20)
@@ -20,3 +21,10 @@ mesh = SubResource("BoxMesh_nniuc")
 shape = SubResource("BoxShape3D_2hrq2")
 
 [node name="Player" parent="." instance=ExtResource("1_ah0k3")]
+
+[node name="Button" parent="." instance=ExtResource("2_8dcpy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0711191, 0.507144, -5.92859)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.827562, 0.0293014, 0.560609, -0.559652, -0.0350844, 0.827984, 0.0439297, -0.998955, -0.0126359, 4.41338, 12.6235, -0.932694)
+shadow_enabled = true

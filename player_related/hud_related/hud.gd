@@ -22,3 +22,9 @@ func hide_popup():
 	open_popup.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	open_popup = null
+
+func display_interact_hud():
+	$Interact.visible = true
+	
+func hide_interact_hud():
+	$Interact.visible = false

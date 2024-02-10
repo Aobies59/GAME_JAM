@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://2ybtpu3e4vfu"]
+
+[ext_resource type="Script" path="res://world_related/button.gd" id="1_8bura"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o614n"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_15yip"]
+material = SubResource("StandardMaterial3D_o614n")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ddrkw"]
+albedo_color = Color(0.631373, 0, 0.0705882, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tfpfj"]
+material = SubResource("StandardMaterial3D_ddrkw")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.2
+
+[sub_resource type="Animation" id="Animation_4sqad"]
+resource_name = "press_button"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.511754, 0), Vector3(0, 0.439086, 0), Vector3(0, 0.512, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mb0q8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.511754, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ofpt"]
+_data = {
+"RESET": SubResource("Animation_mb0q8"),
+"press_button": SubResource("Animation_4sqad")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1f07n"]
+
+[node name="Button" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507144, 0)
+script = ExtResource("1_8bura")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_15yip")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.511754, 0)
+mesh = SubResource("CylinderMesh_tfpfj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MeshInstance3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_8ofpt")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1f07n")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(0.147689, 0, 0, 0, 0.021978, 0, 0, 0, 0.110175, 0, 0.583318, 0)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

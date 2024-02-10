@@ -13,6 +13,8 @@ var MOUSE_SENSITIVITY = 0.1
 var crouching = false
 var running = false
 
+var interactable_object = null
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -29,6 +31,16 @@ func _process(_delta):
 	else:
 		Windows.mouse_clicked = false
 		
+	interactable_object = null
+	for body in CloseObjects.objects_close:
+		if body in CloseObjects.objects_in_view:
+			interactable_object = body
+			
+	if interactable_object != null:
+		$HUD.display_interact_hud()
+	else:
+		$HUD.hide_interact_hud()
+		
 	Windows.click_position = get_viewport().get_mouse_position()
 	
 func handle_other_inputs():
@@ -44,8 +56,10 @@ func handle_other_inputs():
 	else:
 		running = false
 		
-	if Input.is_action_just_pressed("interact") and not Windows.popup_open:
-		$HUD.display_popup("beware")
+	if Input.is_action_just_pressed("interact") and interactable_object != null:
+		if interactable_object.name.begins_with("button") and interactable_object.interactable:
+			interactable_object.interact()
+			$HUD.display_popup("beware")
 		
 	if Input.is_action_just_pressed("escape"):
 		get_tree().quit()
@@ -93,3 +107,13 @@ func _input(event):
 		$CamRoot.rotate_x(deg_to_rad(event.relative.y) * MOUSE_SENSITIVITY * -1)
 		$CamRoot.rotation_degrees.x = clamp($CamRoot.rotation_degrees.x, -75, 75)
 		self.rotate_y(deg_to_rad(event.relative.x) * MOUSE_SENSITIVITY * -1)
+
+
+func _on_area_3d_body_entered(body):
+	if body not in CloseObjects.objects_close:
+		CloseObjects.objects_close.append(body)
+
+
+func _on_area_3d_body_exited(body):
+	if body in CloseObjects.objects_close:
+		CloseObjects.objects_close.remove_at(CloseObjects.objects_close.find(body))
