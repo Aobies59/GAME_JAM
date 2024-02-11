@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs6e64u7s34v5"]
+[gd_scene load_steps=8 format=3 uid="uid://cs6e64u7s34v5"]
 
 [ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="1_ah0k3"]
-[ext_resource type="PackedScene" uid="uid://2ybtpu3e4vfu" path="res://world_related/button.tscn" id="2_8dcpy"]
+[ext_resource type="PackedScene" uid="uid://2ybtpu3e4vfu" path="res://world_related/interactables/button.tscn" id="2_8dcpy"]
 [ext_resource type="PackedScene" uid="uid://dqvea62eedgmi" path="res://world_related/collectables/test_collectable.tscn" id="3_ocjcl"]
+[ext_resource type="PackedScene" uid="uid://bmh2a2g7tx22k" path="res://puzzles/puzzle_1/puzzle_1.tscn" id="4_cd88b"]
+[ext_resource type="PackedScene" uid="uid://ddysbvtjxnwwv" path="res://world_related/collectables/chair.tscn" id="5_rr7j4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nniuc"]
 size = Vector3(20, 0.2, 20)
@@ -32,7 +34,7 @@ shape = SubResource("BoxShape3D_2hrq2")
 [node name="Objects" type="Node3D" parent="."]
 
 [node name="Button" parent="Objects" instance=ExtResource("2_8dcpy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0711191, 0.507144, -5.92859)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.76553, 0.710084, -5.92859)
 
 [node name="Orb" parent="Objects" instance=ExtResource("3_ocjcl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.41515, 0.420748, 0)
@@ -48,3 +50,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95889, 0.420748, -4.76019)
 
 [node name="Orb5" parent="Objects" instance=ExtResource("3_ocjcl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.11321, 0.420748, -1.25015)
+
+[node name="puzzle_1" parent="Objects" instance=ExtResource("4_cd88b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00566, -7.1239)
+
+[node name="Chair" parent="Objects" instance=ExtResource("5_rr7j4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.480282, -3.43453)

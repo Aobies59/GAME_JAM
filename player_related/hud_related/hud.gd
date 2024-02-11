@@ -39,8 +39,14 @@ func hide_popup():
 func display_interact_hud():
 	$Interact.visible = true
 	
+func display_use_hud():
+	$Use.visible = true
+	
 func hide_interact_hud():
 	$Interact.visible = false
+
+func hide_use_hud():
+	$Use.visible = false
 
 var inventory = [null, null, null, null]
 var inventory_names = [null, null, null, null]
@@ -53,7 +59,9 @@ func move_selected_slot_left():
 	CloseObjects.object_in_hand = inventory_names[selected_slot]
 
 # preloaded objects to drop on the floor
-var collectables = {"Orb": preload("res://world_related/collectables/test_collectable.tscn"), "Chair": preload("res://world_related/collectables/temp_chair.tscn")}
+var collectables = {"Orb": preload("res://world_related/collectables/test_collectable.tscn"),
+"Chair": preload("res://world_related/collectables/chair.tscn"),
+"Puzzle_orb": preload("res://world_related/collectables/puzzle_orb.tscn")}
 func collect(item):
 	# CloseObjects.object_in_hand = object's collectable name
 	# inventory[selected_slot] = objects preloaded node
@@ -72,7 +80,6 @@ func collect(item):
 		if inventory[i] == null:
 			inventory[i] = collectables[item.collectable_name]
 			inventory_names[i] = item.collectable_name
-			CloseObjects.object_in_hand = item.collectable_name
 			display_collected_item(i)
 			item.queue_free()
 			return 0
@@ -80,14 +87,17 @@ func collect(item):
 	# if the item was not collected succesfully, return error state
 	return -1
 
-func drop(relative_position: Vector3):
+func drop(relative_position: Vector3, absolute_position = false):
 	# if there is no object in hand, return error state
 	if inventory[selected_slot] == null or CloseObjects.object_in_hand == null:
 		return -1
 	# create the item to spawn in the floor
 	var temp_item = inventory[selected_slot].instantiate()
 	# item's position is the given position with its own floor height
-	temp_item.position = Vector3(relative_position.x, FloorHeight.floor_heights[CloseObjects.object_in_hand], relative_position.z)
+	if absolute_position:
+		temp_item.position = relative_position
+	else:
+		temp_item.position = Vector3(relative_position.x, FloorHeight.floor_heights[CloseObjects.object_in_hand], relative_position.z)
 	# add the item to the tree
 	get_tree().root.add_child(temp_item)
 	# hide the item from the inventory hud

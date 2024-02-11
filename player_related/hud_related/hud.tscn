@@ -25,14 +25,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -169.0
-offset_top = 187.0
-offset_right = 169.0
-offset_bottom = 229.0
+offset_left = 420.0
+offset_top = 234.0
+offset_right = 575.0
+offset_bottom = 276.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 30
-text = "\"PRESS E TO INTERACT\""
+text = "INTERACT"
+
+[node name="Use" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 430.0
+offset_top = 234.0
+offset_right = 558.0
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "COLLECT"
 
 [node name="InventoryUI" type="Control" parent="."]
 layout_mode = 1

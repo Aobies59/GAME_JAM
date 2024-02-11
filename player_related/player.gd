@@ -8,6 +8,7 @@ var speed = 5.0
 var interactable_object = null
 func _process(_delta):
 	handle_other_inputs()
+	handle_interact_inputs()
 	# update speed based on player state
 	speed = get_speed()
 	$CamRoot.position.y = get_player_height()
@@ -18,7 +19,7 @@ func _process(_delta):
 	
 	Windows.click_position = get_viewport().get_mouse_position()
 	
-@onready var objects_in_hand = [$CamRoot/Orb, $CamRoot/Chair]
+@onready var objects_in_hand = [$CamRoot/Orb, $CamRoot/Chair, $CamRoot/PuzzleOrb]
 func update_hud_object_visibility():
 	# update the item in the bottom left's visibility
 	for object in objects_in_hand:
@@ -34,24 +35,37 @@ func get_interactable_object():
 	# if there is a body both close and in view, it is interactable
 	for body in CloseObjects.objects_close:
 		if body in CloseObjects.objects_in_view:
-			$HUD.display_interact_hud()
-			return body
+			if body.name.begins_with("interactable") and body.interactable:
+				$HUD.hide_use_hud()
+				$HUD.display_interact_hud()
+				return body
+			elif body.name.begins_with("collectable") and inventory_space > 0:
+				$HUD.hide_interact_hud()
+				$HUD.display_use_hud()
+				return body
 			
 	# if there is no interactable object, hide the interact hud
 	$HUD.hide_interact_hud()
+	$HUD.hide_use_hud()
 	return null
 	
-var inventory_space = 4
-var objects_in_front: Array
 func handle_other_inputs():
 	update_player_state()
+
+	# TODO: pause menu
+	if Input.is_action_just_pressed("escape"):
+		get_tree().quit()
 		
-	# handle interact button
+	scroll_inventory_slots()
+
+var inventory_space = 4
+var objects_in_front: Array
+func handle_interact_inputs():
 	if Input.is_action_just_pressed("interact") and interactable_object != null:
-		# if the object is interactable, interact with it
+	# if the object is interactable, interact with it
 		if interactable_object.name.begins_with("interactable") and interactable_object.interactable:
 			interactable_object.interact(self)
-			
+		
 		# if the object is collectable, try to collect it
 		if interactable_object.name.begins_with("collectable") and inventory_space > 0:
 			# only update the inventory space if the object was collected succesfully
@@ -59,17 +73,11 @@ func handle_other_inputs():
 				inventory_space -= 1
 			
 	# handle second interact button
-	if Input.is_action_just_pressed("interact2") and len(objects_in_front) == 0:
+	if Input.is_action_just_pressed("interact2") and len(objects_in_front) == 0 and is_on_floor():
 		var relative_position = self.position - $CamRoot/Camera3D.get_global_transform().basis.z
 		# only update the inventory space if the object was dropped succesfully
 		if $HUD.drop(relative_position) == 0:
 			inventory_space += 1
-		
-	# TODO: pause menu
-	if Input.is_action_just_pressed("escape"):
-		get_tree().quit()
-		
-	scroll_inventory_slots()
 
 # player state variables
 var crouching = false
@@ -145,21 +153,21 @@ func _input(event):
 		$CamRoot.rotation_degrees.x = clamp($CamRoot.rotation_degrees.x, -75, 75)
 		self.rotate_y(deg_to_rad(event.relative.x) * MOUSE_SENSITIVITY * -1)
 
-func _on_area_3d_body_entered(body):
-	if body not in CloseObjects.objects_close:
-		CloseObjects.objects_close.append(body)
-
-func _on_area_3d_body_exited(body):
-	if body in CloseObjects.objects_close:
-		CloseObjects.objects_close.remove_at(CloseObjects.objects_close.find(body))
-
 func display_popup(popup_name):
 	$HUD.display_popup(popup_name)
 
-func _on_area_3d_2_body_entered(body):
+func _on_object_around_body_entered(body):
+	if body not in CloseObjects.objects_close:
+		CloseObjects.objects_close.append(body)
+
+func _on_object_around_body_exited(body):
+	if body in CloseObjects.objects_close:
+		CloseObjects.objects_close.remove_at(CloseObjects.objects_close.find(body))
+
+func _on_object_in_front_body_entered(body):
 	if body not in objects_in_front and body.name != "Player":
 		objects_in_front.append(body)
 
-func _on_area_3d_2_body_exited(body):
+func _on_object_in_front_body_exited(body):
 	if body in objects_in_front:
 		objects_in_front.remove_at(objects_in_front.find(body))

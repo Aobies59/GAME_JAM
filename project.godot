@@ -21,6 +21,10 @@ Windows="*res://global/windows.gd"
 CloseObjects="*res://global/close_objects.gd"
 FloorHeight="*res://global/floor_height.gd"
 
+[display]
+
+window/size/resizable=false
+
 [filesystem]
 
 import/blender/enabled=false

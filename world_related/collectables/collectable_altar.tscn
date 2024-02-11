@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cinlmaaemhohv"]
+
+[ext_resource type="Script" path="res://world_related/collectables/CollectableAltar.gd" id="1_dclvy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cbgaa"]
+radius = 0.001
+
+[sub_resource type="BoxMesh" id="BoxMesh_ivbvs"]
+
+[node name="CollectableAltar" type="StaticBody3D"]
+script = ExtResource("1_dclvy")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 5.22716, 0, 0, 0, 1, 0, 0, 0)
+aabb = AABB(-0.0903608, -0.014066, -0.0933891, 0.180722, 0.028132, 0.186778)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_cbgaa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.171022, 0, 0, 0, 0.0269901, 0, 0, 0, 0.207167, 0, -0.0718829, 0)
+mesh = SubResource("BoxMesh_ivbvs")
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
