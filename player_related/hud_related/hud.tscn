@@ -1,16 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://w0du2stt3g3j"]
+[gd_scene load_steps=9 format=3 uid="uid://w0du2stt3g3j"]
 
 [ext_resource type="Script" path="res://player_related/hud_related/hud.gd" id="1_hp7ha"]
-
-[sub_resource type="GDScript" id="GDScript_3iq1u"]
-script/source = "extends \"res://player_related/hud_related/popups.gd\"
-
-func _ready():
-	distance_to_center = Vector2(self.size.x/2, 0)
-
-func _on_close_button_pressed():
-	$\"..\".hide_popup()
-"
+[ext_resource type="Texture2D" uid="uid://b43ynin770pty" path="res://assets/windows/sun/window_sun_base.svg" id="2_uhy4e"]
+[ext_resource type="Script" path="res://player_related/hud_related/WindowSunBase.gd" id="3_fd71d"]
+[ext_resource type="FontFile" uid="uid://tf5dto8n3iqd" path="res://assets/windows/W95FA.otf" id="4_aw7hu"]
+[ext_resource type="Texture2D" uid="uid://b4nolh3fpcf8p" path="res://assets/windows/sun/window_sun_ok.svg" id="5_1lvjw"]
+[ext_resource type="Texture2D" uid="uid://dhlhwd2yknudu" path="res://assets/windows/sun/window_sun_ok_pressed.svg" id="6_hpu5f"]
+[ext_resource type="Texture2D" uid="uid://ktcy608my48t" path="res://assets/windows/sun/window_sun_close.svg" id="7_eoj74"]
+[ext_resource type="Texture2D" uid="uid://d2c23483esjmp" path="res://assets/windows/sun/window_sun_close_pressed.svg" id="8_dmeye"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -20,97 +17,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hp7ha")
-
-[node name="mujeres_cachondas" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -137.0
-offset_top = -131.0
-offset_right = 137.0
-offset_bottom = 131.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(134, 127)
-script = SubResource("GDScript_3iq1u")
-
-[node name="text" type="Label" parent="mujeres_cachondas"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -94.0
-offset_top = -50.5
-offset_right = 94.0
-offset_bottom = 50.5
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(96, 51.5)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "MUJERES CACHONDAS A
-5 KM DE DISTANCIA Y 
-APROXIMANDOSE A 240
-KILOMETROS POR HORA"
-
-[node name="close_button" type="Button" parent="mujeres_cachondas"]
-layout_mode = 1
-offset_left = 7.0
-offset_top = 5.0
-offset_right = 34.0
-offset_bottom = 55.0
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 30
-text = "X"
-
-[node name="beware" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -139.0
-offset_top = -78.0
-offset_right = 139.0
-offset_bottom = 78.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(134, 127)
-script = SubResource("GDScript_3iq1u")
-
-[node name="text" type="Label" parent="beware"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -88.5
-offset_top = -14.5
-offset_right = 88.5
-offset_bottom = 14.5
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(96, 51.5)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "BEWARE OF THE SUN"
-
-[node name="close_button" type="Button" parent="beware"]
-layout_mode = 1
-offset_left = 7.0
-offset_top = 5.0
-offset_right = 34.0
-offset_bottom = 55.0
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 30
-text = "X"
 
 [node name="Interact" type="Label" parent="."]
 layout_mode = 1
@@ -128,7 +34,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 30
 text = "\"PRESS E TO INTERACT\""
 
-[node name="Objects" type="Control" parent="."]
+[node name="InventoryUI" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -139,7 +45,7 @@ offset_right = 58.0
 offset_bottom = -15.0
 grow_vertical = 0
 
-[node name="Slot1Selected" type="ColorRect" parent="Objects"]
+[node name="Slot1Selected" type="ColorRect" parent="InventoryUI"]
 layout_mode = 0
 offset_left = -2.0
 offset_top = -2.0
@@ -148,19 +54,19 @@ offset_bottom = 38.0
 scale = Vector2(1.09609, 1.11001)
 color = Color(1, 0, 0, 1)
 
-[node name="Slot1Empty" type="ColorRect" parent="Objects"]
+[node name="Slot1Empty" type="ColorRect" parent="InventoryUI"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Slot1Full" type="ColorRect" parent="Objects"]
+[node name="Slot1Full" type="ColorRect" parent="InventoryUI"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 1)
 
-[node name="Slot2Selected" type="ColorRect" parent="Objects"]
+[node name="Slot2Selected" type="ColorRect" parent="InventoryUI"]
 visible = false
 layout_mode = 0
 offset_left = 47.0
@@ -170,13 +76,13 @@ offset_bottom = 38.0
 scale = Vector2(1.09609, 1.11001)
 color = Color(1, 0, 0, 1)
 
-[node name="Slot2Empty" type="ColorRect" parent="Objects"]
+[node name="Slot2Empty" type="ColorRect" parent="InventoryUI"]
 layout_mode = 0
 offset_left = 49.0
 offset_right = 89.0
 offset_bottom = 40.0
 
-[node name="Slot2Full" type="ColorRect" parent="Objects"]
+[node name="Slot2Full" type="ColorRect" parent="InventoryUI"]
 visible = false
 layout_mode = 0
 offset_left = 49.0
@@ -184,7 +90,7 @@ offset_right = 89.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 1)
 
-[node name="Slot3Selected" type="ColorRect" parent="Objects"]
+[node name="Slot3Selected" type="ColorRect" parent="InventoryUI"]
 visible = false
 layout_mode = 0
 offset_left = 97.0
@@ -194,13 +100,13 @@ offset_bottom = 38.0
 scale = Vector2(1.09609, 1.11001)
 color = Color(1, 0, 0, 1)
 
-[node name="Slot3Empty" type="ColorRect" parent="Objects"]
+[node name="Slot3Empty" type="ColorRect" parent="InventoryUI"]
 layout_mode = 0
 offset_left = 99.0
 offset_right = 139.0
 offset_bottom = 40.0
 
-[node name="Slot3Full" type="ColorRect" parent="Objects"]
+[node name="Slot3Full" type="ColorRect" parent="InventoryUI"]
 visible = false
 layout_mode = 0
 offset_left = 99.0
@@ -208,7 +114,7 @@ offset_right = 139.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 1)
 
-[node name="Slot4Selected" type="ColorRect" parent="Objects"]
+[node name="Slot4Selected" type="ColorRect" parent="InventoryUI"]
 visible = false
 layout_mode = 0
 offset_left = 148.0
@@ -218,13 +124,13 @@ offset_bottom = 38.0
 scale = Vector2(1.09609, 1.11001)
 color = Color(1, 0, 0, 1)
 
-[node name="Slot4Empty" type="ColorRect" parent="Objects"]
+[node name="Slot4Empty" type="ColorRect" parent="InventoryUI"]
 layout_mode = 0
 offset_left = 150.0
 offset_right = 190.0
 offset_bottom = 40.0
 
-[node name="Slot4Full" type="ColorRect" parent="Objects"]
+[node name="Slot4Full" type="ColorRect" parent="InventoryUI"]
 visible = false
 layout_mode = 0
 offset_left = 150.0
@@ -232,5 +138,133 @@ offset_right = 190.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 1)
 
-[connection signal="pressed" from="mujeres_cachondas/close_button" to="mujeres_cachondas" method="_on_close_button_pressed"]
-[connection signal="pressed" from="beware/close_button" to="beware" method="_on_close_button_pressed"]
+[node name="Template" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576.62, 346.5)
+scale = Vector2(0.58, 0.58)
+texture = ExtResource("2_uhy4e")
+script = ExtResource("3_fd71d")
+
+[node name="text" type="Label" parent="Template"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -348.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(96, 51.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_aw7hu")
+theme_override_font_sizes/font_size = 30
+text = "DEFAULT TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OkButton" type="TextureButton" parent="Template"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -347.5
+offset_top = -105.776
+offset_right = -130.5
+offset_bottom = -40.7758
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_1lvjw")
+texture_pressed = ExtResource("6_hpu5f")
+
+[node name="Label" type="Label" parent="Template/OkButton"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 211.0
+offset_bottom = 57.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_aw7hu")
+theme_override_font_sizes/font_size = 25
+text = "OK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="TextureButton" parent="Template"]
+offset_left = 188.586
+offset_top = -164.655
+offset_right = 228.586
+offset_bottom = -124.655
+texture_normal = ExtResource("7_eoj74")
+texture_pressed = ExtResource("8_dmeye")
+
+[node name="Beware" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576.62, 346.5)
+scale = Vector2(0.58, 0.58)
+texture = ExtResource("2_uhy4e")
+script = ExtResource("3_fd71d")
+
+[node name="text" type="Label" parent="Beware"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -348.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(96, 51.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_aw7hu")
+theme_override_font_sizes/font_size = 30
+text = "Beware of the Sun"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OkButton" type="TextureButton" parent="Beware"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -347.5
+offset_top = -105.776
+offset_right = -130.5
+offset_bottom = -40.7758
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_1lvjw")
+texture_pressed = ExtResource("6_hpu5f")
+
+[node name="Label" type="Label" parent="Beware/OkButton"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 211.0
+offset_bottom = 57.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_aw7hu")
+theme_override_font_sizes/font_size = 25
+text = "OK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="TextureButton" parent="Beware"]
+offset_left = 188.586
+offset_top = -164.655
+offset_right = 228.586
+offset_bottom = -124.655
+texture_normal = ExtResource("7_eoj74")
+texture_pressed = ExtResource("8_dmeye")
+
+[connection signal="pressed" from="Template/OkButton" to="Template" method="_on_ok_button_pressed"]
+[connection signal="pressed" from="Template/CloseButton" to="Template" method="_on_close_button_pressed"]
+[connection signal="pressed" from="Beware/OkButton" to="Beware" method="_on_ok_button_pressed"]
+[connection signal="pressed" from="Beware/CloseButton" to="Beware" method="_on_close_button_pressed"]

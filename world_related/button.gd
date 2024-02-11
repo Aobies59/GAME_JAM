@@ -3,7 +3,6 @@ var interactable = true
 var inventory_space = 4
 
 func _ready():
-	super._ready()
 	$MeshInstance3D2/AnimationPlayer.animation_finished.connect(_animation_finished)
 	self.name = "interactable_button"
 	floor_height = 0.507
