@@ -1,6 +1,7 @@
 extends Node
 
 var floor_height: float
+var collectable_name: String
 
 func _on_visible_on_screen_notifier_3d_screen_entered():
 	if self not in CloseObjects.objects_in_view:

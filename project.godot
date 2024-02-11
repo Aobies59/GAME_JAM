@@ -19,7 +19,11 @@ config/icon="res://icon.svg"
 
 Windows="*res://global/windows.gd"
 CloseObjects="*res://global/close_objects.gd"
-UsedSpace="*res://global/used_space.gd"
+FloorHeight="*res://global/floor_height.gd"
+
+[filesystem]
+
+import/blender/enabled=false
 
 [input]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://wadayt3nt7ao"]
+[gd_scene load_steps=10 format=3 uid="uid://wadayt3nt7ao"]
 
 [ext_resource type="Script" path="res://player_related/player.gd" id="1_h6cke"]
 [ext_resource type="PackedScene" uid="uid://w0du2stt3g3j" path="res://player_related/hud_related/hud.tscn" id="2_7avxc"]
@@ -6,6 +6,21 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5olx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6514v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy23x"]
+albedo_color = Color(1, 1, 0, 1)
+metallic = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_xnrci"]
+material = SubResource("StandardMaterial3D_fy23x")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="GDScript" id="GDScript_blt63"]
+script/source = "extends MeshInstance3D
+
+var collectable_name = \"Orb\"
+"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4hqqd"]
 radius = 1.0
@@ -21,12 +36,20 @@ script = ExtResource("1_h6cke")
 shape = SubResource("CapsuleShape3D_r5olx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_6514v")
 
 [node name="CamRoot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.349425, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamRoot"]
+
+[node name="Orb" type="MeshInstance3D" parent="CamRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.260843, -0.15617, -0.270544)
+visible = false
+mesh = SubResource("SphereMesh_xnrci")
+skeleton = NodePath("")
+script = SubResource("GDScript_blt63")
 
 [node name="HUD" parent="." instance=ExtResource("2_7avxc")]
 

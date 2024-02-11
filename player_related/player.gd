@@ -20,6 +20,8 @@ var inventory_space = 4
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@onready var objects_in_hand = [$CamRoot/Orb]
+ 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	name = "Player"
@@ -44,6 +46,15 @@ func _process(_delta):
 	else:
 		$HUD.hide_interact_hud()
 		
+	for object in objects_in_hand:
+		if CloseObjects.object_in_hand == null:
+			object.visible = false
+			continue
+		if object.collectable_name == CloseObjects.object_in_hand:
+			object.visible = true
+		else:
+			object.visible = false
+		
 	Windows.click_position = get_viewport().get_mouse_position()
 	
 func handle_other_inputs():
@@ -60,23 +71,27 @@ func handle_other_inputs():
 		running = false
 		
 	if Input.is_action_just_pressed("interact") and interactable_object != null:
+		# if the object is interactable, interact with it
 		if interactable_object.name.begins_with("interactable") and interactable_object.interactable:
 			interactable_object.interact(self)
+			
+		# if the object is collectable, try to collect it
 		if interactable_object.name.begins_with("collectable") and inventory_space > 0:
-			var object = interactable_object
-			if object in objects_in_front:
-				objects_in_front.remove_at(objects_in_front.find(object))
-			inventory_space -= 1
-			$HUD.collect(interactable_object)
+			# only update the inventory space if the object was collected succesfully
+			if $HUD.collect(interactable_object) == 0:
+				inventory_space -= 1
 			
 	if Input.is_action_just_pressed("interact2") and len(objects_in_front) == 0:
 		var relative_position = self.position - $CamRoot/Camera3D.get_global_transform().basis.z
+		# only update the inventory space if the object was dropped succesfully
 		if $HUD.drop(relative_position) == 0:
 			inventory_space += 1
 		
+	# TODO: pause menu
 	if Input.is_action_just_pressed("escape"):
 		get_tree().quit()
 		
+	# scroll between inventory slots
 	if Input.is_action_just_pressed("ScrollUp"):
 		$HUD.move_selected_slot_left()
 		
