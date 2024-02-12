@@ -18,18 +18,18 @@ size = Vector3(20, 0.2, 20)
 
 [node name="Environment" type="Node3D" parent="."]
 
+[node name="Floor" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, -8.9407e-08, -9.77889e-09, 6.25849e-07, 0.999999, 4.93601e-08, -2.18861e-08, 2.32831e-08, 1, 7.15256e-06, 0.110053, 6.55651e-07)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Floor"]
+mesh = SubResource("BoxMesh_nniuc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
+shape = SubResource("BoxShape3D_2hrq2")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(0.827562, 0.0293014, 0.560609, -0.559652, -0.0350844, 0.827984, 0.0439297, -0.998955, -0.0126359, 4.41338, 12.6235, -0.932694)
 shadow_enabled = true
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/DirectionalLight3D"]
-transform = Transform3D(0.827562, -0.559652, 0.0439297, 0.0293014, -0.0350844, -0.998955, 0.560609, 0.827984, -0.0126359, 3.39181, -0.622011, -12.8469)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/DirectionalLight3D/StaticBody3D"]
-mesh = SubResource("BoxMesh_nniuc")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/DirectionalLight3D/StaticBody3D"]
-shape = SubResource("BoxShape3D_2hrq2")
 
 [node name="Objects" type="Node3D" parent="."]
 

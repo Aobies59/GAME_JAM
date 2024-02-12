@@ -8,13 +8,14 @@ func _ready():
 	
 func _process(delta):
 	if active:
-		self.position.y -= 0.98 * delta
-	if self.position.y < -0.4:
-		self.position.y = -0.4
+		self.position.y -= 2 * delta
 	
 func _on_area_3d_body_entered(body):
 	if body.name.begins_with("Barrier") and active:
 		self.reset()
+	if body.name.begins_with("Floor") and active:
+		self.position.y += 0.1
+		active = false
 		
 func activate():
 	active = true
