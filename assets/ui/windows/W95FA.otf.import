@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://tf5dto8n3iqd"
-path="res://.godot/imported/W95FA.otf-5d35daaa1140e58bbe369036ece42f6d.fontdata"
+path="res://.godot/imported/W95FA.otf-f6914dac156a82daeee2cf7cf900f2ed.fontdata"
 
 [deps]
 
-source_file="res://assets/windows/W95FA.otf"
-dest_files=["res://.godot/imported/W95FA.otf-5d35daaa1140e58bbe369036ece42f6d.fontdata"]
+source_file="res://assets/ui/windows/W95FA.otf"
+dest_files=["res://.godot/imported/W95FA.otf-f6914dac156a82daeee2cf7cf900f2ed.fontdata"]
 
 [params]
 

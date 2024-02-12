@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjxgwl3k3xl2y"]
+
+[ext_resource type="Script" path="res://puzzles/puzzle_2/cylinder_generator.gd" id="1_ip34v"]
+
+[node name="CylinderGenerator" type="Node3D"]
+script = ExtResource("1_ip34v")

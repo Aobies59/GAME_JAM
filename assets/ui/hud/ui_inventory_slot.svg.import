@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4nolh3fpcf8p"
-path="res://.godot/imported/window_sun_ok.svg-29cd9c9ea65f9c0dc1d3e6388b3baedf.ctex"
+uid="uid://bui302slcfyr6"
+path="res://.godot/imported/ui_inventory_slot.svg-df599f5d62a0f81de43ada44a9656265.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/windows/sun/window_sun_ok.svg"
-dest_files=["res://.godot/imported/window_sun_ok.svg-29cd9c9ea65f9c0dc1d3e6388b3baedf.ctex"]
+source_file="res://assets/ui/hud/ui_inventory_slot.svg"
+dest_files=["res://.godot/imported/ui_inventory_slot.svg-df599f5d62a0f81de43ada44a9656265.ctex"]
 
 [params]
 

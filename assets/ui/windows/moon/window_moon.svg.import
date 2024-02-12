@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4nolh3fpcf8p"
-path="res://.godot/imported/window_sun_ok.svg-29cd9c9ea65f9c0dc1d3e6388b3baedf.ctex"
+uid="uid://bhgn5jl6s2taj"
+path="res://.godot/imported/window_moon.svg-a895a0aac59fc0b52b6d95ef7c103c31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/windows/sun/window_sun_ok.svg"
-dest_files=["res://.godot/imported/window_sun_ok.svg-29cd9c9ea65f9c0dc1d3e6388b3baedf.ctex"]
+source_file="res://assets/ui/windows/moon/window_moon.svg"
+dest_files=["res://.godot/imported/window_moon.svg-a895a0aac59fc0b52b6d95ef7c103c31.ctex"]
 
 [params]
 

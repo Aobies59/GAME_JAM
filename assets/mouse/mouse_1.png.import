@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b43ynin770pty"
-path.s3tc="res://.godot/imported/window_sun_base.svg-829ec100c5abeccd1e146cc8f45591e5.s3tc.ctex"
+uid="uid://du2utoj8gp0vg"
+path.s3tc="res://.godot/imported/mouse_1.png-db0b7149f4866e928bb41e477ab4ed31.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/ui/windows/sun/window_sun_base.svg"
-dest_files=["res://.godot/imported/window_sun_base.svg-829ec100c5abeccd1e146cc8f45591e5.s3tc.ctex"]
+source_file="res://assets/mouse/mouse_1.png"
+dest_files=["res://.godot/imported/mouse_1.png-db0b7149f4866e928bb41e477ab4ed31.s3tc.ctex"]
 
 [params]
 
@@ -24,8 +25,8 @@ compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=8
+roughness/src_normal="res://assets/mouse/mouse_2.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
@@ -33,6 +34,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

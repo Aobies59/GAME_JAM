@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmh2a2g7tx22k"]
+[gd_scene load_steps=15 format=3 uid="uid://tgg5vpjtyd21"]
 
 [ext_resource type="ArrayMesh" uid="uid://bxmyr8v3a5hu" path="res://assets/tubotest.obj" id="2_ncucm"]
 [ext_resource type="Script" path="res://world_related/collectables/Button.gd" id="3_gvtsb"]
@@ -128,13 +128,23 @@ shape = SubResource("BoxShape3D_caqmu")
 mesh = SubResource("BoxMesh_vaj7q")
 
 [node name="Barrier3" type="StaticBody3D" parent="Group_Barriers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00533387, 1.64494, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00533387, 1.44813, 0)
 script = SubResource("GDScript_danun")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Group_Barriers/Barrier3"]
 shape = SubResource("BoxShape3D_caqmu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Group_Barriers/Barrier3"]
+mesh = SubResource("BoxMesh_vaj7q")
+
+[node name="Barrier4" type="StaticBody3D" parent="Group_Barriers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.422791, 1.90611, 0)
+script = SubResource("GDScript_qw576")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Group_Barriers/Barrier4"]
+shape = SubResource("BoxShape3D_caqmu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Group_Barriers/Barrier4"]
 mesh = SubResource("BoxMesh_vaj7q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Group_Barriers"]

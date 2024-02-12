@@ -2,26 +2,28 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4nolh3fpcf8p"
-path="res://.godot/imported/window_sun_ok.svg-29cd9c9ea65f9c0dc1d3e6388b3baedf.ctex"
+uid="uid://bujgju8nw82hr"
+path.s3tc="res://.godot/imported/mouse_0.png-26d9c78b007c7990f4fe81c26bd37108.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/ui/windows/sun/window_sun_ok.svg"
-dest_files=["res://.godot/imported/window_sun_ok.svg-29cd9c9ea65f9c0dc1d3e6388b3baedf.ctex"]
+source_file="res://assets/mouse/mouse_0.png"
+dest_files=["res://.godot/imported/mouse_0.png-26d9c78b007c7990f4fe81c26bd37108.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,7 +33,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
+detect_3d/compress_to=0

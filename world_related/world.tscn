@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cs6e64u7s34v5"]
+[gd_scene load_steps=9 format=3 uid="uid://cs6e64u7s34v5"]
 
 [ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="1_ah0k3"]
 [ext_resource type="PackedScene" uid="uid://2ybtpu3e4vfu" path="res://world_related/interactables/button.tscn" id="2_8dcpy"]
 [ext_resource type="PackedScene" uid="uid://dqvea62eedgmi" path="res://world_related/collectables/test_collectable.tscn" id="3_ocjcl"]
-[ext_resource type="PackedScene" uid="uid://bmh2a2g7tx22k" path="res://puzzles/puzzle_1/puzzle_1.tscn" id="4_cd88b"]
+[ext_resource type="PackedScene" uid="uid://tgg5vpjtyd21" path="res://puzzles/puzzle_1/puzzle_1.tscn" id="4_cd88b"]
 [ext_resource type="PackedScene" uid="uid://ddysbvtjxnwwv" path="res://world_related/collectables/chair.tscn" id="5_rr7j4"]
+[ext_resource type="PackedScene" uid="uid://bjxgwl3k3xl2y" path="res://puzzles/puzzle_2/cylinder_generator.tscn" id="6_78djm"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nniuc"]
 size = Vector3(20, 0.2, 20)
@@ -56,3 +57,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00566, -7.1239)
 
 [node name="Chair" parent="Objects" instance=ExtResource("5_rr7j4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.480282, -3.43453)
+
+[node name="CylinderGenerator" parent="." instance=ExtResource("6_78djm")]
