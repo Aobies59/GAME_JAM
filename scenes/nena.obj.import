@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c6ntwqiag3qv"
+path="res://.godot/imported/nena.obj-28ef839ef44372d9ee057aa71b5fad3d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/nena.obj-28ef839ef44372d9ee057aa71b5fad3d.mesh"]
+
+source_file="res://scenes/nena.obj"
+dest_files=["res://.godot/imported/nena.obj-28ef839ef44372d9ee057aa71b5fad3d.mesh", "res://.godot/imported/nena.obj-28ef839ef44372d9ee057aa71b5fad3d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
