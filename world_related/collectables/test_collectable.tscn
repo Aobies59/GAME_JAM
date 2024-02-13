@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dqvea62eedgmi"]
 
-[ext_resource type="Script" path="res://world_related/collectables/Orb.gd" id="1_nr3ux"]
+[ext_resource type="Script" path="res://world_related/collectables/test_collectable.gd" id="1_dil3f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy23x"]
 albedo_color = Color(1, 1, 0, 1)
@@ -14,12 +14,12 @@ height = 0.4
 [sub_resource type="SphereShape3D" id="SphereShape3D_7r2dk"]
 radius = 0.2
 
-[node name="Orb" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.205091, 0)
-script = ExtResource("1_nr3ux")
+[node name="Orb" type="RigidBody3D"]
+script = ExtResource("1_dil3f")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_i53gg")
+skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7r2dk")

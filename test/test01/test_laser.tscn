@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=3 uid="uid://dbdn0nmjbihck"]
+
+[ext_resource type="Script" path="res://test/test01/test_laser.gd" id="1_1k0pn"]
+[ext_resource type="PackedScene" uid="uid://cpwicbphgrdft" path="res://test/test01/end_particles.tscn" id="2_eooit"]
+[ext_resource type="PackedScene" uid="uid://dihe3xmo320hf" path="res://test/test01/beam_particles.tscn" id="3_dkubx"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_oumrp"]
+flip_faces = true
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5fod1"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.843137)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_h4s8u"]
+
+[sub_resource type="Curve" id="Curve_iyk0d"]
+_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(0.268041, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7okya"]
+curve = SubResource("Curve_iyk0d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h5drv"]
+resource_local_to_scene = true
+spread = 80.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_h4s8u")
+radial_velocity_min = 1.0
+radial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_7okya")
+
+[sub_resource type="Curve" id="Curve_ehtjt"]
+_data = [Vector2(0, 0.494505), 0.0, 0.0, 0, 0, Vector2(0.237113, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_canmf"]
+curve = SubResource("Curve_ehtjt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_01k4g"]
+resource_local_to_scene = true
+emission_shape = 3
+emission_box_extents = Vector3(0.03, 0.1, 0.03)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_canmf")
+collision_mode = 2
+
+[node name="Laser" type="RayCast3D"]
+script = ExtResource("1_1k0pn")
+
+[node name="BeamMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_oumrp")
+surface_material_override/0 = SubResource("StandardMaterial3D_5fod1")
+
+[node name="EndParticles" parent="." instance=ExtResource("2_eooit")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+process_material = SubResource("ParticleProcessMaterial_h5drv")
+
+[node name="BeamParticles" parent="." instance=ExtResource("3_dkubx")]
+process_material = SubResource("ParticleProcessMaterial_01k4g")

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpoi0wjwp6fd8"]
+
+[ext_resource type="PackedScene" uid="uid://styp6m6sabo5" path="res://test/test01/box.tscn" id="1_u0at1"]
+[ext_resource type="PackedScene" uid="uid://dbdn0nmjbihck" path="res://test/test01/test_laser.tscn" id="2_0yjvl"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0oos0"]
+size = Vector2(5, 5)
+
+[node name="Main" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_0oos0")
+
+[node name="Box" parent="." instance=ExtResource("1_u0at1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273382, 1.2585)
+
+[node name="Box2" parent="." instance=ExtResource("1_u0at1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273382, -1.25878)
+
+[node name="Laser" parent="." instance=ExtResource("2_0yjvl")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.25, 1.006)
+target_position = Vector3(0, -10, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.61464, 0.401196, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.61464, 0.401196, 0)
+fov = 87.3023

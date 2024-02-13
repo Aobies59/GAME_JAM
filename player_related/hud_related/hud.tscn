@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://w0du2stt3g3j"]
 
 [ext_resource type="Script" path="res://player_related/hud_related/hud.gd" id="1_hp7ha"]
-[ext_resource type="Texture2D" uid="uid://b43ynin770pty" path="res://assets/windows/sun/window_sun_base.svg" id="2_uhy4e"]
+[ext_resource type="Texture2D" uid="uid://b43ynin770pty" path="res://assets/ui/windows/sun/window_sun_base.svg" id="2_uhy4e"]
 [ext_resource type="Script" path="res://player_related/hud_related/WindowSunBase.gd" id="3_fd71d"]
-[ext_resource type="FontFile" uid="uid://tf5dto8n3iqd" path="res://assets/windows/W95FA.otf" id="4_aw7hu"]
-[ext_resource type="Texture2D" uid="uid://b4nolh3fpcf8p" path="res://assets/windows/sun/window_sun_ok.svg" id="5_1lvjw"]
-[ext_resource type="Texture2D" uid="uid://dhlhwd2yknudu" path="res://assets/windows/sun/window_sun_ok_pressed.svg" id="6_hpu5f"]
-[ext_resource type="Texture2D" uid="uid://ktcy608my48t" path="res://assets/windows/sun/window_sun_close.svg" id="7_eoj74"]
-[ext_resource type="Texture2D" uid="uid://d2c23483esjmp" path="res://assets/windows/sun/window_sun_close_pressed.svg" id="8_dmeye"]
+[ext_resource type="FontFile" uid="uid://tf5dto8n3iqd" path="res://assets/ui/windows/W95FA.otf" id="4_aw7hu"]
+[ext_resource type="Texture2D" uid="uid://b4nolh3fpcf8p" path="res://assets/ui/windows/sun/window_sun_ok.svg" id="5_1lvjw"]
+[ext_resource type="Texture2D" uid="uid://dhlhwd2yknudu" path="res://assets/ui/windows/sun/window_sun_ok_pressed.svg" id="6_hpu5f"]
+[ext_resource type="Texture2D" uid="uid://ktcy608my48t" path="res://assets/ui/windows/sun/window_sun_close.svg" id="7_eoj74"]
+[ext_resource type="Texture2D" uid="uid://d2c23483esjmp" path="res://assets/ui/windows/sun/window_sun_close_pressed.svg" id="8_dmeye"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3

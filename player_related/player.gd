@@ -19,10 +19,12 @@ func _process(_delta):
 	
 	Windows.click_position = get_viewport().get_mouse_position()
 	
-@onready var objects_in_hand = [$CamRoot/Orb, $CamRoot/Chair, $CamRoot/PuzzleOrb]
+@onready var objects_in_hand = $CamRoot.get_children()
 func update_hud_object_visibility():
 	# update the item in the bottom left's visibility
 	for object in objects_in_hand:
+		if is_instance_of(object, Camera3D):
+			continue
 		if CloseObjects.object_in_hand == null:
 			object.visible = false
 			continue
@@ -49,12 +51,30 @@ func get_interactable_object():
 	$HUD.hide_use_hud()
 	return null
 	
+@onready var bullet = preload("res://player_related/bullet.tscn")
+var bullets = 100000000
+func shoot():
+	if CloseObjects.object_in_hand != "Gun":
+		return
+	if $CamRoot/collectable_gun.is_firing:
+		return
+	bullets -= 1
+	$CamRoot/collectable_gun.shoot()
+	var temp_bullet = bullet.instantiate()
+	var camera_direction = $CamRoot/Camera3D.get_global_transform().basis.z
+	temp_bullet.position = $CamRoot/bullet_position.global_transform.origin
+	temp_bullet.assign_direction(camera_direction)
+	get_parent().add_child(temp_bullet)
+	
 func handle_other_inputs():
 	update_player_state()
 
 	# TODO: pause menu
 	if Input.is_action_just_pressed("escape"):
 		get_tree().quit()
+		
+	if Input.is_action_pressed("click") and bullets > 0 and CloseObjects.object_in_hand == "Gun":
+		shoot()
 		
 	scroll_inventory_slots()
 

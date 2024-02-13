@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ddysbvtjxnwwv"]
 
-[ext_resource type="Script" path="res://Chair.gd" id="1_haykx"]
+[ext_resource type="Script" path="res://world_related/collectables/Chair.gd" id="1_hbhml"]
 [ext_resource type="Texture2D" uid="uid://cyxs7n7xk064e" path="res://assets/taburete/taburete_0.png" id="2_dehsm"]
 [ext_resource type="Texture2D" uid="uid://bdibwu4ngth7h" path="res://assets/taburete/taburete_1.png" id="3_hodqx"]
 [ext_resource type="Texture2D" uid="uid://d4jr0430bb3gd" path="res://assets/taburete/taburete_2.png" id="4_mfeyj"]
@@ -55,9 +55,8 @@ shadow_mesh = SubResource("ArrayMesh_kks4n")
 [sub_resource type="BoxShape3D" id="BoxShape3D_kp2li"]
 size = Vector3(0.576233, 0.55481, 0.535339)
 
-[node name="Chair" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271072, 0)
-script = ExtResource("1_haykx")
+[node name="Chair" type="RigidBody3D"]
+script = ExtResource("1_hbhml")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_xefg5")

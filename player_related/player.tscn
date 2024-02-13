@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://wadayt3nt7ao"]
+[gd_scene load_steps=29 format=3 uid="uid://wadayt3nt7ao"]
 
 [ext_resource type="Script" path="res://player_related/player.gd" id="1_h6cke"]
 [ext_resource type="PackedScene" uid="uid://w0du2stt3g3j" path="res://player_related/hud_related/hud.tscn" id="2_7avxc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cyxs7n7xk064e" path="res://assets/taburete/taburete_0.png" id="3_2is2l"]
 [ext_resource type="Texture2D" uid="uid://bdibwu4ngth7h" path="res://assets/taburete/taburete_1.png" id="4_6350l"]
 [ext_resource type="Texture2D" uid="uid://d4jr0430bb3gd" path="res://assets/taburete/taburete_2.png" id="5_yjgjm"]
+[ext_resource type="Script" path="res://player_related/Gun_hand.gd" id="6_a7lmc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5olx"]
 
@@ -87,6 +88,63 @@ script/source = "extends MeshInstance3D
 var collectable_name = \"Chair\"
 "
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vxxs"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4lkmd"]
+material = SubResource("StandardMaterial3D_8vxxs")
+size = Vector3(0.2, 0.4, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_remx7"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t8y23"]
+material = SubResource("StandardMaterial3D_remx7")
+size = Vector3(0.07, 0.3, 0.07)
+
+[sub_resource type="Animation" id="Animation_21lgm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.174533, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gbfyc"]
+resource_name = "Shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.174533, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nm38q"]
+_data = {
+"RESET": SubResource("Animation_21lgm"),
+"Shoot": SubResource("Animation_gbfyc")
+}
+
+[sub_resource type="GDScript" id="GDScript_txp5n"]
+script/source = "extends Node3D
+
+var collectable_name = \"NonCollectable\"
+"
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_4hqqd"]
 radius = 1.0
 
@@ -130,7 +188,29 @@ mesh = SubResource("ArrayMesh_xefg5")
 skeleton = NodePath("")
 script = SubResource("GDScript_b06hk")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CamRoot"]
+[node name="collectable_gun" type="Node3D" parent="CamRoot"]
+transform = Transform3D(0.2, 0, 0, 0, 0.196962, -0.0347297, 0, 0.0347297, 0.196962, 0.25, -0.173, -0.3)
+script = ExtResource("6_a7lmc")
+
+[node name="Barrel" type="MeshInstance3D" parent="CamRoot/collectable_gun"]
+transform = Transform3D(1, 0, 0, 0, 0.00373493, 0.999993, 0, -0.999993, 0.00373493, 0, 0.171, -0.048)
+mesh = SubResource("BoxMesh_4lkmd")
+skeleton = NodePath("../..")
+
+[node name="Handle" type="MeshInstance3D" parent="CamRoot/collectable_gun"]
+transform = Transform3D(1, 0, 0, 0, 0.979056, 0.203591, 0, -0.203591, 0.979056, 0, 0, 0.059)
+mesh = SubResource("BoxMesh_t8y23")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CamRoot/collectable_gun"]
+libraries = {
+"": SubResource("AnimationLibrary_nm38q")
+}
+
+[node name="bullet_position" type="Node3D" parent="CamRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512088, -0.514502, -0.85)
+visible = false
+script = SubResource("GDScript_txp5n")
 
 [node name="HUD" parent="." instance=ExtResource("2_7avxc")]
 
@@ -140,6 +220,7 @@ script = SubResource("GDScript_b06hk")
 shape = SubResource("SphereShape3D_4hqqd")
 
 [node name="ObjectInFront" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.702192, 0, -0.796488)
 
 [node name="ObjectInFrontDetection" type="CollisionShape3D" parent="ObjectInFront"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680525, -0.0817795, 0.0513756)

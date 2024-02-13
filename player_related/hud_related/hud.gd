@@ -1,5 +1,6 @@
 extends Control
 
+var gun
 var popups: Dictionary
 func _ready():
 	popups["beware"] = $Beware
@@ -61,7 +62,8 @@ func move_selected_slot_left():
 # preloaded objects to drop on the floor
 var collectables = {"Orb": preload("res://world_related/collectables/test_collectable.tscn"),
 "Chair": preload("res://world_related/collectables/chair.tscn"),
-"Puzzle_orb": preload("res://world_related/collectables/puzzle_orb.tscn")}
+"Puzzle_orb": preload("res://world_related/collectables/puzzle_orb.tscn"),
+"Gun": preload("res://player_related/gun.tscn")}
 func collect(item):
 	# CloseObjects.object_in_hand = object's collectable name
 	# inventory[selected_slot] = objects preloaded node
@@ -97,9 +99,9 @@ func drop(relative_position: Vector3, absolute_position = false):
 	if absolute_position:
 		temp_item.position = relative_position
 	else:
-		temp_item.position = Vector3(relative_position.x, FloorHeight.floor_heights[CloseObjects.object_in_hand], relative_position.z)
+		temp_item.position = Vector3(relative_position.x, FloorHeight.floor_height, relative_position.z)
 	# add the item to the tree
-	get_tree().root.add_child(temp_item)
+	add_child(temp_item)
 	# hide the item from the inventory hud
 	hide_collected_item(selected_slot)
 	# set the variables for the item to null

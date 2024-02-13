@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpwicbphgrdft"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ik68y"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.843137)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 10.0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_h4s8u"]
+
+[sub_resource type="Curve" id="Curve_iyk0d"]
+_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(0.268041, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7okya"]
+curve = SubResource("Curve_iyk0d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3n606"]
+resource_local_to_scene = true
+spread = 80.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_h4s8u")
+radial_velocity_min = 1.0
+radial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_7okya")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8eojs"]
+size = Vector2(0.02, 0.02)
+
+[node name="EndParticles" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_ik68y")
+amount = 25
+lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_3n606")
+draw_pass_1 = SubResource("QuadMesh_8eojs")

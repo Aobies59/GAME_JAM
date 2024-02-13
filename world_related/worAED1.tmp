@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dqvea62eedgmi" path="res://world_related/collectables/test_collectable.tscn" id="3_ocjcl"]
 [ext_resource type="PackedScene" uid="uid://bmh2a2g7tx22k" path="res://puzzles/puzzle_1/puzzle_1.tscn" id="4_cd88b"]
 [ext_resource type="PackedScene" uid="uid://ddysbvtjxnwwv" path="res://world_related/collectables/chair.tscn" id="5_rr7j4"]
-[ext_resource type="PackedScene" uid="uid://dy31sduyndi6n" path="res://player_related/gun.tscn" id="6_0032t"]
+[ext_resource type="PackedScene" uid="uid://dy31sduyndi6n" path="res://player_related/hud_related/gun.tscn" id="6_0032t"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nniuc"]
 size = Vector3(20, 0.2, 20)
