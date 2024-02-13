@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dfbarvxk1nn2i"]
+
+[ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="1_40n2f"]
+[ext_resource type="Texture2D" uid="uid://1sw6fiwgb2m" path="res://assets/computer/computer_pc_low_standardSurface3_BaseColor.png" id="2_gxk63"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_40n2f")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.331
+shader_parameter/jitter = 0.242
+shader_parameter/resolution = Vector2i(150, 150)
+shader_parameter/albedo = ExtResource("2_gxk63")

@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bhw71jm570h4u"]
+
+[ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="1_vv7d2"]
+[ext_resource type="Texture2D" uid="uid://craj2r708ecp" path="res://assets/wall/wall_basecolor.png" id="2_vi5jm"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_vv7d2")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.25
+shader_parameter/resolution = Vector2i(320, 240)
+shader_parameter/albedo = ExtResource("2_vi5jm")

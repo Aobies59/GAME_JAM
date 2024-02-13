@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dwriytra64p8v"]
+
+[ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="1_gvwkd"]
+[ext_resource type="Texture2D" uid="uid://c8vn5xp2xvrjt" path="res://assets/keyboard/keyboard_0.png" id="2_0w6ka"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gvwkd")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.315
+shader_parameter/jitter = 0.011
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("2_0w6ka")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpgrhnc0att0p"]
+
+[ext_resource type="PackedScene" uid="uid://p878o12jrnou" path="res://assets/caja02/caja02.glb" id="1_q6bif"]
+[ext_resource type="Material" uid="uid://d32mxdtu58ovo" path="res://shaders/modelShader.tres" id="2_nbnqd"]
+
+[node name="caja02" instance=ExtResource("1_q6bif")]
+
+[node name="caja_low2" parent="caja_low_obj/caja_low" index="0"]
+material_override = ExtResource("2_nbnqd")

@@ -1,5 +1,6 @@
-[gd_scene load_steps=37 format=3 uid="uid://henf0idxpflt"]
+[gd_scene load_steps=27 format=3 uid="uid://henf0idxpflt"]
 
+[ext_resource type="Shader" path="res://scenes/postProcessingFilter.gdshader" id="1_cpkwn"]
 [ext_resource type="Texture2D" uid="uid://0glty7kfq6rb" path="res://textures/texture_02.svg" id="2_hlo3o"]
 [ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="3_ms578"]
 [ext_resource type="PackedScene" uid="uid://840apkll4pse" path="res://assets/caja/caja.glb" id="4_haqk2"]
@@ -8,65 +9,72 @@
 [ext_resource type="PackedScene" uid="uid://p878o12jrnou" path="res://assets/caja02/caja02.glb" id="5_1seca"]
 [ext_resource type="PackedScene" uid="uid://bph0lkuaemw5w" path="res://assets/table/table.glb" id="6_fq0qy"]
 [ext_resource type="PackedScene" uid="uid://cpcmfnw3io21t" path="res://assets/door/door.glb" id="7_2khyr"]
+[ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="7_nstfp"]
 [ext_resource type="PackedScene" uid="uid://bipy1uhw2poml" path="res://assets/display/display.glb" id="8_257db"]
+[ext_resource type="Material" uid="uid://bhw71jm570h4u" path="res://assets/wall/wall.tres" id="9_7y382"]
 [ext_resource type="PackedScene" uid="uid://swqspdicltp6" path="res://assets/computer/computer.glb" id="9_dhyi6"]
 [ext_resource type="Texture2D" uid="uid://dq71eqcwnm16u" path="res://assets/floor/floor_basecolor.png" id="11_mcj4c"]
-[ext_resource type="Texture2D" uid="uid://bvo2tsk55gskb" path="res://assets/floor/floor_ambientocclusion.png" id="12_18i2m"]
-[ext_resource type="Texture2D" uid="uid://bbsveyhojh7ng" path="res://assets/floor/floor_height.png" id="13_1rvro"]
-[ext_resource type="Texture2D" uid="uid://brxxk4mtvusci" path="res://assets/floor/floor_metallic.png" id="14_pim4t"]
-[ext_resource type="Texture2D" uid="uid://x0t8ym4i3hfv" path="res://assets/floor/floor_normal.png" id="15_ooe6g"]
-[ext_resource type="Texture2D" uid="uid://bpo354wlfr2ic" path="res://assets/floor/floor_roughness.png" id="16_k5nxb"]
-[ext_resource type="Texture2D" uid="uid://craj2r708ecp" path="res://assets/wall/wall_basecolor.png" id="17_1x6se"]
-[ext_resource type="Texture2D" uid="uid://dr4qs3gk1t7fc" path="res://assets/wall/wall_ambientocclusion.png" id="18_f2htc"]
-[ext_resource type="Texture2D" uid="uid://dfldvi4twu8u1" path="res://assets/wall/wall_height.png" id="19_fxwmy"]
-[ext_resource type="Texture2D" uid="uid://bn383as70v11a" path="res://assets/wall/wall_metallic.png" id="20_gcq46"]
-[ext_resource type="Texture2D" uid="uid://dku0v4vc48rnj" path="res://assets/wall/wall_normal.png" id="21_vp7mg"]
-[ext_resource type="Texture2D" uid="uid://cmyxkmxi36nl5" path="res://assets/wall/wall_roughness.png" id="22_wam5x"]
 [ext_resource type="Texture2D" uid="uid://cqrkaau8y3fh3" path="res://assets/celling/celling_basecolor.png" id="23_w64xq"]
-[ext_resource type="Texture2D" uid="uid://8ch810uvk4no" path="res://assets/celling/celling_ambientocclusion.png" id="24_4c3cc"]
-[ext_resource type="Texture2D" uid="uid://bjqmc2askl0aq" path="res://assets/celling/celling_height.png" id="25_j1dsf"]
-[ext_resource type="Texture2D" uid="uid://tns20kmjtsmt" path="res://assets/celling/celling_metallic.png" id="26_k1tmg"]
-[ext_resource type="Texture2D" uid="uid://7gb8hy6hqje6" path="res://assets/celling/celling_normal.png" id="27_xjyl8"]
-[ext_resource type="Texture2D" uid="uid://bu4ha7cbm20jr" path="res://assets/celling/celling_roughness.png" id="28_rboh4"]
+[ext_resource type="PackedScene" uid="uid://bfdyamh0o5pnx" path="res://assets/leds/leds.glb" id="27_h6gk7"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8l3u5"]
-albedo_texture = ExtResource("23_w64xq")
-metallic = 1.0
-metallic_texture = ExtResource("26_k1tmg")
-roughness_texture = ExtResource("28_rboh4")
-normal_enabled = true
-normal_texture = ExtResource("27_xjyl8")
-ao_enabled = true
-ao_texture = ExtResource("24_4c3cc")
-heightmap_enabled = true
-heightmap_texture = ExtResource("25_j1dsf")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_diuti"]
+shader = ExtResource("1_cpkwn")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 12
+shader_parameter/dither_size = 4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fngb1"]
-albedo_texture = ExtResource("11_mcj4c")
-metallic = 1.0
-metallic_texture = ExtResource("14_pim4t")
-roughness_texture = ExtResource("16_k5nxb")
-normal_enabled = true
-normal_texture = ExtResource("15_ooe6g")
-ao_enabled = true
-ao_texture = ExtResource("12_18i2m")
-heightmap_enabled = true
-heightmap_texture = ExtResource("13_1rvro")
-uv1_scale = Vector3(5, 5, 5)
+[sub_resource type="Environment" id="Environment_fl7v1"]
+background_color = Color(0.580392, 0.431373, 0.211765, 1)
+background_energy_multiplier = 0.0
+ambient_light_source = 2
+ambient_light_color = Color(0.0352941, 0.113725, 0.133333, 1)
+ambient_light_energy = 4.73
+tonemap_mode = 3
+tonemap_exposure = 0.24
+tonemap_white = 16.0
+ssr_max_steps = 10
+ssr_depth_tolerance = 8.31
+ssao_enabled = true
+ssao_radius = 0.83
+ssao_intensity = 8.54
+ssao_detail = 0.0
+ssao_horizon = 0.0
+ssao_sharpness = 1.0
+fog_enabled = true
+fog_light_color = Color(0.521569, 0.552941, 0.588235, 1)
+fog_light_energy = 0.67
+fog_density = 0.0075
+fog_height = -323.37
+fog_height_density = 16.0
+volumetric_fog_density = 0.1658
+volumetric_fog_albedo = Color(0, 0.305882, 0.305882, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.12
+volumetric_fog_anisotropy = -0.9
+volumetric_fog_length = 1024.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_kf3yj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ty8j7"]
+render_priority = 0
+shader = ExtResource("7_nstfp")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.0
+shader_parameter/jitter = 0.0
+shader_parameter/resolution = Vector2i(150, 150)
+shader_parameter/albedo = ExtResource("23_w64xq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adx17"]
+render_priority = 0
+shader = ExtResource("7_nstfp")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.018
+shader_parameter/resolution = Vector2i(150, 150)
+shader_parameter/albedo = ExtResource("11_mcj4c")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u5ucj"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_edb85"]
-albedo_texture = ExtResource("17_1x6se")
-metallic = 1.0
-metallic_texture = ExtResource("20_gcq46")
-roughness_texture = ExtResource("22_wam5x")
-normal_enabled = true
-normal_texture = ExtResource("21_vp7mg")
-ao_enabled = true
-ao_texture = ExtResource("18_f2htc")
-heightmap_enabled = true
-heightmap_texture = ExtResource("19_fxwmy")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1fufp"]
 size = Vector3(1.60663, 1.36723, 1)
@@ -84,229 +92,312 @@ uv1_world_triplanar = true
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Casa" type="Node" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_diuti")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Techo" type="Node" parent="Casa"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+mesh_lod_threshold = 0.0
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Techo"]
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Techo/StaticBody3D"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/Node3D"]
+environment = SubResource("Environment_fl7v1")
+camera_attributes = SubResource("CameraAttributesPractical_kf3yj")
 
-[node name="Techo" type="CSGBox3D" parent="Casa/Techo/StaticBody3D/MeshInstance3D"]
-transform = Transform3D(-3.49691e-08, 0, -0.6, 0, 0.328, 0, 0.8, 0, -2.62268e-08, 0.0504278, 4.02945, 2.20427e-09)
+[node name="Casa" type="Node" parent="SubViewportContainer/SubViewport/Node3D"]
+
+[node name="Techo" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Techo"]
+
+[node name="Techo" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Techo/StaticBody3D"]
+transform = Transform3D(-3.49691e-08, 0, -0.6, 0, 0.328, 0, 0.8, 0, -2.62268e-08, 0.0440298, 4.76782, 2.20427e-09)
+layers = 4
+snap = 1e-06
 use_collision = true
-size = Vector3(7.59741, 0.0688477, 13.2298)
-material = SubResource("StandardMaterial3D_8l3u5")
+size = Vector3(7.59741, 4.57111, 13.2298)
+material = SubResource("ShaderMaterial_ty8j7")
 
-[node name="Suelo" type="Node" parent="Casa"]
+[node name="Suelo" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Suelo"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Suelo"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Suelo/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Suelo/StaticBody3D"]
 
-[node name="Suelo" type="CSGBox3D" parent="Casa/Suelo/StaticBody3D/MeshInstance3D"]
+[node name="Suelo" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Suelo/StaticBody3D/MeshInstance3D"]
 transform = Transform3D(-3.49691e-08, 0, -0.6, 0, 0.328, 0, 0.8, 0, -2.62268e-08, 0, 0, 0)
 use_collision = true
 size = Vector3(7.59741, 0.0688477, 13.0225)
-material = SubResource("StandardMaterial3D_fngb1")
+material = SubResource("ShaderMaterial_adx17")
 
-[node name="Paredes" type="Node" parent="Casa"]
+[node name="Paredes" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Paredes"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Paredes"]
 transform = Transform3D(-3.49691e-08, -0.328, 2.62268e-08, 0, -1.43373e-08, -0.6, 0.8, -1.43373e-08, 1.14641e-15, -3.90619, 2.04656, 3.52056e-15)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Casa/Paredes/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Paredes/StaticBody3D"]
 transform = Transform3D(1, 0, -1.05879e-22, 7.10543e-15, 1, -7.10543e-15, 0, -4.56569e-23, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_u5ucj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Paredes/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Paredes/StaticBody3D"]
 transform = Transform3D(1, 0, -3.17637e-22, 2.84217e-14, 1, -2.13163e-14, 0, -4.56569e-23, 1, 0, 0, 0)
 skeleton = NodePath("../CollisionShape3D")
 
-[node name="Wall1" type="CSGBox3D" parent="Casa/Paredes/StaticBody3D/MeshInstance3D"]
-transform = Transform3D(1, 0, 2.11758e-22, -1.42109e-14, 1, 7.10543e-15, 0, -4.56569e-23, 1, 0, 0, 0)
+[node name="Wall1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Paredes/StaticBody3D/MeshInstance3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0819391, 0, 0)
+layers = 8
 use_collision = true
-size = Vector3(7.59741, 0.0688477, 6.88062)
-material = SubResource("StandardMaterial3D_edb85")
+size = Vector3(7.59741, 0.0688477, 7.85077)
+material = ExtResource("9_7y382")
 
-[node name="Wall2" type="CSGBox3D" parent="Casa/Paredes/StaticBody3D/MeshInstance3D"]
-transform = Transform3D(-1, -3.58433e-08, 2.86603e-15, 2.13226e-07, -1, 1.5992e-07, -5.09516e-15, 4.77911e-08, 1, -4.2773e-07, -23.8667, -0.0152893)
+[node name="Wall2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Paredes/StaticBody3D/MeshInstance3D"]
+transform = Transform3D(4.37114e-08, 1.77636e-15, 1, 8.74228e-08, -1, 1.42109e-14, 1, 8.74229e-08, -4.37114e-08, 0.100792, -23.8667, 0.0257306)
+layers = 9
 use_collision = true
-size = Vector3(7.59741, 0.0688477, 7.0506)
-material = SubResource("StandardMaterial3D_edb85")
+size = Vector3(7.59741, 0.0688477, 8.25349)
+material = ExtResource("9_7y382")
 
-[node name="Wall3" type="CSGBox3D" parent="Casa/Paredes/StaticBody3D/MeshInstance3D"]
-transform = Transform3D(1.94707e-07, -0.41, 3.27835e-08, 2.43902, 1.94707e-07, 7.99599e-08, -5.82818e-08, 2.38956e-08, 1, -3.78738, -11.9091, -0.00403214)
+[node name="Wall3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Paredes/StaticBody3D/MeshInstance3D"]
+transform = Transform3D(-1.06613e-07, -0.41, 0, -1.06613e-07, 7.83381e-16, -1, 2.43902, -1.79217e-08, -4.37114e-08, -3.78738, -11.7617, -0.256859)
+layers = 8
 use_collision = true
-size = Vector3(9.81511, 0.0688477, 6.87964)
-material = SubResource("StandardMaterial3D_edb85")
+size = Vector3(3.2454, 0.0688477, 25.8505)
+material = ExtResource("9_7y382")
 
-[node name="Wall4" type="CSGBox3D" parent="Casa/Paredes/StaticBody3D/MeshInstance3D"]
-transform = Transform3D(1.94707e-07, -0.41, 3.27835e-08, 2.43902, 1.94707e-07, 7.99599e-08, -5.82818e-08, 2.38956e-08, 1, 3.80125, -11.9091, -0.00403214)
+[node name="Wall4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Paredes/StaticBody3D/MeshInstance3D"]
+transform = Transform3D(-1.06613e-07, -0.41, 3.82137e-15, 1.06613e-07, 7.83381e-16, 1, -2.43902, 1.79217e-08, 4.37114e-08, 3.80125, -11.7948, 0.0046196)
+layers = 9
 use_collision = true
-size = Vector3(9.81511, 0.0688477, 6.87964)
-material = SubResource("StandardMaterial3D_edb85")
+size = Vector3(2.9811, 0.0688477, 25.3236)
+material = ExtResource("9_7y382")
 
-[node name="Setup" type="Node" parent="Casa"]
+[node name="Setup" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
-[node name="Mesa" type="Node" parent="Casa/Setup"]
+[node name="Mesa" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Setup/Mesa"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Mesa"]
 transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0.981526, -2.23049)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Casa/Setup/Mesa/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Mesa/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000762939, 0.0911488, 0)
 shape = SubResource("BoxShape3D_1fufp")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Setup/Mesa/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Mesa/StaticBody3D"]
 
-[node name="table" parent="Casa/Setup/Mesa/StaticBody3D/MeshInstance3D" instance=ExtResource("6_fq0qy")]
+[node name="table" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Mesa/StaticBody3D/MeshInstance3D" instance=ExtResource("6_fq0qy")]
+transform = Transform3D(1, 0, 0, 0, 1.15584, 0, 0, 0, 1, 0, 0.0949242, 0)
 
-[node name="Pantalla" type="Node" parent="Casa/Setup"]
+[node name="Pantalla" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Setup/Pantalla"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Pantalla"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58035, -2.39743)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Setup/Pantalla/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Pantalla/StaticBody3D"]
 
-[node name="display" parent="Casa/Setup/Pantalla/StaticBody3D/MeshInstance3D" instance=ExtResource("8_257db")]
+[node name="display" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Pantalla/StaticBody3D/MeshInstance3D" instance=ExtResource("8_257db")]
+transform = Transform3D(0.989445, 0, -0.144909, 0, 1, 0, 0.144909, 0, 0.989445, 0.355158, 0.163894, -0.0167446)
 
-[node name="PC" type="Node" parent="Casa/Setup"]
+[node name="PC" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Setup/PC"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/PC"]
 transform = Transform3D(-8.74228e-07, 0, -20, 0, 20, 0, 20, 0, -8.74228e-07, -0.959549, 1.58237, -2.43796)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Setup/PC/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/PC/StaticBody3D"]
 
-[node name="computer" parent="Casa/Setup/PC/StaticBody3D/MeshInstance3D" instance=ExtResource("9_dhyi6")]
+[node name="computer" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/PC/StaticBody3D/MeshInstance3D" instance=ExtResource("9_dhyi6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0156908)
 
-[node name="Teclado" type="Node" parent="Casa/Setup"]
+[node name="Teclado" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Setup/Teclado"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Teclado"]
 transform = Transform3D(0.0099368, 0, 0.00112249, 0, 0.01, 0, -0.00112249, 0, 0.0099368, -0.0885141, 1.04312, -1.86277)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Setup/Teclado/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Teclado/StaticBody3D"]
 
-[node name="keyboard" parent="Casa/Setup/Teclado/StaticBody3D/MeshInstance3D" instance=ExtResource("4_w44vf")]
-transform = Transform3D(0.999214, 0, -0.0396435, 0, 1, 0, 0.0396435, 0, 0.999214, 0, 0, 0)
+[node name="keyboard" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Teclado/StaticBody3D/MeshInstance3D" instance=ExtResource("4_w44vf")]
+transform = Transform3D(0.999214, 0, -0.0396435, 0, 1, 0, 0.0396435, 0, 0.999214, 37.0297, 15.6836, 4.18297)
 
-[node name="Raton" type="Node" parent="Casa/Setup"]
+[node name="Raton" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Setup/Raton"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Raton"]
 transform = Transform3D(-0.0119879, 0, 0.00053766, 0, 0.012, 0, -0.00053766, 0, -0.0119879, 0.485918, 1.04726, -1.84229)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Setup/Raton/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Raton/StaticBody3D"]
 
-[node name="mouse" parent="Casa/Setup/Raton/StaticBody3D/MeshInstance3D" instance=ExtResource("5_1ea8d")]
-transform = Transform3D(0.997382, 0, -0.0723156, 0, 1, 0, 0.0723156, 0, 0.997382, 0, 0, 0)
+[node name="mouse" parent="SubViewportContainer/SubViewport/Node3D/Casa/Setup/Raton/StaticBody3D/MeshInstance3D" instance=ExtResource("5_1ea8d")]
+transform = Transform3D(0.997383, 0, -0.0723156, 0, 1, 0, 0.0723156, 0, 0.997383, -27.4019, 12.742, 1.2289)
 
-[node name="Caja_larga" type="Node" parent="Casa"]
+[node name="Caja_larga" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Caja_larga"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga"]
 transform = Transform3D(-8.34679e-08, 0.403567, -0.104465, -1.96739, -1.81751e-08, 0, -2.07042e-08, 0.100105, 0.421147, -3.46775, 1.02457, 0.830695)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Caja_larga/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga/StaticBody3D"]
 skeleton = NodePath("")
 
-[node name="caja" parent="Casa/Caja_larga/StaticBody3D/MeshInstance3D" instance=ExtResource("4_haqk2")]
+[node name="caja" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga/StaticBody3D/MeshInstance3D" instance=ExtResource("4_haqk2")]
 transform = Transform3D(1, 3.33067e-16, -2.22045e-16, 1.42109e-14, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Casa/Caja_larga"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga"]
 transform = Transform3D(8.49022e-08, -0.410502, 0.0690301, -1.96739, -1.81751e-08, 1.42726e-16, 1.36812e-08, -0.0661486, -0.428384, 3.59588, 1.02457, 2.66317)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Caja_larga/StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga/StaticBody3D2"]
 skeleton = NodePath("")
 
-[node name="caja" parent="Casa/Caja_larga/StaticBody3D2/MeshInstance3D" instance=ExtResource("4_haqk2")]
+[node name="caja" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga/StaticBody3D2/MeshInstance3D" instance=ExtResource("4_haqk2")]
 transform = Transform3D(1, 3.33067e-16, -2.22045e-16, 1.42109e-14, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="Casa/Caja_larga"]
+[node name="StaticBody3D3" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga"]
 transform = Transform3D(5.30359e-08, -0.53977, 0.103254, -1.23945, -2.41021e-08, -6.32554e-16, 1.10653e-08, -0.112616, -0.494899, 3.27806, 0.634374, 1.9678)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Caja_larga/StaticBody3D3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga/StaticBody3D3"]
 skeleton = NodePath("")
 
-[node name="caja" parent="Casa/Caja_larga/StaticBody3D3/MeshInstance3D" instance=ExtResource("4_haqk2")]
+[node name="caja" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga/StaticBody3D3/MeshInstance3D" instance=ExtResource("4_haqk2")]
 transform = Transform3D(1, 3.33067e-16, -2.22045e-16, 1.42109e-14, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 
-[node name="Caja_amplia" type="Node" parent="Casa"]
+[node name="Caja_amplia" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Caja_amplia"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia"]
 transform = Transform3D(-0.0375573, 0, -1.23536, 0, 1.2, 0, 1.4951, 0, -0.0310338, -3.13004, 0.667671, 2.03967)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Casa/Caja_amplia/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D"]
 transform = Transform3D(1, 0, 1.49012e-08, 0, 1, 0, 0, 0, 1, -0.250626, 0.384277, -0.0498862)
 shape = SubResource("BoxShape3D_7fav7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Caja_amplia/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D"]
 
-[node name="caja02" parent="Casa/Caja_amplia/StaticBody3D/MeshInstance3D" instance=ExtResource("5_1seca")]
+[node name="caja02" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D/MeshInstance3D" instance=ExtResource("5_1seca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, -1.49012e-08, 0, 1, 0, 0, 0)
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Casa/Caja_amplia"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia"]
 transform = Transform3D(0.210403, 0, -0.977615, 0, 1, 0, 0.977615, 0, 0.210403, -3.14692, 1.76037, 2.09162)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Caja_amplia/StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D2"]
 
-[node name="caja02" parent="Casa/Caja_amplia/StaticBody3D2/MeshInstance3D" instance=ExtResource("5_1seca")]
+[node name="caja02" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D2/MeshInstance3D" instance=ExtResource("5_1seca")]
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="Casa/Caja_amplia"]
+[node name="StaticBody3D3" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia"]
 transform = Transform3D(-0.0820772, 0, 1.23389, 0, 1.2, 0, -1.49332, 0, -0.0678185, 3.24366, 0.648564, 0.811382)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Casa/Caja_amplia/StaticBody3D3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D3"]
 transform = Transform3D(1, 0, -2.45869e-07, 0, 1, 0, -1.49012e-08, 0, 1, -0.445551, 0.285034, -0.000304699)
 shape = SubResource("BoxShape3D_7fav7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Caja_amplia/StaticBody3D3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D3"]
 
-[node name="caja02" parent="Casa/Caja_amplia/StaticBody3D3/MeshInstance3D" instance=ExtResource("5_1seca")]
+[node name="caja02" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D3/MeshInstance3D" instance=ExtResource("5_1seca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, -1.49012e-08, 0, 1, 0, 0, 0)
 
-[node name="StaticBody3D4" type="StaticBody3D" parent="Casa/Caja_amplia"]
+[node name="StaticBody3D4" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia"]
 transform = Transform3D(0.0323151, 0, -0.380647, 0, 0.365254, 0, 1.23902, 0, 0.00992768, 3.27806, 1.44156, 1.53941)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Caja_amplia/StaticBody3D4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D4"]
 skeleton = NodePath("")
 
-[node name="caja" parent="Casa/Caja_amplia/StaticBody3D4/MeshInstance3D" instance=ExtResource("4_haqk2")]
+[node name="caja" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D4/MeshInstance3D" instance=ExtResource("4_haqk2")]
 transform = Transform3D(1, 3.33067e-16, -2.22045e-16, 1.42109e-14, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 
-[node name="Puerta" type="Node" parent="Casa"]
+[node name="Puerta" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Casa/Puerta"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta"]
 transform = Transform3D(-1.3, 0, 1.96295e-07, 0, 1.3, 0, -1.96295e-07, 0, -1.3, 3.90777, 0, -1.07252)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Casa/Puerta/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0292358, 1.07001, 0.49802)
 shape = SubResource("BoxShape3D_48fuj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Casa/Puerta/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D"]
 
-[node name="door" parent="Casa/Puerta/StaticBody3D/MeshInstance3D" instance=ExtResource("7_2khyr")]
+[node name="door" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D/MeshInstance3D" instance=ExtResource("7_2khyr")]
 transform = Transform3D(1, 0, 9.9476e-14, 0, 1, 0, -9.9476e-14, 0, 1, 0.0131838, 1.02587, 0.499322)
 
-[node name="Player" parent="." instance=ExtResource("3_ms578")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9.3132e-10)
-visible = false
+[node name="led" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
-[node name="Cama" type="CSGBox3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led"]
+
+[node name="leds" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D" instance=ExtResource("27_h6gk7")]
+transform = Transform3D(3.11142, 0, 0, 0, 1, 0, 0, 0, 1, 0.00223053, 3.99135, 0.00588799)
+
+[node name="ledOnly" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
+transform = Transform3D(0.321397, 0, 0, 0, -0.00532331, -0.999986, 0, 0.999986, -0.00532331, 0, -0.975899, 0)
+light_color = Color(0.290196, 0.290196, 0.290196, 1)
+light_energy = 10.02
+light_indirect_energy = 0.03
+light_volumetric_fog_energy = 0.0
+light_cull_mask = 4294966274
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
+transform = Transform3D(0.321397, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04499, 0)
+light_color = Color(1, 1, 0.733333, 1)
+light_energy = 12.959
+light_cull_mask = 4294967291
+shadow_enabled = true
+
+[node name="celling" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
+transform = Transform3D(0.321397, 0, 0, 0, 1, 0, 0, 0, 1, 0.0650366, -2.2096, 0)
+light_color = Color(1, 1, 0.733333, 1)
+light_energy = 0.485
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.32
+light_specular = 0.0
+light_cull_mask = 4294966276
+omni_range = 5.12529
+
+[node name="wallLight" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
+transform = Transform3D(0.321397, 0, 0, 0, 1, 0, 0, 0, 1, -0.632947, -2.2096, 0)
+layers = 8
+light_color = Color(1, 1, 0.733333, 1)
+light_energy = 9.212
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.32
+light_specular = 0.0
+light_cull_mask = 4294966280
+omni_range = 5.12529
+
+[node name="wallLight2" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
+transform = Transform3D(0.321397, 0, 0, 0, 1, 0, 0, 0, 1, 0.342833, -2.2096, 0.00192511)
+layers = 8
+light_color = Color(1, 1, 0.733333, 1)
+light_energy = 9.212
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.32
+light_specular = 0.0
+light_cull_mask = 4294966280
+omni_range = 5.12529
+
+[node name="Player" parent="SubViewportContainer/SubViewport/Node3D" instance=ExtResource("3_ms578")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9.3132e-10)
+
+[node name="Cama" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D"]
 transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1, -3.04804, 0.291863, -1.06276)
 size = Vector3(1, 0.508301, 3.04883)
 material = SubResource("StandardMaterial3D_14ld5")
 
-[node name="Ambiente" type="Node3D" parent="."]
+[node name="Ambiente" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0475959, -9.3132e-10)
+visible = false
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Ambiente"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Node3D/Ambiente"]
 transform = Transform3D(0.827562, 0.0293014, 0.560609, -0.559652, -0.0350844, 0.827984, 0.0439297, -0.998955, -0.0126359, 4.41338, 12.6235, -0.932694)
+visible = false
 shadow_enabled = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ambiente/DirectionalLight3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Ambiente/DirectionalLight3D"]
 transform = Transform3D(0.827562, -0.559652, 0.0439297, 0.0293014, -0.0350844, -0.998955, 0.560609, 0.827984, -0.0126359, 3.39181, -0.622011, -12.8469)
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Ambiente"]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Node3D/Ambiente"]
 transform = Transform3D(-0.457195, 0.841574, -0.287623, -0.121294, 0.261377, 0.957585, 0.881056, 0.47269, -0.017422, -7.61801, 12.6167, -0.924681)
+visible = false
 shadow_enabled = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ambiente/DirectionalLight3D2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Ambiente/DirectionalLight3D2"]
 transform = Transform3D(0.827562, -0.559652, 0.0439297, 0.0293015, -0.0350844, -0.998955, 0.560609, 0.827984, -0.0126359, 3.39181, -0.62201, -12.8469)

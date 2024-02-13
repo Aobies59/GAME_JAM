@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d32mxdtu58ovo"]
+
+[ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="1_jv8jg"]
+[ext_resource type="Texture2D" uid="uid://lct420a6aytu" path="res://assets/caja02/caja02_0.png" id="2_b8yu8"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jv8jg")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.191
+shader_parameter/jitter = 0.584
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("2_b8yu8")

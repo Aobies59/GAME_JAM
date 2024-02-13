@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://wpvuitaw7xo"]
+
+[ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="1_qlcqc"]
+[ext_resource type="Texture2D" uid="uid://bujgju8nw82hr" path="res://assets/mouse/mouse_0.png" id="2_fqgv4"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_qlcqc")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.455
+shader_parameter/resolution = Vector2i(320, 240)
+shader_parameter/albedo = ExtResource("2_fqgv4")

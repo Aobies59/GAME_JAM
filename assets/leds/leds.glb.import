@@ -29,6 +29,18 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"leds": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/leds/leds.tres"
+}
+},
+"nodes": {
+"PATH:leds_low_obj/leds_low/leds_low2": {
+"mesh_instance/layers": 2
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

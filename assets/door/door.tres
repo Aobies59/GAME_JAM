@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dsyo5f3hrtw33"]
+
+[ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="1_2vbym"]
+[ext_resource type="Texture2D" uid="uid://ccimafunkl2dm" path="res://assets/door/door_0.png" id="2_plo5h"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_2vbym")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.14
+shader_parameter/jitter = 0.5
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("2_plo5h")

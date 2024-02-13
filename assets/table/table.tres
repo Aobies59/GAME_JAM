@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b1bn2ekud8pbu"]
+
+[ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="1_lrifq"]
+[ext_resource type="Texture2D" uid="uid://rroq4bbk4kdj" path="res://assets/table/table_0.png" id="2_p3ndr"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_lrifq")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.375
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("2_p3ndr")

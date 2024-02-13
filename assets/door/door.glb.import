@@ -29,6 +29,18 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"door": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/door/door.tres"
+}
+},
+"nodes": {
+"PATH:puerta_low_obj/puerta_low/puerta_low2": {
+"mesh_instance/layers": 9
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1
