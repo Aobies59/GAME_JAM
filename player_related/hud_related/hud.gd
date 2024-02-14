@@ -1,9 +1,7 @@
 extends Control
 
 var gun
-var popups: Dictionary
-func _ready():
-	popups["beware"] = $Beware
+@onready var popup = $Template
 	
 func _process(_delta):
 	update_inventory_hud()
@@ -22,11 +20,10 @@ func update_inventory_hud():
 
 var open_popup: Sprite2D = null
 func display_popup(popup_name):
-	if popups[popup_name] == null:
-		return
 	Windows.popup_open = true
-	popups[popup_name].visible = true
-	open_popup = popups[popup_name]
+	popup.get_node("text").text = popup_name
+	popup.visible = true
+	open_popup = popup
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 func hide_popup():

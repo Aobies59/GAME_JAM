@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://w0du2stt3g3j"]
+[gd_scene load_steps=13 format=3 uid="uid://w0du2stt3g3j"]
 
 [ext_resource type="Script" path="res://player_related/hud_related/hud.gd" id="1_hp7ha"]
 [ext_resource type="Texture2D" uid="uid://b43ynin770pty" path="res://assets/ui/windows/sun/window_sun_base.svg" id="2_uhy4e"]
@@ -8,6 +8,31 @@
 [ext_resource type="Texture2D" uid="uid://dhlhwd2yknudu" path="res://assets/ui/windows/sun/window_sun_ok_pressed.svg" id="6_hpu5f"]
 [ext_resource type="Texture2D" uid="uid://ktcy608my48t" path="res://assets/ui/windows/sun/window_sun_close.svg" id="7_eoj74"]
 [ext_resource type="Texture2D" uid="uid://d2c23483esjmp" path="res://assets/ui/windows/sun/window_sun_close_pressed.svg" id="8_dmeye"]
+[ext_resource type="Texture2D" uid="uid://dwbq3tffsvs8b" path="res://assets/CrossHair.png" id="9_74xgm"]
+
+[sub_resource type="GDScript" id="GDScript_eqs8o"]
+script/source = "extends Control
+
+
+func _process(_delta):
+	visible = true if CloseObjects.object_in_hand == \"Gun\" else false
+"
+
+[sub_resource type="GDScript" id="GDScript_hbstn"]
+script/source = "extends Label
+
+
+func _process(_delta):
+	text = \"SCORE: \" + str(PlayerInfo.score)
+"
+
+[sub_resource type="GDScript" id="GDScript_3ctfp"]
+script/source = "extends Label
+
+
+func _process(_delta):
+	text = \"BULLETS: \" + str(PlayerInfo.bullets)
+"
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -26,9 +51,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 420.0
-offset_top = 234.0
+offset_top = 184.0
 offset_right = 575.0
-offset_bottom = 276.0
+offset_bottom = 226.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 30
@@ -41,14 +66,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 430.0
-offset_top = 234.0
-offset_right = 558.0
-offset_bottom = 276.0
+offset_left = 472.0
+offset_top = 184.0
+offset_right = 627.0
+offset_bottom = 226.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 30
-text = "COLLECT"
+text = "USE
+"
 
 [node name="InventoryUI" type="Control" parent="."]
 layout_mode = 1
@@ -217,70 +243,61 @@ offset_bottom = -124.655
 texture_normal = ExtResource("7_eoj74")
 texture_pressed = ExtResource("8_dmeye")
 
-[node name="Beware" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(576.62, 346.5)
-scale = Vector2(0.58, 0.58)
-texture = ExtResource("2_uhy4e")
-script = ExtResource("3_fd71d")
+[node name="GunHUD" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_eqs8o")
 
-[node name="text" type="Label" parent="Beware"]
+[node name="CrossHair" type="TextureRect" parent="GunHUD"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -480.0
-offset_top = -348.0
-offset_right = -4.0
-offset_bottom = -3.0
+offset_left = 552.0
+offset_top = 300.0
+offset_right = 592.0
+offset_bottom = 340.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(96, 51.5)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_aw7hu")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_74xgm")
+
+[node name="Score" type="Label" parent="GunHUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 492.0
+offset_top = 535.0
+offset_right = 621.0
+offset_bottom = 577.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 30
-text = "Beware of the Sun"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "SCORE: 0"
+script = SubResource("GDScript_hbstn")
 
-[node name="OkButton" type="TextureButton" parent="Beware"]
+[node name="Bullets" type="Label" parent="GunHUD"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -347.5
-offset_top = -105.776
-offset_right = -130.5
-offset_bottom = -40.7758
+offset_left = 492.0
+offset_top = 572.0
+offset_right = 621.0
+offset_bottom = 614.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("5_1lvjw")
-texture_pressed = ExtResource("6_hpu5f")
-
-[node name="Label" type="Label" parent="Beware/OkButton"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 6.0
-offset_right = 211.0
-offset_bottom = 57.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_aw7hu")
-theme_override_font_sizes/font_size = 25
-text = "OK"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CloseButton" type="TextureButton" parent="Beware"]
-offset_left = 188.586
-offset_top = -164.655
-offset_right = 228.586
-offset_bottom = -124.655
-texture_normal = ExtResource("7_eoj74")
-texture_pressed = ExtResource("8_dmeye")
+theme_override_font_sizes/font_size = 30
+text = "BULLETS: 0"
+script = SubResource("GDScript_3ctfp")
 
 [connection signal="pressed" from="Template/OkButton" to="Template" method="_on_ok_button_pressed"]
 [connection signal="pressed" from="Template/CloseButton" to="Template" method="_on_close_button_pressed"]
-[connection signal="pressed" from="Beware/OkButton" to="Beware" method="_on_ok_button_pressed"]
-[connection signal="pressed" from="Beware/CloseButton" to="Beware" method="_on_close_button_pressed"]

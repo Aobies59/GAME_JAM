@@ -22,6 +22,7 @@ run/size/viewport_width=1152
 Windows="*res://global/windows.gd"
 CloseObjects="*res://global/close_objects.gd"
 FloorHeight="*res://global/floor_height.gd"
+PlayerInfo="*res://global/PlayerInfo.gd"
 
 [display]
 

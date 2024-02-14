@@ -52,18 +52,16 @@ func get_interactable_object():
 	return null
 	
 @onready var bullet = preload("res://player_related/bullet.tscn")
-var bullets = 100000000
 func shoot():
 	if CloseObjects.object_in_hand != "Gun":
 		return
 	if $CamRoot/collectable_gun.is_firing:
 		return
-	bullets -= 1
+	PlayerInfo.bullets -= 1
 	$CamRoot/collectable_gun.shoot()
 	var temp_bullet = bullet.instantiate()
-	var camera_direction = $CamRoot/Camera3D.get_global_transform().basis.z
-	temp_bullet.position = $CamRoot/bullet_position.global_transform.origin
-	temp_bullet.assign_direction(camera_direction)
+	temp_bullet.position = $CamRoot/Camera3D.global_transform.origin
+	temp_bullet.assign_direction($CamRoot/Camera3D.global_transform.basis.z.normalized())
 	get_parent().add_child(temp_bullet)
 	
 func handle_other_inputs():
@@ -73,7 +71,7 @@ func handle_other_inputs():
 	if Input.is_action_just_pressed("escape"):
 		get_tree().quit()
 		
-	if Input.is_action_pressed("click") and bullets > 0 and CloseObjects.object_in_hand == "Gun":
+	if Input.is_action_pressed("click") and PlayerInfo.bullets > 0 and CloseObjects.object_in_hand == "Gun":
 		shoot()
 		
 	scroll_inventory_slots()
