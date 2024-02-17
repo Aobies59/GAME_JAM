@@ -1,7 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://henf0idxpflt"]
+[gd_scene load_steps=32 format=3 uid="uid://henf0idxpflt"]
 
 [ext_resource type="Shader" path="res://scenes/postProcessingFilter.gdshader" id="1_cpkwn"]
-[ext_resource type="Texture2D" uid="uid://0glty7kfq6rb" path="res://textures/texture_02.svg" id="2_hlo3o"]
 [ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="3_ms578"]
 [ext_resource type="PackedScene" uid="uid://840apkll4pse" path="res://assets/caja/caja.glb" id="4_haqk2"]
 [ext_resource type="PackedScene" uid="uid://d24h3o1kts187" path="res://assets/keyboard/keyboard.glb" id="4_w44vf"]
@@ -14,6 +13,11 @@
 [ext_resource type="Material" uid="uid://bhw71jm570h4u" path="res://assets/wall/wall.tres" id="9_7y382"]
 [ext_resource type="PackedScene" uid="uid://swqspdicltp6" path="res://assets/computer/computer.glb" id="9_dhyi6"]
 [ext_resource type="Texture2D" uid="uid://dq71eqcwnm16u" path="res://assets/floor/floor_basecolor.png" id="11_mcj4c"]
+[ext_resource type="PackedScene" uid="uid://bgyh5vsbvnv30" path="res://assets/door/doorFrame.glb" id="14_84i82"]
+[ext_resource type="Texture2D" uid="uid://dbmkwqpf8llml" path="res://assets/bed/colchon_mattress_BaseColor.png" id="15_dgc8r"]
+[ext_resource type="ArrayMesh" uid="uid://c80ka5hohbstv" path="res://assets/bed/mattress.obj" id="16_mohkm"]
+[ext_resource type="Texture2D" uid="uid://d4k28y8e36q21" path="res://assets/bed/cojin_pillow_BaseColor.png" id="17_srxh5"]
+[ext_resource type="ArrayMesh" uid="uid://t7cpu0l0p3vi" path="res://assets/bed/pillow.obj" id="18_fatim"]
 [ext_resource type="Texture2D" uid="uid://cqrkaau8y3fh3" path="res://assets/celling/celling_basecolor.png" id="23_w64xq"]
 [ext_resource type="PackedScene" uid="uid://bfdyamh0o5pnx" path="res://assets/leds/leds.glb" id="27_h6gk7"]
 
@@ -85,10 +89,23 @@ size = Vector3(1.64053, 1.64819, 1.09917)
 [sub_resource type="BoxShape3D" id="BoxShape3D_48fuj"]
 size = Vector3(0.100464, 1.98578, 0.949829)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_14ld5"]
-albedo_texture = ExtResource("2_hlo3o")
-uv1_triplanar = true
-uv1_world_triplanar = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xjua"]
+render_priority = 0
+shader = ExtResource("7_nstfp")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.5
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("15_dgc8r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trlsk"]
+render_priority = 0
+shader = ExtResource("7_nstfp")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.5
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("17_srxh5")
 
 [node name="Node3D" type="Node3D"]
 
@@ -136,6 +153,30 @@ material = SubResource("ShaderMaterial_ty8j7")
 transform = Transform3D(-3.49691e-08, 0, -0.6, 0, 0.328, 0, 0.8, 0, -2.62268e-08, 0, 0, 0)
 use_collision = true
 size = Vector3(7.59741, 0.0688477, 13.0225)
+material = SubResource("ShaderMaterial_adx17")
+
+[node name="zocalo" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Suelo/StaticBody3D/MeshInstance3D"]
+transform = Transform3D(-3.49691e-08, 0, -0.6, 0, 0.328, 0, 0.8, 0, -2.62268e-08, 6.31168e-08, 0.0204022, -3.06827)
+use_collision = true
+size = Vector3(0.314209, 1.0137, 13.0225)
+material = SubResource("ShaderMaterial_adx17")
+
+[node name="zocalo2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Suelo/StaticBody3D/MeshInstance3D"]
+transform = Transform3D(-3.49691e-08, 0, -0.6, 0, 0.328, 0, 0.8, 0, -2.62268e-08, 6.31168e-08, 0.0204022, 3.00087)
+use_collision = true
+size = Vector3(0.314209, 1.0137, 13.0225)
+material = SubResource("ShaderMaterial_adx17")
+
+[node name="zocalo3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Suelo/StaticBody3D/MeshInstance3D"]
+transform = Transform3D(0.8, 0, 0, 0, 0.328, 0, 0, 0, 0.6, -3.95977, 0.0204022, -0.0446625)
+use_collision = true
+size = Vector3(0.314209, 1.0137, 13.0225)
+material = SubResource("ShaderMaterial_adx17")
+
+[node name="zocalo4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Suelo/StaticBody3D/MeshInstance3D"]
+transform = Transform3D(0.8, 0, 0, 0, 0.328, 0, 0, 0, 0.6, 3.98657, 0.0204022, -0.0446625)
+use_collision = true
+size = Vector3(0.314209, 1.0137, 13.0225)
 material = SubResource("ShaderMaterial_adx17")
 
 [node name="Paredes" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
@@ -244,7 +285,7 @@ transform = Transform3D(-8.34679e-08, 0.403567, -0.104465, -1.96739, -1.81751e-0
 skeleton = NodePath("")
 
 [node name="caja" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga/StaticBody3D/MeshInstance3D" instance=ExtResource("4_haqk2")]
-transform = Transform3D(1, 3.33067e-16, -2.22045e-16, 1.42109e-14, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 5.07707e-09, -8.24798e-09, 5.07709e-09, 0.450426, 0.892814, 8.24798e-09, -0.892814, 0.450426, 3.57628e-07, 4.04639, 3.1095)
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_larga"]
 transform = Transform3D(8.49022e-08, -0.410502, 0.0690301, -1.96739, -1.81751e-08, 1.42726e-16, 1.36812e-08, -0.0661486, -0.428384, 3.59588, 1.02457, 2.66317)
@@ -318,7 +359,23 @@ shape = SubResource("BoxShape3D_48fuj")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D"]
 
 [node name="door" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D/MeshInstance3D" instance=ExtResource("7_2khyr")]
-transform = Transform3D(1, 0, 9.9476e-14, 0, 1, 0, -9.9476e-14, 0, 1, 0.0131838, 1.02587, 0.499322)
+transform = Transform3D(1, 0, 1.27898e-13, 0, 1, 0, -1.27898e-13, 0, 1, 0.0131838, 1.00271, 0.499322)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta"]
+
+[node name="doorFrame" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/MeshInstance3D" instance=ExtResource("14_84i82")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 3.86675, 1.27695, -1.74432)
+
+[node name="wallLight2" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06893, 1.78175, 0.0078131)
+layers = 8
+light_color = Color(1, 1, 0.733333, 1)
+light_energy = 9.212
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.32
+light_specular = 0.0
+light_cull_mask = 4294966280
+omni_range = 5.12529
 
 [node name="led" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
@@ -363,24 +420,24 @@ light_specular = 0.0
 light_cull_mask = 4294966280
 omni_range = 5.12529
 
-[node name="wallLight2" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
-transform = Transform3D(0.321397, 0, 0, 0, 1, 0, 0, 0, 1, 0.342833, -2.2096, 0.00192511)
-layers = 8
-light_color = Color(1, 1, 0.733333, 1)
-light_energy = 9.212
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.32
-light_specular = 0.0
-light_cull_mask = 4294966280
-omni_range = 5.12529
+[node name="bed" type="Node" parent="SubViewportContainer/SubViewport/Node3D"]
+
+[node name="cama" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/bed"]
+transform = Transform3D(2.34482, 0, 0, 0, 2.08865, 0, 0, 0, 2.08865, -2.63754, 0.251931, -0.963893)
+material_override = SubResource("ShaderMaterial_7xjua")
+mesh = ExtResource("16_mohkm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/bed"]
+transform = Transform3D(1.88658, 0, 0.187541, 0, 1.89588, 0, -0.187541, 0, 1.88658, -2.64071, 0.292334, -3.30252)
+skeleton = NodePath("Pillow")
+
+[node name="Pillow" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/bed/MeshInstance3D"]
+material_override = SubResource("ShaderMaterial_trlsk")
+mesh = ExtResource("18_fatim")
+skeleton = NodePath("../../../../../..")
 
 [node name="Player" parent="SubViewportContainer/SubViewport/Node3D" instance=ExtResource("3_ms578")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9.3132e-10)
-
-[node name="Cama" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1, -3.04804, 0.291863, -1.06276)
-size = Vector3(1, 0.508301, 3.04883)
-material = SubResource("StandardMaterial3D_14ld5")
 
 [node name="Ambiente" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0475959, -9.3132e-10)
