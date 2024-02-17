@@ -1,163 +1,35 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmh2a2g7tx22k"]
+[gd_scene load_steps=6 format=3 uid="uid://ce4v6t3wgqyjq"]
 
-[ext_resource type="ArrayMesh" uid="uid://bxmyr8v3a5hu" path="res://assets/tubotest.obj" id="2_ncucm"]
-[ext_resource type="Script" path="res://world_related/collectables/Button.gd" id="3_gvtsb"]
-[ext_resource type="PackedScene" uid="uid://dhpd3x1cmidnb" path="res://world_related/collectables/puzzle_orb.tscn" id="3_injld"]
+[ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="1_ge4uc"]
+[ext_resource type="PackedScene" uid="uid://dx5hgp78kbh4d" path="res://world_related/collectables/hammer.tscn" id="2_rqmvq"]
+[ext_resource type="PackedScene" uid="uid://dvc5tkyv1eulr" path="res://puzzles/puzzle_1/pseudo_interactable_strength_tester.tscn" id="3_aggmn"]
 
-[sub_resource type="GDScript" id="GDScript_60cv6"]
-script/source = "extends StaticBody3D
+[sub_resource type="BoxMesh" id="BoxMesh_c2ufi"]
+size = Vector3(20, 0.1, 20)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gc2ac"]
+size = Vector3(20, 0.1, 20)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	name = \"Barrier\"
-"
+[node name="puzzle_1" type="Node3D"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_caqmu"]
-size = Vector3(0.2, 0.01, 0.01)
+[node name="Floor" type="StaticBody3D" parent="."]
 
-[sub_resource type="BoxMesh" id="BoxMesh_vaj7q"]
-size = Vector3(0.2, 0.01, 0.1)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0499908, 0)
+mesh = SubResource("BoxMesh_c2ufi")
 
-[sub_resource type="GDScript" id="GDScript_qw576"]
-script/source = "extends StaticBody3D
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_gc2ac")
 
+[node name="Player" parent="." instance=ExtResource("1_ge4uc")]
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	name = \"Barrier\"
-"
+[node name="collectable_hammer" parent="." instance=ExtResource("2_rqmvq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.0601)
 
-[sub_resource type="GDScript" id="GDScript_danun"]
-script/source = "extends StaticBody3D
+[node name="pseudo_interactable_strength_tester" parent="." instance=ExtResource("3_aggmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.998483, 5.11661)
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	name = \"Barrier\"
-"
-
-[sub_resource type="Animation" id="Animation_2vush"]
-resource_name = "MoveLeft"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.407409, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_nlfhl"]
-resource_name = "MoveRight"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.407409, 0, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xjerq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ndy7g"]
-_data = {
-"MoveLeft": SubResource("Animation_2vush"),
-"MoveRight": SubResource("Animation_nlfhl"),
-"RESET": SubResource("Animation_xjerq")
-}
-
-[sub_resource type="BoxMesh" id="BoxMesh_ptdvi"]
-size = Vector3(0.2, 0.2, 0.2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_e20m8"]
-size = Vector3(0.2, 0.2, 0.2)
-
-[node name="Puzzle_1" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.679094, 0)
-
-[node name="Tubotest" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14614, 0)
-mesh = ExtResource("2_ncucm")
-skeleton = NodePath("../..")
-
-[node name="Group_Barriers" type="Node3D" parent="."]
-
-[node name="Barrier1" type="StaticBody3D" parent="Group_Barriers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00533387, 0.653667, 0)
-script = SubResource("GDScript_60cv6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Group_Barriers/Barrier1"]
-shape = SubResource("BoxShape3D_caqmu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Group_Barriers/Barrier1"]
-mesh = SubResource("BoxMesh_vaj7q")
-
-[node name="Barrier2" type="StaticBody3D" parent="Group_Barriers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.422791, 1.14406, 0)
-script = SubResource("GDScript_qw576")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Group_Barriers/Barrier2"]
-shape = SubResource("BoxShape3D_caqmu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Group_Barriers/Barrier2"]
-mesh = SubResource("BoxMesh_vaj7q")
-
-[node name="Barrier3" type="StaticBody3D" parent="Group_Barriers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00533387, 1.64494, 0)
-script = SubResource("GDScript_danun")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Group_Barriers/Barrier3"]
-shape = SubResource("BoxShape3D_caqmu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Group_Barriers/Barrier3"]
-mesh = SubResource("BoxMesh_vaj7q")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Group_Barriers"]
-libraries = {
-"": SubResource("AnimationLibrary_ndy7g")
-}
-
-[node name="Button" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75929, 0.758449, 0.371278)
-script = ExtResource("3_gvtsb")
-
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Button"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0409547, -0.0015825)
-aabb = AABB(-0.0982095, -0.135522, -0.0965874, 0.196419, 0.189025, 0.193175)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
-mesh = SubResource("BoxMesh_ptdvi")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Button"]
-shape = SubResource("BoxShape3D_e20m8")
-
-[node name="PuzzleOrb2" parent="." instance=ExtResource("3_injld")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.29, 0)
-
-[connection signal="screen_entered" from="Button/VisibleOnScreenNotifier3D" to="Button" method="_on_visible_on_screen_notifier_3d_screen_entered"]
-[connection signal="screen_exited" from="Button/VisibleOnScreenNotifier3D" to="Button" method="_on_visible_on_screen_notifier_3d_screen_exited"]
+[node name="temp_light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.26342, 0)
+light_energy = 5.0
+omni_range = 23.447

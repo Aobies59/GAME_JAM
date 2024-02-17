@@ -1,8 +1,35 @@
 extends CharacterBody3D
 
 func _ready():
+	hammer_timer.autostart = false
+	hammer_timer.one_shot = true
+	hammer_timer.timeout.connect(swing_hammer)
+	add_child(hammer_timer)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	name = "Player"
+	connect_broadcast_messages()
+	
+func connect_broadcast_messages():
+	Broadcast.listen("congrats", self, "_on_congrats_message_received")
+	Broadcast.listen("round_advance", self, "_on_advance_round_received")
+	Broadcast.listen("timeout", self, "_on_timeout_message_received")
+	Broadcast.listen("drop", self, "_on_drop_message_received")
+	Broadcast.listen("sun_visible", self, "_on_sun_visible_received")
+	
+func _on_congrats_message_received(_params):
+	display_popup("Congrats!")
+	
+func _on_timeout_message_received(_params):
+	display_popup("Out of time!")
+	
+func _on_drop_message_received(params):
+	$HUD.drop(params["position"], true)
+	
+func _on_sun_visible_received(_params):
+	display_popup("When looking at the sun,\npress E with an object\n in hand to present it to him")
+	
+func _on_advance_round_received(_params):
+	display_popup("Next Round!")
 	
 var speed = 5.0
 var interactable_object = null
@@ -45,6 +72,10 @@ func get_interactable_object():
 				$HUD.hide_interact_hud()
 				$HUD.display_use_hud()
 				return body
+			elif body.name.begins_with("pseudo_interactable"):
+				$HUD.hide_use_hud()
+				$HUD.hide_interact_hud()
+				return body
 			
 	# if there is no interactable object, hide the interact hud
 	$HUD.hide_interact_hud()
@@ -64,6 +95,9 @@ func shoot():
 	temp_bullet.assign_direction($CamRoot/Camera3D.global_transform.basis.z.normalized())
 	get_parent().add_child(temp_bullet)
 	
+var clicking = false
+var hammer_in_use = false
+var hammer_timer = Timer.new()
 func handle_other_inputs():
 	update_player_state()
 
@@ -71,10 +105,34 @@ func handle_other_inputs():
 	if Input.is_action_just_pressed("escape"):
 		get_tree().quit()
 		
-	if Input.is_action_pressed("click") and PlayerInfo.bullets > 0 and CloseObjects.object_in_hand == "Gun":
-		shoot()
+	if Input.is_action_pressed("click"):
+		if PlayerInfo.bullets > 0 and CloseObjects.object_in_hand == "Gun":
+			shoot()
+			
+	if Input.is_action_just_pressed("click"):
+		clicking = true
+		if CloseObjects.object_in_hand == "Hammer":
+			hammer_in_use = true
+			hammer_timer.stop()
+			hammer_timer.wait_time = 0.5
+			hammer_timer.start()
+			$HUD.start_loading_hammer()
+			
+	if Input.is_action_just_released("click"):
+		clicking = false
+		if hammer_in_use:
+			var power = 1.2 - hammer_timer.time_left
+			swing_hammer(power)
 		
 	scroll_inventory_slots()
+	
+func swing_hammer(power = 1.2):
+	$HUD.stop_loading_hammer()
+	hammer_in_use = false
+	hammer_timer.stop()
+	$CamRoot/collectable_hammer.swing()
+	if interactable_object != null and interactable_object.name.begins_with("pseudo_interactable_strength_tester"):
+		Broadcast.send("hammer_hit", {"power": power})
 
 var inventory_space = 4
 var objects_in_front: Array
@@ -82,7 +140,7 @@ func handle_interact_inputs():
 	if Input.is_action_just_pressed("interact") and interactable_object != null:
 	# if the object is interactable, interact with it
 		if interactable_object.name.begins_with("interactable") and interactable_object.interactable:
-			interactable_object.interact(self)
+			interactable_object.interact()
 		
 		# if the object is collectable, try to collect it
 		if interactable_object.name.begins_with("collectable") and inventory_space > 0:

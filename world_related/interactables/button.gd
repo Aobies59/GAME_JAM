@@ -1,6 +1,5 @@
 extends "res://world_related/interactables_and_collectables.gd"
 
-var player_object
 @onready var timer = Timer.new()
 
 func _ready():
@@ -11,35 +10,43 @@ func _ready():
 	timer.timeout.connect(_on_timer_end)
 	timer.one_shot = true
 	add_child(timer)
+	Broadcast.listen("disable_round_timer", self, "_on_disable_round_timer_received")
 	
-func interact(player):
-	player_object = player
+func _on_disable_round_timer_received(_params):
 	timer.stop()
-	timer.wait_time = 7.0
+	timer.wait_time = 0.01
+	timer.start()
+	
+func interact():
+	if PlayerInfo.shooting_finished:
+		victory()
+		return
+	timer.stop()
+	timer.wait_time = PlayerInfo.wait_time
 	timer.start()
 	interactable = false
 	$MeshInstance3D2/AnimationPlayer.play("press_button")
-	PlayerInfo.bullets = 5
-	PlayerInfo.score = 0
+	PlayerInfo.bullets = PlayerInfo.bullets_to_give
+	PlayerInfo.victory = false
+	Broadcast.send("reload_button_press")
 	
 func _on_timer_end():
-	if PlayerInfo.score >= 5:
-		player_object.display_popup("Congrats!")
-		interactable = false
+	if PlayerInfo.victory and not PlayerInfo.shooting_finished:
+		round_advance()
+	elif PlayerInfo.shooting_finished:
+		victory()
 	else:
-		player_object.display_popup("Out of time!")
+		Broadcast.send("timeout")
 		PlayerInfo.bullets = 0
-		PlayerInfo.score = 0
 
 func _animation_finished(anim_name):
-	if anim_name == "press_button":
+	if anim_name == "press_button" and not PlayerInfo.shooting_finished:
 		interactable = true
 
-func _on_visible_on_screen_notifier_3d_screen_entered():
-	if self not in CloseObjects.objects_in_view:
-		CloseObjects.objects_in_view.append(self)
+func round_advance():
+	Broadcast.send("round_advance")
 
-
-func _on_visible_on_screen_notifier_3d_screen_exited():
-	if self in CloseObjects.objects_in_view:
-		CloseObjects.objects_in_view.remove_at(CloseObjects.objects_in_view.find(self))
+func victory():
+	Broadcast.send("congrats")
+	interactable = false
+	# TODO: give morse code to the player

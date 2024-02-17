@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://wadayt3nt7ao"]
+[gd_scene load_steps=37 format=3 uid="uid://wadayt3nt7ao"]
 
 [ext_resource type="Script" path="res://player_related/player.gd" id="1_h6cke"]
 [ext_resource type="PackedScene" uid="uid://w0du2stt3g3j" path="res://player_related/hud_related/hud.tscn" id="2_7avxc"]
@@ -7,10 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://bdibwu4ngth7h" path="res://assets/taburete/taburete_1.png" id="4_6350l"]
 [ext_resource type="Texture2D" uid="uid://d4jr0430bb3gd" path="res://assets/taburete/taburete_2.png" id="5_yjgjm"]
 [ext_resource type="Script" path="res://player_related/Gun_hand.gd" id="6_a7lmc"]
+[ext_resource type="Script" path="res://world_related/collectables/hammer.gd" id="7_kcwsq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5olx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6514v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mohu"]
+size = Vector3(0.0496407, 0.0501576, 2.00639)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy23x"]
 albedo_color = Color(1, 1, 0, 1)
@@ -145,11 +149,64 @@ script/source = "extends Node3D
 var collectable_name = \"NonCollectable\"
 "
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_4hqqd"]
-radius = 1.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5640"]
+albedo_color = Color(0.388235, 0.192157, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tsd6k"]
+material = SubResource("StandardMaterial3D_e5640")
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ql3k7"]
+albedo_color = Color(0.32549, 0.32549, 0.32549, 1)
+metallic = 0.53
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1r52b"]
+material = SubResource("StandardMaterial3D_ql3k7")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+
+[sub_resource type="Animation" id="Animation_o4bii"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p4w7q"]
+resource_name = "Swing"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(0, 1.5708, -1.39626), Vector3(0, 1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7i4j3"]
+_data = {
+"RESET": SubResource("Animation_o4bii"),
+"Swing": SubResource("Animation_p4w7q")
+}
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jyvg8"]
-size = Vector3(1.26462, 1.58159, 1.22519)
+size = Vector3(1.00555, 0.367343, 0.658456)
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -166,6 +223,13 @@ mesh = SubResource("CapsuleMesh_6514v")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.349425, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamRoot"]
+
+[node name="ObjectAround" type="Area3D" parent="CamRoot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00483006, -0.287938, 0)
+
+[node name="ObjectArounDetection" type="CollisionShape3D" parent="CamRoot/Camera3D/ObjectAround"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00501823, 0.287833, -1.00161)
+shape = SubResource("BoxShape3D_7mohu")
 
 [node name="Orb" type="MeshInstance3D" parent="CamRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.260843, -0.15617, -0.270544)
@@ -212,21 +276,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512088, -0.514502, -0.85)
 visible = false
 script = SubResource("GDScript_txp5n")
 
+[node name="collectable_hammer" type="StaticBody3D" parent="CamRoot"]
+transform = Transform3D(-1.448e-06, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.448e-06, 0.25, -0.185067, -0.300071)
+visible = false
+script = ExtResource("7_kcwsq")
+
+[node name="Mango" type="MeshInstance3D" parent="CamRoot/collectable_hammer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0859341, 0)
+mesh = SubResource("CylinderMesh_tsd6k")
+
+[node name="Cabeza" type="MeshInstance3D" parent="CamRoot/collectable_hammer"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.286242, 0)
+mesh = SubResource("CylinderMesh_1r52b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CamRoot/collectable_hammer"]
+libraries = {
+"": SubResource("AnimationLibrary_7i4j3")
+}
+
 [node name="HUD" parent="." instance=ExtResource("2_7avxc")]
-
-[node name="ObjectAround" type="Area3D" parent="."]
-
-[node name="ObjectArounDetection" type="CollisionShape3D" parent="ObjectAround"]
-shape = SubResource("SphereShape3D_4hqqd")
 
 [node name="ObjectInFront" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.702192, 0, -0.796488)
 
 [node name="ObjectInFrontDetection" type="CollisionShape3D" parent="ObjectInFront"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680525, -0.0817795, 0.0513756)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.702705, 0.282395, 0.334743)
 shape = SubResource("BoxShape3D_jyvg8")
 
-[connection signal="body_entered" from="ObjectAround" to="." method="_on_object_around_body_entered"]
-[connection signal="body_exited" from="ObjectAround" to="." method="_on_object_around_body_exited"]
+[connection signal="body_entered" from="CamRoot/Camera3D/ObjectAround" to="." method="_on_object_around_body_entered"]
+[connection signal="body_exited" from="CamRoot/Camera3D/ObjectAround" to="." method="_on_object_around_body_exited"]
 [connection signal="body_entered" from="ObjectInFront" to="." method="_on_object_in_front_body_entered"]
 [connection signal="body_exited" from="ObjectInFront" to="." method="_on_object_in_front_body_exited"]

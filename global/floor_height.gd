@@ -1,4 +1,4 @@
 extends Node
 
 
-var floor_height = 0.8
+var floor_height = 1
