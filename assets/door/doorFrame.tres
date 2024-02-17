@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://oqslt84f5xpt"]
+
+[ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="1_i287h"]
+[ext_resource type="Texture2D" uid="uid://be8dln0y8tc2t" path="res://assets/door/doorFrame_0.png" id="2_557iv"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_i287h")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.5
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("2_557iv")

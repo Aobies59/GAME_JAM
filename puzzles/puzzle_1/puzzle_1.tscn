@@ -24,10 +24,10 @@ shape = SubResource("BoxShape3D_gc2ac")
 [node name="Player" parent="." instance=ExtResource("1_ge4uc")]
 
 [node name="collectable_hammer" parent="." instance=ExtResource("2_rqmvq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.0601)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.105343, -6.0601)
 
 [node name="pseudo_interactable_strength_tester" parent="." instance=ExtResource("3_aggmn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.998483, 5.11661)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.998483, 5.11661)
 
 [node name="temp_light" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.26342, 0)
