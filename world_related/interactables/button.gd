@@ -18,6 +18,9 @@ func _on_disable_round_timer_received(_params):
 	timer.start()
 	
 func interact():
+	if PlayerInfo.shooting_finished:
+		victory()
+		return
 	timer.stop()
 	timer.wait_time = PlayerInfo.wait_time
 	timer.start()

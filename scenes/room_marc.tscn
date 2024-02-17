@@ -99,11 +99,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 mesh_lod_threshold = 0.0
 size = Vector2i(1920, 1080)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
@@ -328,7 +330,7 @@ transform = Transform3D(1, 0, 9.9476e-14, 0, 1, 0, -9.9476e-14, 0, 1, 0.0131838,
 transform = Transform3D(3.11142, 0, 0, 0, 1, 0, 0, 0, 1, 0.00223053, 3.99135, 0.00588799)
 
 [node name="ledOnly" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
-transform = Transform3D(0.321397, 0, 0, 0, -0.00532331, -0.999986, 0, 0.999986, -0.00532331, 0, -0.975899, 0)
+transform = Transform3D(1, 0, 0, 0, -0.00532331, -0.999986, 0, 0.999986, -0.00532331, 0, -0.975899, 0)
 light_color = Color(0.290196, 0.290196, 0.290196, 1)
 light_energy = 10.02
 light_indirect_energy = 0.03
@@ -336,14 +338,14 @@ light_volumetric_fog_energy = 0.0
 light_cull_mask = 4294966274
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
-transform = Transform3D(0.321397, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04499, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04499, 0)
 light_color = Color(1, 1, 0.733333, 1)
 light_energy = 12.959
 light_cull_mask = 4294967291
 shadow_enabled = true
 
 [node name="celling" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
-transform = Transform3D(0.321397, 0, 0, 0, 1, 0, 0, 0, 1, 0.0650366, -2.2096, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0650366, -2.2096, 0)
 light_color = Color(1, 1, 0.733333, 1)
 light_energy = 0.485
 light_indirect_energy = 0.0
@@ -353,7 +355,7 @@ light_cull_mask = 4294966276
 omni_range = 5.12529
 
 [node name="wallLight" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
-transform = Transform3D(0.321397, 0, 0, 0, 1, 0, 0, 0, 1, -0.632947, -2.2096, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.632947, -2.2096, 0)
 layers = 8
 light_color = Color(1, 1, 0.733333, 1)
 light_energy = 9.212
@@ -364,7 +366,7 @@ light_cull_mask = 4294966280
 omni_range = 5.12529
 
 [node name="wallLight2" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/led/MeshInstance3D/leds"]
-transform = Transform3D(0.321397, 0, 0, 0, 1, 0, 0, 0, 1, 0.342833, -2.2096, 0.00192511)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.342833, -2.2096, 0.00192511)
 layers = 8
 light_color = Color(1, 1, 0.733333, 1)
 light_energy = 9.212

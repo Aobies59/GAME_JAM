@@ -19,6 +19,9 @@ func _ready():
 func _on_hit(_params):
 	PlayerInfo.victory = get_round_state()
 	if PlayerInfo.victory:
+		round_number -= 1
+		if round_number <= 0:
+			PlayerInfo.shooting_finished = true
 		Broadcast.send("disable_round_timer")
 	
 func _on_button_press(_params):
@@ -27,9 +30,6 @@ func _on_button_press(_params):
 		
 var round_number = 3
 func _on_round_advance_received(_params):
-	round_number -= 1
-	if round_number <= 0:
-		PlayerInfo.shooting_finished = true
 	PlayerInfo.wait_time -= 2
 	var target_num = rng.randi_range(5, MAX_TARGET_NUM)
 	generate_targets(target_num)
