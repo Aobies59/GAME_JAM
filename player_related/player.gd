@@ -1,4 +1,5 @@
 extends CharacterBody3D
+const HAMMER_LOAD_TIME = 0.5
 
 func _ready():
 	hammer_timer.autostart = false
@@ -8,29 +9,29 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	name = "Player"
 	connect_broadcast_messages()
-	
+
 func connect_broadcast_messages():
 	Broadcast.listen("congrats", self, "_on_congrats_message_received")
 	Broadcast.listen("round_advance", self, "_on_advance_round_received")
 	Broadcast.listen("timeout", self, "_on_timeout_message_received")
 	Broadcast.listen("drop", self, "_on_drop_message_received")
 	Broadcast.listen("sun_visible", self, "_on_sun_visible_received")
-	
+
 func _on_congrats_message_received(_params):
 	display_popup("Congrats!")
-	
+
 func _on_timeout_message_received(_params):
 	display_popup("Out of time!")
-	
+
 func _on_drop_message_received(params):
 	$HUD.drop(params["position"], true)
-	
+
 func _on_sun_visible_received(_params):
 	display_popup("When looking at the sun,\npress E with an object\n in hand to present it to him")
-	
+
 func _on_advance_round_received(_params):
 	display_popup("Next Round!")
-	
+
 var speed = 5.0
 var interactable_object = null
 func _process(_delta):
@@ -39,13 +40,13 @@ func _process(_delta):
 	# update speed based on player state
 	speed = get_speed()
 	$CamRoot.position.y = get_player_height()
-		
+	
 	interactable_object = get_interactable_object()
-		
+	
 	update_hud_object_visibility()
 	
 	Windows.click_position = get_viewport().get_mouse_position()
-	
+
 @onready var objects_in_hand = $CamRoot.get_children()
 func update_hud_object_visibility():
 	# update the item in the bottom left's visibility
@@ -76,12 +77,12 @@ func get_interactable_object():
 				$HUD.hide_use_hud()
 				$HUD.hide_interact_hud()
 				return body
-			
+	
 	# if there is no interactable object, hide the interact hud
 	$HUD.hide_interact_hud()
 	$HUD.hide_use_hud()
 	return null
-	
+
 @onready var bullet = preload("res://player_related/bullet.tscn")
 func shoot():
 	if CloseObjects.object_in_hand != "Gun":
@@ -94,13 +95,13 @@ func shoot():
 	temp_bullet.position = $CamRoot/Camera3D.global_transform.origin
 	temp_bullet.assign_direction($CamRoot/Camera3D.global_transform.basis.z.normalized())
 	get_parent().add_child(temp_bullet)
-	
+
 var clicking = false
 var hammer_in_use = false
 var hammer_timer = Timer.new()
 func handle_other_inputs():
 	update_player_state()
-
+	
 	# TODO: pause menu
 	if Input.is_action_just_pressed("escape"):
 		get_tree().quit()
@@ -108,25 +109,25 @@ func handle_other_inputs():
 	if Input.is_action_pressed("click"):
 		if PlayerInfo.bullets > 0 and CloseObjects.object_in_hand == "Gun":
 			shoot()
-			
+	
 	if Input.is_action_just_pressed("click"):
 		clicking = true
 		if CloseObjects.object_in_hand == "Hammer":
 			hammer_in_use = true
 			hammer_timer.stop()
-			hammer_timer.wait_time = 0.5
+			hammer_timer.wait_time = HAMMER_LOAD_TIME
 			hammer_timer.start()
 			$HUD.start_loading_hammer()
-			
+	
 	if Input.is_action_just_released("click"):
 		clicking = false
 		if hammer_in_use:
-			var power = 1.2 - hammer_timer.time_left
+			var power = HAMMER_LOAD_TIME - hammer_timer.time_left
 			swing_hammer(power)
 		
 	scroll_inventory_slots()
-	
-func swing_hammer(power = 1.2):
+
+func swing_hammer(power = HAMMER_LOAD_TIME):
 	$HUD.stop_loading_hammer()
 	hammer_in_use = false
 	hammer_timer.stop()
@@ -147,7 +148,7 @@ func handle_interact_inputs():
 			# only update the inventory space if the object was collected succesfully
 			if $HUD.collect(interactable_object) == 0:
 				inventory_space -= 1
-			
+	
 	# handle second interact button
 	if Input.is_action_just_pressed("interact2") and len(objects_in_front) == 0 and is_on_floor():
 		var relative_position = self.position - $CamRoot/Camera3D.get_global_transform().basis.z
@@ -164,7 +165,7 @@ func update_player_state():
 		crouching = true
 	else:
 		crouching = false
-		
+	
 	# update running state
 	if Input.is_action_pressed("run") and not crouching and is_on_floor():
 		running = true
