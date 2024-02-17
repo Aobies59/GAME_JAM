@@ -14,7 +14,7 @@ radius = 0.03
 height = 0.06
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pc8bw"]
-radius = 0.031
+radius = 0.124467
 
 [node name="TestBullet" type="StaticBody3D"]
 script = ExtResource("1_6tost")

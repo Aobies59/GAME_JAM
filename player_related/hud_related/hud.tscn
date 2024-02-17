@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://w0du2stt3g3j"]
+[gd_scene load_steps=19 format=3 uid="uid://w0du2stt3g3j"]
 
 [ext_resource type="Script" path="res://player_related/hud_related/hud.gd" id="1_hp7ha"]
 [ext_resource type="Texture2D" uid="uid://c8ogluh78xa8m" path="res://assets/ui/hud/ui_inventory_slot_selected.svg" id="2_amdgq"]
@@ -64,14 +64,6 @@ script/source = "extends Control
 
 func _process(_delta):
 	visible = true if CloseObjects.object_in_hand == \"Gun\" else false
-"
-
-[sub_resource type="GDScript" id="GDScript_hbstn"]
-script/source = "extends Label
-
-
-func _process(_delta):
-	text = \"SCORE: \" + str(PlayerInfo.score)
 "
 
 [sub_resource type="GDScript" id="GDScript_3ctfp"]
@@ -295,23 +287,6 @@ offset_bottom = -500.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_eqs8o")
-
-[node name="Score" type="Label" parent="GunHUD"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 860.0
-offset_top = 933.0
-offset_right = 989.0
-offset_bottom = 975.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "SCORE: 0"
-script = SubResource("GDScript_hbstn")
 
 [node name="Bullets" type="Label" parent="GunHUD"]
 layout_mode = 1
