@@ -11,6 +11,7 @@ func _ready():
 	
 func connect_broadcast_messages():
 	Broadcast.listen("congrats", self, "_on_congrats_message_received")
+	Broadcast.listen("round_advance", self, "_on_advance_round_received")
 	Broadcast.listen("timeout", self, "_on_timeout_message_received")
 	Broadcast.listen("drop", self, "_on_drop_message_received")
 	Broadcast.listen("sun_visible", self, "_on_sun_visible_received")
@@ -25,7 +26,10 @@ func _on_drop_message_received(params):
 	$HUD.drop(params["position"], true)
 	
 func _on_sun_visible_received(_params):
-	$HUD.display_popup("When looking at the sun,\npress E with an object\n in hand to present it to him")
+	display_popup("When looking at the sun,\npress E with an object\n in hand to present it to him")
+	
+func _on_advance_round_received(_params):
+	display_popup("Next Round!")
 	
 var speed = 5.0
 var interactable_object = null
