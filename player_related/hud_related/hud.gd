@@ -60,7 +60,8 @@ func move_selected_slot_left():
 var collectables = {"Orb": preload("res://world_related/collectables/test_collectable.tscn"),
 "Chair": preload("res://world_related/collectables/chair.tscn"),
 "Puzzle_orb": preload("res://world_related/collectables/puzzle_orb.tscn"),
-"Gun": preload("res://player_related/gun.tscn")}
+"Gun": preload("res://player_related/gun.tscn"),
+"Hammer": preload("res://world_related/collectables/hammer.tscn")}
 func collect(item):
 	# CloseObjects.object_in_hand = object's collectable name
 	# inventory[selected_slot] = objects preloaded node
@@ -107,6 +108,12 @@ func drop(relative_position: Vector3, absolute_position = false):
 	CloseObjects.object_in_hand = null
 	
 	return 0
+	
+func start_loading_hammer():
+	$HammerHUD/Charge/AnimationPlayer.play("Charge")
+	
+func stop_loading_hammer():
+	$HammerHUD/Charge/AnimationPlayer.play("RESET")
 
 func display_collected_item(item_index):
 	full_slot_markers[item_index].visible = true

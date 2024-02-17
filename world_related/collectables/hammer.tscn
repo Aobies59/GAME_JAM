@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=3 uid="uid://dx5hgp78kbh4d"]
+
+[ext_resource type="Script" path="res://world_related/collectables/hammer.gd" id="1_bnvp0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5640"]
+albedo_color = Color(0.388235, 0.192157, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tsd6k"]
+material = SubResource("StandardMaterial3D_e5640")
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ql3k7"]
+albedo_color = Color(0.32549, 0.32549, 0.32549, 1)
+metallic = 0.53
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1r52b"]
+material = SubResource("StandardMaterial3D_ql3k7")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_edyxa"]
+size = Vector3(0.202148, 0.402069, 0.103668)
+
+[sub_resource type="Animation" id="Animation_o4bii"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("@SubViewport@9288/collectable_hammer:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p4w7q"]
+resource_name = "Swing"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("@SubViewport@9288/collectable_hammer:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.0472), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7i4j3"]
+_data = {
+"RESET": SubResource("Animation_o4bii"),
+"Swing": SubResource("Animation_p4w7q")
+}
+
+[node name="collectable_hammer" type="RigidBody3D"]
+script = ExtResource("1_bnvp0")
+
+[node name="Mango" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0859341, 0)
+mesh = SubResource("CylinderMesh_tsd6k")
+skeleton = NodePath("../../..")
+
+[node name="Cabeza" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.286242, 0)
+mesh = SubResource("CylinderMesh_1r52b")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000488281, 0.137161, -0.000137329)
+shape = SubResource("BoxShape3D_edyxa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_7i4j3")
+}
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(0.0961443, 0, 0, 0, 0.201409, 0, 0, 0, 0.0539743, 0, 0.138427, 0)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

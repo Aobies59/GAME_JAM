@@ -23,9 +23,13 @@ Windows="*res://global/windows.gd"
 CloseObjects="*res://global/close_objects.gd"
 FloorHeight="*res://global/floor_height.gd"
 PlayerInfo="*res://global/PlayerInfo.gd"
+Broadcast="*res://global/Broadcast.gd"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 window/size/resizable=false
 
 [filesystem]

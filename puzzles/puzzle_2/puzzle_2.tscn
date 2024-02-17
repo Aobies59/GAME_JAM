@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b0hwll5k73fb6"]
+[gd_scene load_steps=23 format=3 uid="uid://b0hwll5k73fb6"]
 
 [ext_resource type="Texture2D" uid="uid://jqto7agv1d6c" path="res://assets/standferia/EstanteFeria_estante_feria_baseColor.png" id="1_sdukb"]
 [ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="2_dgeol"]
@@ -66,6 +66,12 @@ size = Vector3(40, 0.2, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_g822i"]
 size = Vector3(40, 0.2, 20)
 
+[sub_resource type="BoxMesh" id="BoxMesh_f7faf"]
+size = Vector3(0.1, 1.5, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dh7lc"]
+size = Vector3(0.1, 1.5, 20)
+
 [sub_resource type="PlaceholderMesh" id="PlaceholderMesh_nlt55"]
 
 [sub_resource type="PlaceholderMesh" id="PlaceholderMesh_ckc3o"]
@@ -80,7 +86,7 @@ height = 0.02
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_p0iue"]
 height = 1.57562
 
-[node name="Node3D" type="Node3D"]
+[node name="Puzzle 2" type="Node3D"]
 
 [node name="EstanteFeria" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0726156, 0, 0, 0, 0.0726156, 0, 0, 0, 0.0726156, -0.791777, 3.31457, -5.72097)
@@ -96,7 +102,7 @@ shape = SubResource("ConcavePolygonShape3D_7c1rl")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24305, 0)
 
 [node name="Gun" parent="." instance=ExtResource("3_6l2np")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -4.92168, 0.315719, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.06857, 1.41617, -5.46322)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -119,6 +125,15 @@ mesh = SubResource("BoxMesh_8crb3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
 shape = SubResource("BoxShape3D_g822i")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13655, 0.715659, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/StaticBody3D"]
+mesh = SubResource("BoxMesh_f7faf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D"]
+shape = SubResource("BoxShape3D_dh7lc")
 
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 30.1481, 10.2354, 0)
@@ -144,5 +159,8 @@ mesh = SubResource("CylinderMesh_fgq8p")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Target/TargetBody"]
 shape = SubResource("CylinderShape3D_p0iue")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+omni_range = 70.9215
+
 [node name="Button" parent="." instance=ExtResource("6_k1lou")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.723505, 6.63956)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.14324, 0.944517, 0)

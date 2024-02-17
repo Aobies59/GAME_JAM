@@ -7,6 +7,7 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_15yip"]
 material = SubResource("StandardMaterial3D_o614n")
+size = Vector3(1.5, 1.5, 1.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ddrkw"]
 albedo_color = Color(0.631373, 0, 0.0705882, 1)
@@ -29,7 +30,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0.511754, 0)]
+"values": [Vector3(0, 0.742998, 0.462003)]
 }
 
 [sub_resource type="Animation" id="Animation_4sqad"]
@@ -45,7 +46,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0.511754, 0), Vector3(0, 0.439086, 0), Vector3(0, 0.512, 0)]
+"values": [Vector3(0, 0.742998, 0.462003), Vector3(0, 0.67, 0.462), Vector3(0, 0.742998, 0.462003)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ofpt"]
@@ -55,6 +56,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1f07n"]
+size = Vector3(1.5, 1.5, 1.5)
 
 [node name="Button" type="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507144, 0)
@@ -64,7 +66,7 @@ script = ExtResource("1_8bura")
 mesh = SubResource("BoxMesh_15yip")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.511754, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.742998, 0.462003)
 mesh = SubResource("CylinderMesh_tfpfj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MeshInstance3D2"]
