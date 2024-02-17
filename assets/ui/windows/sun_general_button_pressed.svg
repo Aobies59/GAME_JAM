@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 217 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:2;">
+    <g id="Button" transform="matrix(1.08004,0,0,1.08004,-32.6855,-169.753)">
+        <g transform="matrix(1.00471,0,0,0.679931,-1039.72,-83.6314)">
+            <path d="M1256.88,431.264L1072.12,431.264L1072.12,364.736L1256.88,364.736L1256.88,431.264ZM1254,367L1075,367L1075,429L1254,429L1254,367Z" style="stroke:black;stroke-width:7.5px;"/>
+        </g>
+        <g transform="matrix(1,0,0,0.574871,6.72017,79.8013)">
+            <rect x="28.735" y="143.619" width="187.907" height="82.624" style="fill:rgb(237,222,146);"/>
+        </g>
+        <g transform="matrix(1,0,0,1,6.72017,-16.3812)">
+            <path d="M214.373,178.745L216.642,178.745L216.642,226.243L28.735,226.243L28.735,223.996L214.381,223.982L214.373,178.745Z" style="fill:rgb(157,143,80);"/>
+        </g>
+        <g transform="matrix(1,0,0,1,6.72017,-16.3812)">
+            <path d="M28.735,223.98L28.735,178.745L214.342,178.745L214.355,181.024L30.996,181.006L30.996,223.98L28.735,223.98Z" style="fill:rgb(249,235,167);"/>
+        </g>
+    </g>
+    <g id="Button-Pressed" serif:id="Button Pressed" transform="matrix(1.08004,0,0,1.08004,-32.6855,-169.753)">
+        <g transform="matrix(1.00471,0,0,0.679931,-1039.72,-83.6314)">
+            <path d="M1256.88,431.264L1072.12,431.264L1072.12,364.736L1256.88,364.736L1256.88,431.264ZM1254,367L1075,367L1075,429L1254,429L1254,367Z" style="stroke:black;stroke-width:7.5px;"/>
+        </g>
+        <g transform="matrix(1,0,0,0.574871,7.64606,80.7272)">
+            <rect x="28.735" y="143.619" width="187.907" height="82.624" style="fill:rgb(237,222,146);"/>
+        </g>
+        <g transform="matrix(1,0,0,1,7.64606,-15.4553)">
+            <path d="M214.373,178.745L216.642,178.745L216.642,226.243L28.735,226.243L28.735,223.996L214.381,223.982L214.373,178.745Z" style="fill:rgb(157,143,80);"/>
+        </g>
+        <g transform="matrix(1,0,0,1,7.64606,-15.4553)">
+            <path d="M28.735,225.235L28.735,178.745L214.4,178.745L214.449,181.024L30.996,181.006L30.996,224.317L28.735,225.235Z" style="fill:rgb(157,143,80);"/>
+        </g>
+        <g id="Selection" transform="matrix(0.901986,0,0,0.378501,18.7453,114.985)">
+            <rect x="28.735" y="143.619" width="187.907" height="82.624" style="fill:rgb(237,222,146);stroke:black;stroke-width:1.75px;stroke-linecap:square;stroke-miterlimit:15;stroke-dasharray:0,3.49,0,0,0,0;"/>
+        </g>
+    </g>
+</svg>
