@@ -4,7 +4,6 @@ extends "res://world_related/interactables_and_collectables.gd"
 
 func _ready():
 	interactable = true
-	$MeshInstance3D2/AnimationPlayer.animation_finished.connect(_animation_finished)
 	self.name = "interactable_button"
 	timer.autostart = false
 	timer.timeout.connect(_on_timer_end)
@@ -35,8 +34,6 @@ func interact():
 		victory()
 		return
 	restart()
-	interactable = false
-	$MeshInstance3D2/AnimationPlayer.play("press_button")
 	Broadcast.send("reload_button_press")
 	
 func _on_timer_end():
@@ -46,7 +43,6 @@ func _on_timer_end():
 		victory()
 	else:
 		Broadcast.send("timeout")
-		Broadcast.send("modify_ammo")
 		PlayerInfo.bullets = 0
 
 func _animation_finished(anim_name):

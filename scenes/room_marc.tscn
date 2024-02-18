@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://henf0idxpflt"]
+[gd_scene load_steps=42 format=3 uid="uid://henf0idxpflt"]
 
 [ext_resource type="Shader" path="res://scenes/postProcessingFilter.gdshader" id="1_cpkwn"]
 [ext_resource type="Texture2D" uid="uid://0glty7kfq6rb" path="res://textures/texture_02.svg" id="2_hlo3o"]
@@ -9,17 +9,17 @@
 [ext_resource type="PackedScene" uid="uid://p878o12jrnou" path="res://assets/caja02/caja02.glb" id="5_1seca"]
 [ext_resource type="PackedScene" uid="uid://bph0lkuaemw5w" path="res://assets/table/table.glb" id="6_fq0qy"]
 [ext_resource type="PackedScene" uid="uid://cpcmfnw3io21t" path="res://assets/door/door.glb" id="7_2khyr"]
-[ext_resource type="PackedScene" uid="uid://c3k2kaaw2hwll" path="res://assets/lamp/lamp.fbx" id="7_j368l"]
+[ext_resource type="PackedScene" uid="uid://b36yqot37esy7" path="res://assets/lamp/lamp.fbx" id="7_j368l"]
 [ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="7_nstfp"]
-[ext_resource type="PackedScene" uid="uid://bipy1uhw2poml" path="res://assets/display/display.glb" id="8_257db"]
-[ext_resource type="Material" uid="uid://bhw71jm570h4u" path="res://assets/wall/wall.tres" id="9_7y382"]
-[ext_resource type="PackedScene" uid="uid://swqspdicltp6" path="res://assets/computer/computer.glb" id="9_dhyi6"]
+[ext_resource type="PackedScene" uid="uid://bfba82opkfd4o" path="res://assets/display/display.glb" id="8_257db"]
+[ext_resource type="Material" path="res://assets/wall/wall.tres" id="9_7y382"]
+[ext_resource type="PackedScene" uid="uid://crlbguoaod2pk" path="res://assets/computer/computer.glb" id="9_dhyi6"]
 [ext_resource type="Texture2D" uid="uid://dq71eqcwnm16u" path="res://assets/floor/floor_basecolor.png" id="11_mcj4c"]
 [ext_resource type="PackedScene" uid="uid://bgyh5vsbvnv30" path="res://assets/door/doorFrame.glb" id="14_84i82"]
-[ext_resource type="Texture2D" uid="uid://dbmkwqpf8llml" path="res://assets/bed/colchon_mattress_BaseColor.png" id="15_dgc8r"]
-[ext_resource type="ArrayMesh" uid="uid://c80ka5hohbstv" path="res://assets/bed/mattress.obj" id="16_mohkm"]
-[ext_resource type="Texture2D" uid="uid://d4k28y8e36q21" path="res://assets/bed/cojin_pillow_BaseColor.png" id="17_srxh5"]
-[ext_resource type="ArrayMesh" uid="uid://t7cpu0l0p3vi" path="res://assets/bed/pillow.obj" id="18_fatim"]
+[ext_resource type="Texture2D" uid="uid://bytqr00dccu05" path="res://assets/bed/colchon_mattress_BaseColor.png" id="15_dgc8r"]
+[ext_resource type="ArrayMesh" uid="uid://gyi0iibyiof7" path="res://assets/bed/mattress.obj" id="16_mohkm"]
+[ext_resource type="Texture2D" uid="uid://b7cj4hmvmerjs" path="res://assets/bed/cojin_pillow_BaseColor.png" id="17_srxh5"]
+[ext_resource type="ArrayMesh" uid="uid://cfwxqkp8cl6d7" path="res://assets/bed/pillow.obj" id="18_fatim"]
 [ext_resource type="Texture2D" uid="uid://cqrkaau8y3fh3" path="res://assets/celling/celling_basecolor.png" id="23_w64xq"]
 [ext_resource type="PackedScene" uid="uid://bfdyamh0o5pnx" path="res://assets/leds/leds.glb" id="27_h6gk7"]
 
@@ -85,11 +85,165 @@ shader_parameter/albedo = ExtResource("11_mcj4c")
 [sub_resource type="BoxShape3D" id="BoxShape3D_1fufp"]
 size = Vector3(1.60663, 1.36723, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ucuf"]
+size = Vector3(1.12335, 1.64819, 1.09917)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_7fav7"]
-size = Vector3(1.64053, 1.64819, 1.09917)
+size = Vector3(1.91955, 1.64819, 1.09917)
+
+[sub_resource type="GDScript" id="GDScript_vrinu"]
+script/source = "extends \"res://world_related/interactables_and_collectables.gd\"
+
+var open = false
+
+func _ready():
+	name = \"interactable_door\"
+	interactable = true
+	$AnimationPlayer.animation_finished.connect(_on_animation_finish)
+
+func _on_animation_finish(anim_name):
+	interactable = true
+	if anim_name == \"Open\":
+		open = true 
+	elif anim_name == \"Close\":
+		open = false
+
+func interact():
+	if open:
+		$AnimationPlayer.play(\"Close\")
+	else:
+		$AnimationPlayer.play(\"Open\")
+	interactable = false
+"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_48fuj"]
-size = Vector3(0.100464, 1.98578, 0.949829)
+size = Vector3(0.100464, 1.98578, 1.01886)
+
+[sub_resource type="Animation" id="Animation_3bm5s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0608237, 1.07001, -0.584333)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_htgta"]
+resource_name = "Close"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.90972, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.437962, 1.07001, 0.113668), Vector3(0.0436208, 1.07001, -0.564099)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.90482, 0), Vector3(0, 7.10543e-14, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pjldm"]
+resource_name = "Open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -1.90972, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.0436208, 1.07001, -0.564099), Vector3(0.437962, 1.07001, 0.113668)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 7.10543e-14, 0), Vector3(0, -1.90482, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6qmpr"]
+_data = {
+"Close": SubResource("Animation_htgta"),
+"Open": SubResource("Animation_pjldm"),
+"RESET": SubResource("Animation_3bm5s")
+}
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0d21h"]
 size = Vector3(1.48267, 0.625885, 2.98486)
@@ -324,11 +478,11 @@ transform = Transform3D(1, 3.33067e-16, -2.22045e-16, 1.42109e-14, 1, 2.98023e-0
 [node name="Caja_amplia" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia"]
-transform = Transform3D(-0.0375573, 0, -1.23536, 0, 1.2, 0, 1.4951, 0, -0.0310338, -3.13004, 0.667671, 2.03967)
+transform = Transform3D(-0.0375572, 0, -1.23536, 0, 1.2, 0, 1.4951, 0, -0.0310325, -3.13004, 0.667671, 2.03967)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D"]
-transform = Transform3D(1, 0, 1.49012e-08, 0, 1, 0, 0, 0, 1, -0.250626, 0.384277, -0.0498862)
-shape = SubResource("BoxShape3D_7fav7")
+transform = Transform3D(1.00001, 0, -4.47035e-07, 0, 1, 0, -5.96046e-08, 0, 1, 0.00692582, 0.381911, -0.100034)
+shape = SubResource("BoxShape3D_0ucuf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Caja_amplia/StaticBody3D"]
 
@@ -366,22 +520,33 @@ transform = Transform3D(1, 3.33067e-16, -2.22045e-16, 1.42109e-14, 1, 2.98023e-0
 [node name="Puerta" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta"]
-transform = Transform3D(-1.3, 0, 1.96295e-07, 0, 1.3, 0, -1.96295e-07, 0, -1.3, 3.90777, 0, -1.07252)
+transform = Transform3D(-1.3, 0, 1.96295e-07, 0, 1.3, 0, -1.96295e-07, 0, -1.3, 3.86847, 0, -2.46708)
+script = SubResource("GDScript_vrinu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0292358, 1.07001, 0.49802)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0608237, 1.07001, -0.584333)
 shape = SubResource("BoxShape3D_48fuj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15256e-07, 0, -0.0618523)
 
 [node name="door" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D/MeshInstance3D" instance=ExtResource("7_2khyr")]
-transform = Transform3D(1, 0, 9.9476e-14, 0, 1, 0, -9.9476e-14, 0, 1, 0.0131838, 1.02587, 0.499322)
+transform = Transform3D(1, 0, 1.42109e-13, 0, 1, 0, -1.42109e-13, 0, 1, 0.0131834, 1.02587, -0.516683)
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D/MeshInstance3D"]
+transform = Transform3D(-0.769231, 0, -1.16151e-07, 0, 0.769231, 0, 1.16151e-07, 0, -0.769231, 0.468062, 1.00359, -0.605093)
+aabb = AABB(-0.567718, -1.25513, -1.36601, 1.112, 2.51027, 1.97811)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D"]
-transform = Transform3D(1.25287, 0, 2.27374e-13, 0, 1.25287, 0, -2.27374e-13, 0, 1.25287, 0.073771, 0.998012, 0.51304)
+transform = Transform3D(1.25287, 0, 0, 0, 1.25287, 0, 0, 0, 1.25287, 0.0737708, 0.998012, -0.589882)
 
 [node name="doorFrame" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D/MeshInstance3D2" instance=ExtResource("14_84i82")]
 transform = Transform3D(-0.769231, 0, -1.16151e-07, 0, 0.769231, 0, 1.16151e-07, 0, -0.769231, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D"]
+libraries = {
+"": SubResource("AnimationLibrary_6qmpr")
+}
 
 [node name="led" type="Node" parent="SubViewportContainer/SubViewport/Node3D/Casa"]
 
@@ -488,3 +653,6 @@ shadow_enabled = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Node3D/Ambiente/DirectionalLight3D2"]
 transform = Transform3D(0.827562, -0.559652, 0.0439297, 0.0293015, -0.0350844, -0.998955, 0.560609, 0.827984, -0.0126359, 3.39181, -0.62201, -12.8469)
+
+[connection signal="screen_entered" from="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D/MeshInstance3D/VisibleOnScreenNotifier3D" to="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D" method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D/MeshInstance3D/VisibleOnScreenNotifier3D" to="SubViewportContainer/SubViewport/Node3D/Casa/Puerta/StaticBody3D" method="_on_visible_on_screen_notifier_3d_screen_exited"]

@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://xjbn38qy1dke"]
+
+[ext_resource type="Script" path="res://scenes/windows.gd" id="1_3lxtp"]
+[ext_resource type="Texture2D" uid="uid://csgilcjsg2y23" path="res://assets/ui/windows/new-screen-windows.svg" id="1_kkm1x"]
+
+[node name="Windows" type="Node2D"]
+script = ExtResource("1_3lxtp")
+
+[node name="New-screen-windows" type="Sprite2D" parent="."]
+position = Vector2(979, 540)
+scale = Vector2(1.79333, 1.79333)
+texture = ExtResource("1_kkm1x")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 690.0
+offset_top = 173.0
+offset_right = 1316.0
+offset_bottom = 827.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "BRO QUE EL SOL ESE
+DA MIEDO LOCO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_bottom = 46.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "X"
+flat = true
+
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]

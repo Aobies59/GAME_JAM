@@ -32,5 +32,5 @@ func _on_animation_finish(anim_name):
 		var anim_index = anim_name.substr(3, anim_name.length() - 1)
 		$AnimationPlayer.play("DOWN_" + anim_index)
 		moving = true
-		if target_hit and get_node("Bola") != null:
-			$Bola.gravity_scale = 1.0
+		if target_hit and get_node("collectable_gacha_ball") != null:
+			$collectable_gacha_ball.gravity_scale = 1.0

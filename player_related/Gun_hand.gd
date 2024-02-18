@@ -12,5 +12,6 @@ func _on_animation_finish(anim_name):
 		is_firing = false
 
 func shoot():
+	Broadcast.send("modify_ammo")
 	is_firing = true
 	animation_player.play("Shoot")

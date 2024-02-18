@@ -61,7 +61,11 @@ var collectables = {"Orb": preload("res://world_related/collectables/test_collec
 "Chair": preload("res://world_related/collectables/chair.tscn"),
 "Puzzle_orb": preload("res://world_related/collectables/puzzle_orb.tscn"),
 "Gun": preload("res://player_related/gun.tscn"),
-"Hammer": preload("res://world_related/collectables/hammer.tscn")}
+"Hammer": preload("res://world_related/collectables/hammer.tscn"),
+"Clever_Paper": preload("res://world_related/collectables/clever_paper.tscn"),
+"Strong_Paper": preload("res://world_related/collectables/strong_paper.tscn"),
+"Gunner_Paper": preload("res://world_related/collectables/clever_paper.tscn"),
+"Gacha_Ball": preload("res://world_related/collectables/gacha_ball.tscn")}
 func collect(item):
 	# CloseObjects.object_in_hand = object's collectable name
 	# inventory[selected_slot] = objects preloaded node
@@ -87,12 +91,16 @@ func collect(item):
 	# if the item was not collected succesfully, return error state
 	return -1
 
-func drop(relative_position: Vector3, absolute_position = false):
+func drop(relative_position: Vector3, absolute_position = false, object = null):
 	# if there is no object in hand, return error state
 	if inventory[selected_slot] == null or CloseObjects.object_in_hand == null:
 		return -1
 	# create the item to spawn in the floor
-	var temp_item = inventory[selected_slot].instantiate()
+	var temp_item
+	if not object:
+		temp_item = inventory[selected_slot].instantiate()
+	else:
+		temp_item = object.instantiate()
 	# item's position is the given position with its own floor height
 	if absolute_position:
 		temp_item.position = relative_position
@@ -120,3 +128,24 @@ func display_collected_item(item_index):
 
 func hide_collected_item(item_index):
 	full_slot_markers[item_index].visible = false
+
+var mouse_mode = Input.MOUSE_MODE_CAPTURED
+func pause():
+	mouse_mode = Input.get_mouse_mode()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	$PauseMenu.visible = true
+	PlayerInfo.paused = true
+	
+func unpause():
+	Input.set_mouse_mode(mouse_mode)
+	$PauseMenu.visible = false
+	PlayerInfo.paused = false
+
+func _on_continue_button_pressed():
+	unpause()
+	
+func _on_exit_button_pressed():
+	get_tree().quit()
+
+func _on_clever_close_button_pressed():
+	PlayerInfo.clever_open = false

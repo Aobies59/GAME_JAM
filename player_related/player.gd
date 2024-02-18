@@ -1,5 +1,6 @@
 extends CharacterBody3D
 const HAMMER_LOAD_TIME = 0.5
+var something_open = false
 
 func _ready():
 	hammer_timer.autostart = false
@@ -16,6 +17,10 @@ func connect_broadcast_messages():
 	Broadcast.listen("timeout", self, "_on_timeout_message_received")
 	Broadcast.listen("drop", self, "_on_drop_message_received")
 	Broadcast.listen("sun_visible", self, "_on_sun_visible_received")
+	Broadcast.listen("bad_target_hit", self, "_on_bad_target_hit_received")
+	Broadcast.listen("looking_at_sun", self, "_on_looking_at_sun_received")
+	Broadcast.listen("not_looking_at_sun", self, "_on_not_looking_at_sun_received")
+	Broadcast.listen("open_gacha_ball", self, "_on_open_gacha_ball_received")
 
 func _on_congrats_message_received(_params):
 	display_popup("Congrats!")
@@ -31,6 +36,21 @@ func _on_sun_visible_received(_params):
 
 func _on_advance_round_received(_params):
 	display_popup("Next Round!")
+	
+func _on_bad_target_hit_received(_params):
+	display_popup("I wouldn't hit that one!")
+
+var looking_at_sun = false
+func _on_looking_at_sun_received(_params):
+	looking_at_sun = true
+	
+func _on_not_looking_at_sun_received(_params):
+	looking_at_sun = false
+	
+var strong_paper = preload("res://world_related/collectables/strong_paper.tscn")
+func _on_open_gacha_ball_received(_params):
+	var relative_position = self.position - $CamRoot/Camera3D.get_global_transform().basis.z
+	$HUD.drop(relative_position, false, strong_paper)
 
 var speed = 5.0
 var interactable_object = null
@@ -46,6 +66,8 @@ func _process(_delta):
 	update_hud_object_visibility()
 	
 	Windows.click_position = get_viewport().get_mouse_position()
+	
+	something_open = PlayerInfo.paused or PlayerInfo.clever_open or PlayerInfo.strong_open or PlayerInfo.gunner_open
 
 @onready var objects_in_hand = $CamRoot.get_children()
 func update_hud_object_visibility():
@@ -100,17 +122,27 @@ var clicking = false
 var hammer_in_use = false
 var hammer_timer = Timer.new()
 func handle_other_inputs():
-	update_player_state()
-	
 	# TODO: pause menu
 	if Input.is_action_just_pressed("escape"):
-		get_tree().quit()
+		if PlayerInfo.paused:
+			$HUD.unpause()
+		else:
+			$HUD.pause()
 		
+	if something_open:
+		return
+		
+	update_player_state()
+	
 	if Input.is_action_pressed("click"):
+		if Windows.popup_open:
+			return
 		if PlayerInfo.bullets > 0 and CloseObjects.object_in_hand == "Gun":
 			shoot()
 	
 	if Input.is_action_just_pressed("click"):
+		if Windows.popup_open:
+			return
 		clicking = true
 		if CloseObjects.object_in_hand == "Hammer":
 			hammer_in_use = true
@@ -118,12 +150,19 @@ func handle_other_inputs():
 			hammer_timer.wait_time = HAMMER_LOAD_TIME
 			hammer_timer.start()
 			$HUD.start_loading_hammer()
+		if CloseObjects.object_in_hand == "Gacha_Ball":
+			Broadcast.send("open_gacha_ball")
 	
 	if Input.is_action_just_released("click"):
+		if Windows.popup_open:
+			return
 		clicking = false
 		if hammer_in_use:
 			var power = HAMMER_LOAD_TIME - hammer_timer.time_left
 			swing_hammer(power)
+			
+	if Input.is_action_just_pressed("interact") and looking_at_sun and CloseObjects.object_in_hand != null:
+		Broadcast.send("sun_give", {"item": CloseObjects.object_in_hand})
 		
 	scroll_inventory_slots()
 
@@ -138,6 +177,8 @@ func swing_hammer(power = HAMMER_LOAD_TIME):
 var inventory_space = 4
 var objects_in_front: Array
 func handle_interact_inputs():
+	if something_open:
+		return
 	if Input.is_action_just_pressed("interact") and interactable_object != null:
 	# if the object is interactable, interact with it
 		if interactable_object.name.begins_with("interactable") and interactable_object.interactable:
@@ -224,6 +265,8 @@ func _physics_process(delta):
 
 var MOUSE_SENSITIVITY = 0.1
 func _input(event):
+	if something_open:
+		return
 	# handle camera movement with mouse motion
 	if event is InputEventMouseMotion and not Windows.popup_open:
 		$CamRoot.rotate_x(deg_to_rad(event.relative.y) * MOUSE_SENSITIVITY * -1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://w0du2stt3g3j"]
+[gd_scene load_steps=21 format=3 uid="uid://w0du2stt3g3j"]
 
 [ext_resource type="Script" path="res://player_related/hud_related/hud.gd" id="1_hp7ha"]
 [ext_resource type="Texture2D" uid="uid://c8ogluh78xa8m" path="res://assets/ui/hud/ui_inventory_slot_selected.svg" id="2_amdgq"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://d2c23483esjmp" path="res://assets/ui/windows/sun/window_sun_close_pressed.svg" id="8_dmeye"]
 [ext_resource type="Texture2D" uid="uid://dwbq3tffsvs8b" path="res://assets/CrossHair.png" id="9_74xgm"]
 [ext_resource type="Texture2D" uid="uid://cnub48n7tpegq" path="res://assets/ui/hud/keyboard_e.svg" id="10_a7hms"]
+[ext_resource type="Texture2D" uid="uid://c123i1je838o4" path="res://assets/ui/hud/barra-color.svg" id="11_knr7n"]
+[ext_resource type="Texture2D" uid="uid://b70ykt4x7vtpa" path="res://assets/ui/hud/revolver.png" id="12_c6ih2"]
+[ext_resource type="Texture2D" uid="uid://iik0biya4fve" path="res://assets/ui/hud/barra.svg" id="12_s24fk"]
 
 [sub_resource type="GDScript" id="GDScript_5c6p8"]
 script/source = "extends Control
@@ -21,57 +24,83 @@ func _process(_delta):
 	visible = true if CloseObjects.object_in_hand == \"Hammer\" else false
 "
 
-[sub_resource type="Animation" id="Animation_jmdjr"]
+[sub_resource type="Animation" id="Animation_kktss"]
 resource_name = "Charge"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:size")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 35), Vector2(233, 35)]
+"values": [Vector2(23.1948, 52.6506), Vector2(191.937, 52.6506)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.000240132, 0.292222), Vector2(-0.284557, 0.292222)]
 }
 
-[sub_resource type="Animation" id="Animation_jvb1w"]
+[sub_resource type="Animation" id="Animation_ph0s3"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:size")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 35)]
+"values": [Vector2(23.1939, 52.125)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.00024129, 0.285928)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ujl5o"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8sn03"]
 _data = {
-"Charge": SubResource("Animation_jmdjr"),
-"RESET": SubResource("Animation_jvb1w")
+"Charge": SubResource("Animation_kktss"),
+"RESET": SubResource("Animation_ph0s3")
 }
 
 [sub_resource type="GDScript" id="GDScript_eqs8o"]
 script/source = "extends Control
 
+func _ready():
+	Broadcast.listen(\"modify_ammo\", self, \"_on_modify_ammo_received\")
+	Broadcast.send(\"modify_ammo\")
 
 func _process(_delta):
 	visible = true if CloseObjects.object_in_hand == \"Gun\" else false
-"
-
-[sub_resource type="GDScript" id="GDScript_3ctfp"]
-script/source = "extends Label
-
-
-func _process(_delta):
-	text = \"BULLETS: \" + str(PlayerInfo.bullets)
+	
+func _on_modify_ammo_received(_params):
+	for slot in $Slots.get_children():
+		slot.visible = false
+		
+	for bullet in range(PlayerInfo.bullets):
+		$Slots.get_children()[bullet].visible = true
 "
 
 [node name="HUD" type="Control"]
@@ -82,6 +111,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hp7ha")
+metadata/_edit_vertical_guides_ = [959.0]
+metadata/_edit_horizontal_guides_ = [540.0]
 
 [node name="InventoryUI" type="Control" parent="."]
 layout_mode = 1
@@ -170,7 +201,7 @@ texture = ExtResource("3_npjcv")
 
 [node name="Template" type="Sprite2D" parent="."]
 visible = false
-z_index = 999
+z_index = 998
 position = Vector2(940, 520)
 scale = Vector2(0.58, 0.58)
 texture = ExtResource("2_uhy4e")
@@ -233,47 +264,31 @@ texture_normal = ExtResource("7_eoj74")
 texture_pressed = ExtResource("8_dmeye")
 
 [node name="HammerHUD" type="Control" parent="."]
+visible = false
 anchors_preset = 0
-offset_left = 1674.0
-offset_top = 1032.0
-offset_right = 1714.0
-offset_bottom = 1072.0
+offset_left = 764.0
+offset_top = 994.0
+offset_right = 1148.0
+offset_bottom = 1083.0
 script = SubResource("GDScript_5c6p8")
 
-[node name="Background" type="ColorRect" parent="HammerHUD"]
-layout_mode = 0
-offset_right = 237.0
-offset_bottom = 39.0
-
-[node name="ChargeOutline" type="ColorRect" parent="HammerHUD"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 236.0
-offset_bottom = 38.0
-color = Color(0, 0, 0, 1)
-
-[node name="BackgroundFront" type="ColorRect" parent="HammerHUD"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 235.0
-offset_bottom = 37.0
-
-[node name="Charge" type="ColorRect" parent="HammerHUD"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 2.0
-offset_bottom = 37.0
-color = Color(1, 0, 0, 1)
+[node name="Charge" type="Sprite2D" parent="HammerHUD"]
+position = Vector2(23.1939, 52.125)
+scale = Vector2(-0.00024129, 0.285928)
+texture = ExtResource("11_knr7n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HammerHUD/Charge"]
 libraries = {
-"": SubResource("AnimationLibrary_ujl5o")
+"": SubResource("AnimationLibrary_8sn03")
 }
 
+[node name="Outline" type="Sprite2D" parent="HammerHUD"]
+position = Vector2(192, 45)
+scale = Vector2(0.284615, 0.284615)
+texture = ExtResource("12_s24fk")
+
 [node name="GunHUD" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -287,23 +302,6 @@ offset_bottom = -500.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_eqs8o")
-
-[node name="Bullets" type="Label" parent="GunHUD"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 850.0
-offset_top = 965.0
-offset_right = 1008.0
-offset_bottom = 1007.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "BULLETS: 0"
-script = SubResource("GDScript_3ctfp")
 
 [node name="CrossHair" type="TextureRect" parent="GunHUD"]
 layout_mode = 1
@@ -320,6 +318,90 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_74xgm")
+
+[node name="Slots" type="Node2D" parent="GunHUD"]
+position = Vector2(-846, 29)
+
+[node name="Slot1" type="ColorRect" parent="GunHUD/Slots"]
+offset_left = 1784.0
+offset_top = 882.0
+offset_right = 1839.0
+offset_bottom = 935.0
+scale = Vector2(0.7, 0.7)
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot2" type="ColorRect" parent="GunHUD/Slots"]
+offset_left = 1848.0
+offset_top = 892.0
+offset_right = 1900.0
+offset_bottom = 944.0
+rotation = 0.936627
+scale = Vector2(0.7, 0.7)
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot3" type="ColorRect" parent="GunHUD/Slots"]
+offset_left = 1841.0
+offset_top = 938.0
+offset_right = 1896.0
+offset_bottom = 991.0
+scale = Vector2(0.7, 0.7)
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot4" type="ColorRect" parent="GunHUD/Slots"]
+offset_left = 1846.0
+offset_top = 970.0
+offset_right = 1901.0
+offset_bottom = 1023.0
+rotation = 0.899299
+scale = Vector2(0.7, 0.7)
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot5" type="ColorRect" parent="GunHUD/Slots"]
+offset_left = 1785.0
+offset_top = 995.0
+offset_right = 1840.0
+offset_bottom = 1048.0
+scale = Vector2(0.7, 0.7)
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot6" type="ColorRect" parent="GunHUD/Slots"]
+offset_left = 1738.0
+offset_top = 992.0
+offset_right = 1793.0
+offset_bottom = 1045.0
+rotation = -0.637
+scale = Vector2(0.7, 0.7)
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot7" type="ColorRect" parent="GunHUD/Slots"]
+offset_left = 1728.0
+offset_top = 938.0
+offset_right = 1783.0
+offset_bottom = 991.0
+scale = Vector2(0.7, 0.7)
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot8" type="ColorRect" parent="GunHUD/Slots"]
+offset_left = 1762.0
+offset_top = 890.0
+offset_right = 1817.0
+offset_bottom = 943.0
+rotation = 0.73187
+scale = Vector2(0.7, 0.7)
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Revolver" type="Sprite2D" parent="GunHUD"]
+position = Vector2(958, 986)
+scale = Vector2(0.133553, 0.133553)
+texture = ExtResource("12_c6ih2")
 
 [node name="Interact" type="Sprite2D" parent="."]
 visible = false
@@ -348,5 +430,46 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="PauseMenu" type="Node2D" parent="."]
+visible = false
+z_index = 999
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+offset_right = 1924.0
+offset_bottom = 1082.0
+color = Color(0, 0, 0, 0.372549)
+
+[node name="ContinueButton" type="Button" parent="PauseMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 712.0
+offset_top = 276.0
+offset_right = 1219.0
+offset_bottom = 486.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "CONTINUE"
+
+[node name="ExitButton" type="Button" parent="PauseMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 712.0
+offset_top = 600.0
+offset_right = 1219.0
+offset_bottom = 810.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "EXIT"
+
 [connection signal="pressed" from="Template/OkButton" to="Template" method="_on_ok_button_pressed"]
 [connection signal="pressed" from="Template/CloseButton" to="Template" method="_on_close_button_pressed"]
+[connection signal="pressed" from="PauseMenu/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="PauseMenu/ExitButton" to="." method="_on_exit_button_pressed"]

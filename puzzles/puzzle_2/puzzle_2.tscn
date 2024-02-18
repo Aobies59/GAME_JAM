@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0hwll5k73fb6"]
+[gd_scene load_steps=5 format=3 uid="uid://b0hwll5k73fb6"]
 
 [ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="2_dgeol"]
-[ext_resource type="PackedScene" uid="uid://dy31sduyndi6n" path="res://player_related/gun.tscn" id="3_6l2np"]
 [ext_resource type="PackedScene" uid="uid://bwvqr4876pqmx" path="res://puzzles/puzzle_2/estante.tscn" id="6_5kt4e"]
-[ext_resource type="PackedScene" uid="uid://2ybtpu3e4vfu" path="res://world_related/interactables/button.tscn" id="6_k1lou"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8crb3"]
 size = Vector3(20, 0.2, 20)
@@ -15,9 +13,6 @@ size = Vector3(20, 0.2, 20)
 
 [node name="Player" parent="." instance=ExtResource("2_dgeol")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.981301, 0)
-
-[node name="Gun" parent="." instance=ExtResource("3_6l2np")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.957568, 0.0940996, -3.61199)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -32,9 +27,6 @@ shape = SubResource("BoxShape3D_g822i")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 omni_range = 70.9215
-
-[node name="Button" parent="." instance=ExtResource("6_k1lou")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.11842, 0.746537, -2.54638)
 
 [node name="estante" parent="." instance=ExtResource("6_5kt4e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
