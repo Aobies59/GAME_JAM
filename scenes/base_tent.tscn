@@ -1,22 +1,12 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=25 format=3 uid="uid://b7onqs73eu8ru"]
-=======
 [gd_scene load_steps=57 format=3 uid="uid://b7onqs73eu8ru"]
->>>>>>> Stashed changes
 
 [ext_resource type="Shader" path="res://scenes/postProcessingFilter.gdshader" id="1_t25qq"]
 [ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="2_tswyo"]
-[ext_resource type="Texture2D" uid="uid://dryen5meyi175" path="res://assets/tentWood/soporteLona_low_tentWood_BaseColor.png" id="3_e0cgt"]
-[ext_resource type="Texture2D" uid="uid://b0qiasqix6cuk" path="res://assets/dirt_floor/tierra_basecolor.png" id="3_likvw"]
-[ext_resource type="ArrayMesh" uid="uid://bb4hu4uvg85re" path="res://assets/tentWood/tentWood.obj" id="4_fvrsb"]
-[ext_resource type="ArrayMesh" uid="uid://bhaf3st1kdg6l" path="res://assets/largeTent/largeTent.obj" id="5_jealn"]
+[ext_resource type="Texture2D" uid="uid://bq1rg0fq6oqvd" path="res://assets/tentWood/soporteLona_low_tentWood_BaseColor.png" id="3_e0cgt"]
+[ext_resource type="Texture2D" uid="uid://dn5wjlpqebdw4" path="res://assets/dirt_floor/tierra_basecolor.png" id="3_likvw"]
+[ext_resource type="ArrayMesh" uid="uid://dr6dt33xekt2l" path="res://assets/tentWood/tentWood.obj" id="4_fvrsb"]
+[ext_resource type="ArrayMesh" uid="uid://dw21aeo0lmdxb" path="res://assets/largeTent/largeTent.obj" id="5_jealn"]
 [ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="6_gnuaj"]
-<<<<<<< Updated upstream
-[ext_resource type="Texture2D" uid="uid://oppu1c78bl4m" path="res://assets/largeTent/carpa_DefaultMaterial_BaseColor.png" id="7_82a0t"]
-[ext_resource type="Texture2D" uid="uid://cgvt13phhqh2s" path="res://assets/seats/assientos_seats_BaseColor.png" id="9_apj1w"]
-[ext_resource type="ArrayMesh" uid="uid://cay0q00a0urjr" path="res://assets/seats/seats.obj" id="10_in5rr"]
-[ext_resource type="Texture2D" uid="uid://cdc5v2q0ob17w" path="res://assets/SUN/sol_low_DefaultMaterial_BaseColor.png" id="11_2plar"]
-=======
 [ext_resource type="Texture2D" uid="uid://ci36iom22anus" path="res://assets/largeTent/carpa_DefaultMaterial_BaseColor.png" id="7_82a0t"]
 [ext_resource type="Texture2D" uid="uid://cm58xon4reuc7" path="res://assets/seats/assientos_seats_BaseColor.png" id="9_apj1w"]
 [ext_resource type="ArrayMesh" uid="uid://bivi33mjcrold" path="res://assets/seats/seats.obj" id="10_in5rr"]
@@ -38,15 +28,10 @@ script/source = "extends Node3D
 
 func _process(_delta):
 	$SubViewportContainer/SubViewport/base/Room_1.visible = true if PlayerInfo.round_number == 1 else false
-	$SubViewportContainer/SubViewport/base/Room_1.position.y = 0 if PlayerInfo.round_number == 1 else 1000
 	$SubViewportContainer/SubViewport/base/Room_2.visible = true if PlayerInfo.round_number == 2 else false
-	$SubViewportContainer/SubViewport/base/Room_2.position.y = 0 if PlayerInfo.round_number == 2 else 1000
 	$SubViewportContainer/SubViewport/base/Room_3.visible = true if PlayerInfo.round_number == 3 else false
-	$SubViewportContainer/SubViewport/base/Room_3.position.y = 0 if PlayerInfo.round_number == 3 else 1000
 	$SubViewportContainer/SubViewport/base/Room_4.visible = true if PlayerInfo.round_number == 4 else false
-	$SubViewportContainer/SubViewport/base/Room_4.position.y = 0 if PlayerInfo.round_number == 4 else 1000
 "
->>>>>>> Stashed changes
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bclq2"]
 shader = ExtResource("1_t25qq")
@@ -110,21 +95,6 @@ sky_material = SubResource("ProceduralSkyMaterial_vkpmb")
 background_mode = 2
 sky = SubResource("Sky_51531")
 
-<<<<<<< Updated upstream
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b6cwp"]
-render_priority = 0
-shader = ExtResource("2_tswyo")
-shader_parameter/affine_mapping = false
-shader_parameter/alpha_scissor = 0.5
-shader_parameter/jitter = 0.25
-shader_parameter/resolution = Vector2i(320, 240)
-shader_parameter/albedo = ExtResource("11_2plar")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_htkdj"]
-albedo_texture = ExtResource("11_2plar")
-emission = Color(1, 1, 0, 1)
-emission_energy_multiplier = 0.1
-=======
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_khgh3"]
 resource_name = "lambert1"
 albedo_texture = ExtResource("18_kdrc4")
@@ -137,7 +107,6 @@ normal_enabled = true
 normal_texture = ExtResource("20_3rm2s")
 ao_enabled = true
 ao_texture = ExtResource("19_7u512")
->>>>>>> Stashed changes
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_3h2tg"]
 _surfaces = [{
@@ -575,17 +544,9 @@ shape = SubResource("ConcavePolygonShape3D_l4w6x")
 environment = SubResource("Environment_o5h4l")
 
 [node name="Room_1" type="Node3D" parent="SubViewportContainer/SubViewport/base"]
-visible = false
 
-<<<<<<< Updated upstream
-[node name="Sun" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, -4.37114e-07, -10, 0, 10, -4.37114e-07, 0.381142, 103.923, -5.41175)
-material_override = SubResource("ShaderMaterial_b6cwp")
-mesh = SubResource("ArrayMesh_c3qtp")
-=======
 [node name="pseudo_interactable_strength_tester" parent="SubViewportContainer/SubViewport/base/Room_1" instance=ExtResource("11_82c4j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10991, -7.0902)
->>>>>>> Stashed changes
 
 [node name="collectable_hammer" parent="SubViewportContainer/SubViewport/base/Room_1" instance=ExtResource("12_0dhy5")]
 transform = Transform3D(-0.00218777, 0.614807, -0.788674, 0.00022292, 0.788677, 0.614808, 0.999998, 0.00116925, -0.00186249, -0.574047, 0.431368, -7.28395)
@@ -599,78 +560,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44223, 1.1888, 0.40255)
 [node name="collectable_pen" parent="SubViewportContainer/SubViewport/base/Room_1" instance=ExtResource("15_3kp7c")]
 transform = Transform3D(0.813882, 0, -0.58103, 0, 1, 0, 0.58103, 0, 0.813882, 8.14549, 1.19112, -0.963182)
 
-[node name="Table" type="StaticBody3D" parent="SubViewportContainer/SubViewport/base/Room_1"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 7.90432, 1.10804, 0)
-
-[node name="Meshes" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.15584, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-
-[node name="table_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes"]
-
-[node name="table_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/table_low"]
-mesh = SubResource("ArrayMesh_caluq")
-skeleton = NodePath("")
-
-[node name="base_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes"]
-
-[node name="base_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/base_low"]
-mesh = SubResource("ArrayMesh_qmooe")
-skeleton = NodePath("")
-
-[node name="drawer_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes"]
-
-[node name="handle_03_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low"]
-
-[node name="handle_03_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low/handle_03_low"]
-mesh = SubResource("ArrayMesh_60lu0")
-skeleton = NodePath("")
-
-[node name="drawer_03_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low"]
-
-[node name="drawer_03_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low/drawer_03_low"]
-mesh = SubResource("ArrayMesh_u3dl2")
-skeleton = NodePath("")
-
-[node name="drawer_02_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low"]
-
-[node name="drawer_02_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low/drawer_02_low"]
-mesh = SubResource("ArrayMesh_fd6og")
-skeleton = NodePath("")
-
-[node name="drawer_01_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low"]
-
-[node name="drawer_01_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low/drawer_01_low"]
-mesh = SubResource("ArrayMesh_nh4bp")
-skeleton = NodePath("")
-
-[node name="drawer_large_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low"]
-
-[node name="drawer_large_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low/drawer_large_low"]
-mesh = SubResource("ArrayMesh_4xkb6")
-skeleton = NodePath("")
-
-[node name="handle_02_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low"]
-
-[node name="handle_02_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low/handle_02_low"]
-mesh = SubResource("ArrayMesh_efix2")
-skeleton = NodePath("")
-
-[node name="handle_01_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low"]
-
-[node name="handle_01_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low/handle_01_low"]
-mesh = SubResource("ArrayMesh_1atwl")
-skeleton = NodePath("")
-
-[node name="handle_large_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low"]
-
-[node name="handle_large_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table/Meshes/drawer_low/handle_large_low"]
-mesh = SubResource("ArrayMesh_gfoko")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/base/Room_1/Table"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00396729, -0.339118, 0.0108643)
-shape = SubResource("BoxShape3D_ysyka")
-
 [node name="Room_2" type="Node3D" parent="SubViewportContainer/SubViewport/base"]
 
 [node name="estante" parent="SubViewportContainer/SubViewport/base/Room_2" instance=ExtResource("13_tdssm")]
@@ -679,86 +568,84 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.059
 [node name="collectable_lamp" parent="SubViewportContainer/SubViewport/base/Room_2" instance=ExtResource("17_qfgjh")]
 transform = Transform3D(0.559497, 0, 0.828833, 0, 1, 0, -0.828833, 0, 0.559497, 8.11596, 1.16213, -0.667421)
 
-[node name="Table" type="StaticBody3D" parent="SubViewportContainer/SubViewport/base/Room_2"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 7.90432, 1.10804, 0)
-
-[node name="Meshes" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.15584, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-
-[node name="table_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes"]
-
-[node name="table_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/table_low"]
-mesh = SubResource("ArrayMesh_caluq")
-skeleton = NodePath("")
-
-[node name="base_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes"]
-
-[node name="base_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/base_low"]
-mesh = SubResource("ArrayMesh_qmooe")
-skeleton = NodePath("")
-
-[node name="drawer_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes"]
-
-[node name="handle_03_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low"]
-
-[node name="handle_03_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low/handle_03_low"]
-mesh = SubResource("ArrayMesh_60lu0")
-skeleton = NodePath("")
-
-[node name="drawer_03_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low"]
-
-[node name="drawer_03_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low/drawer_03_low"]
-mesh = SubResource("ArrayMesh_u3dl2")
-skeleton = NodePath("")
-
-[node name="drawer_02_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low"]
-
-[node name="drawer_02_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low/drawer_02_low"]
-mesh = SubResource("ArrayMesh_fd6og")
-skeleton = NodePath("")
-
-[node name="drawer_01_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low"]
-
-[node name="drawer_01_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low/drawer_01_low"]
-mesh = SubResource("ArrayMesh_nh4bp")
-skeleton = NodePath("")
-
-[node name="drawer_large_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low"]
-
-[node name="drawer_large_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low/drawer_large_low"]
-mesh = SubResource("ArrayMesh_4xkb6")
-skeleton = NodePath("")
-
-[node name="handle_02_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low"]
-
-[node name="handle_02_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low/handle_02_low"]
-mesh = SubResource("ArrayMesh_efix2")
-skeleton = NodePath("")
-
-[node name="handle_01_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low"]
-
-[node name="handle_01_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low/handle_01_low"]
-mesh = SubResource("ArrayMesh_1atwl")
-skeleton = NodePath("")
-
-[node name="handle_large_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low"]
-
-[node name="handle_large_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table/Meshes/drawer_low/handle_large_low"]
-mesh = SubResource("ArrayMesh_gfoko")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/base/Room_2/Table"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00396729, -0.339118, 0.0108643)
-shape = SubResource("BoxShape3D_ysyka")
-
 [node name="Room_3" type="Node3D" parent="SubViewportContainer/SubViewport/base"]
-visible = false
 
 [node name="Room_4" type="Node3D" parent="SubViewportContainer/SubViewport/base"]
-visible = false
 
 [node name="Celda" parent="SubViewportContainer/SubViewport/base/Room_4" instance=ExtResource("18_6db7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.34685, 2.42758, 0.222123)
 
 [node name="Sun" parent="SubViewportContainer/SubViewport/base" instance=ExtResource("15_52rxg")]
 transform = Transform3D(15, 0, 0, 0, -6.55671e-07, -15, 0, 15, -6.55671e-07, 2.58531, 103.923, -5.41175)
+
+[node name="Table" type="StaticBody3D" parent="SubViewportContainer/SubViewport/base"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 7.90432, 1.10804, 0)
+
+[node name="Meshes" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.15584, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="table_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes"]
+
+[node name="table_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/table_low"]
+mesh = SubResource("ArrayMesh_caluq")
+skeleton = NodePath("")
+
+[node name="base_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes"]
+
+[node name="base_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/base_low"]
+mesh = SubResource("ArrayMesh_qmooe")
+skeleton = NodePath("")
+
+[node name="drawer_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes"]
+
+[node name="handle_03_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low"]
+
+[node name="handle_03_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low/handle_03_low"]
+mesh = SubResource("ArrayMesh_60lu0")
+skeleton = NodePath("")
+
+[node name="drawer_03_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low"]
+
+[node name="drawer_03_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low/drawer_03_low"]
+mesh = SubResource("ArrayMesh_u3dl2")
+skeleton = NodePath("")
+
+[node name="drawer_02_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low"]
+
+[node name="drawer_02_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low/drawer_02_low"]
+mesh = SubResource("ArrayMesh_fd6og")
+skeleton = NodePath("")
+
+[node name="drawer_01_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low"]
+
+[node name="drawer_01_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low/drawer_01_low"]
+mesh = SubResource("ArrayMesh_nh4bp")
+skeleton = NodePath("")
+
+[node name="drawer_large_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low"]
+
+[node name="drawer_large_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low/drawer_large_low"]
+mesh = SubResource("ArrayMesh_4xkb6")
+skeleton = NodePath("")
+
+[node name="handle_02_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low"]
+
+[node name="handle_02_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low/handle_02_low"]
+mesh = SubResource("ArrayMesh_efix2")
+skeleton = NodePath("")
+
+[node name="handle_01_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low"]
+
+[node name="handle_01_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low/handle_01_low"]
+mesh = SubResource("ArrayMesh_1atwl")
+skeleton = NodePath("")
+
+[node name="handle_large_low" type="Node3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low"]
+
+[node name="handle_large_low2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/Table/Meshes/drawer_low/handle_large_low"]
+mesh = SubResource("ArrayMesh_gfoko")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/base/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00396729, -0.339118, 0.0108643)
+shape = SubResource("BoxShape3D_ysyka")
