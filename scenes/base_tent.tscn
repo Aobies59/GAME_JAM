@@ -1,16 +1,16 @@
-[gd_scene load_steps=24 format=3 uid="uid://b7onqs73eu8ru"]
+[gd_scene load_steps=25 format=3 uid="uid://b7onqs73eu8ru"]
 
 [ext_resource type="Shader" path="res://scenes/postProcessingFilter.gdshader" id="1_t25qq"]
 [ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="2_tswyo"]
-[ext_resource type="Texture2D" uid="uid://bq1rg0fq6oqvd" path="res://assets/tentWood/soporteLona_low_tentWood_BaseColor.png" id="3_e0cgt"]
-[ext_resource type="Texture2D" uid="uid://dn5wjlpqebdw4" path="res://assets/dirt_floor/tierra_basecolor.png" id="3_likvw"]
-[ext_resource type="ArrayMesh" uid="uid://dr6dt33xekt2l" path="res://assets/tentWood/tentWood.obj" id="4_fvrsb"]
-[ext_resource type="ArrayMesh" uid="uid://dw21aeo0lmdxb" path="res://assets/largeTent/largeTent.obj" id="5_jealn"]
+[ext_resource type="Texture2D" uid="uid://dryen5meyi175" path="res://assets/tentWood/soporteLona_low_tentWood_BaseColor.png" id="3_e0cgt"]
+[ext_resource type="Texture2D" uid="uid://b0qiasqix6cuk" path="res://assets/dirt_floor/tierra_basecolor.png" id="3_likvw"]
+[ext_resource type="ArrayMesh" uid="uid://bb4hu4uvg85re" path="res://assets/tentWood/tentWood.obj" id="4_fvrsb"]
+[ext_resource type="ArrayMesh" uid="uid://bhaf3st1kdg6l" path="res://assets/largeTent/largeTent.obj" id="5_jealn"]
 [ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="6_gnuaj"]
-[ext_resource type="Texture2D" uid="uid://ci36iom22anus" path="res://assets/largeTent/carpa_DefaultMaterial_BaseColor.png" id="7_82a0t"]
-[ext_resource type="Texture2D" uid="uid://cm58xon4reuc7" path="res://assets/seats/assientos_seats_BaseColor.png" id="9_apj1w"]
-[ext_resource type="ArrayMesh" uid="uid://bivi33mjcrold" path="res://assets/seats/seats.obj" id="10_in5rr"]
-[ext_resource type="Texture2D" uid="uid://p873jdw3qu3v" path="res://assets/SUN/sol_low_DefaultMaterial_BaseColor.png" id="11_2plar"]
+[ext_resource type="Texture2D" uid="uid://oppu1c78bl4m" path="res://assets/largeTent/carpa_DefaultMaterial_BaseColor.png" id="7_82a0t"]
+[ext_resource type="Texture2D" uid="uid://cgvt13phhqh2s" path="res://assets/seats/assientos_seats_BaseColor.png" id="9_apj1w"]
+[ext_resource type="ArrayMesh" uid="uid://cay0q00a0urjr" path="res://assets/seats/seats.obj" id="10_in5rr"]
+[ext_resource type="Texture2D" uid="uid://cdc5v2q0ob17w" path="res://assets/SUN/sol_low_DefaultMaterial_BaseColor.png" id="11_2plar"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bclq2"]
 shader = ExtResource("1_t25qq")
@@ -70,6 +70,15 @@ sky_material = SubResource("ProceduralSkyMaterial_vkpmb")
 [sub_resource type="Environment" id="Environment_o5h4l"]
 background_mode = 2
 sky = SubResource("Sky_51531")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b6cwp"]
+render_priority = 0
+shader = ExtResource("2_tswyo")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.25
+shader_parameter/resolution = Vector2i(320, 240)
+shader_parameter/albedo = ExtResource("11_2plar")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_htkdj"]
 albedo_texture = ExtResource("11_2plar")
@@ -189,6 +198,7 @@ environment = SubResource("Environment_o5h4l")
 
 [node name="Sun" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, -4.37114e-07, -10, 0, 10, -4.37114e-07, 0.381142, 103.923, -5.41175)
+material_override = SubResource("ShaderMaterial_b6cwp")
 mesh = SubResource("ArrayMesh_c3qtp")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Sun"]
