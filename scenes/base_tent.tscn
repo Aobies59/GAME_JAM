@@ -1,0 +1,164 @@
+[gd_scene load_steps=21 format=3 uid="uid://byi5warx6jxpo"]
+
+[ext_resource type="Shader" path="res://scenes/postProcessingFilter.gdshader" id="1_t25qq"]
+[ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="2_tswyo"]
+[ext_resource type="Texture2D" uid="uid://dryen5meyi175" path="res://assets/tentWood/soporteLona_low_tentWood_BaseColor.png" id="3_e0cgt"]
+[ext_resource type="Texture2D" uid="uid://b0qiasqix6cuk" path="res://assets/dirt_floor/tierra_basecolor.png" id="3_likvw"]
+[ext_resource type="ArrayMesh" uid="uid://bb4hu4uvg85re" path="res://assets/tentWood/tentWood.obj" id="4_fvrsb"]
+[ext_resource type="ArrayMesh" uid="uid://bhaf3st1kdg6l" path="res://assets/largeTent/largeTent.obj" id="5_jealn"]
+[ext_resource type="PackedScene" uid="uid://wadayt3nt7ao" path="res://player_related/player.tscn" id="6_gnuaj"]
+[ext_resource type="Texture2D" uid="uid://oppu1c78bl4m" path="res://assets/largeTent/carpa_DefaultMaterial_BaseColor.png" id="7_82a0t"]
+[ext_resource type="Texture2D" uid="uid://cgvt13phhqh2s" path="res://assets/seats/assientos_seats_BaseColor.png" id="9_apj1w"]
+[ext_resource type="ArrayMesh" uid="uid://cay0q00a0urjr" path="res://assets/seats/seats.obj" id="10_in5rr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bclq2"]
+shader = ExtResource("1_t25qq")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 12
+shader_parameter/dither_size = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5bw1"]
+render_priority = 0
+shader = ExtResource("2_tswyo")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.018
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("3_likvw")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hpdw3"]
+height = 5.91292
+radius = 0.126154
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rpt3v"]
+render_priority = 0
+shader = ExtResource("2_tswyo")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.3
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("3_e0cgt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_poasv"]
+render_priority = 0
+shader = ExtResource("2_tswyo")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.25
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("7_82a0t")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dyi2r"]
+radius = 4.62395
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rgf57"]
+render_priority = 0
+shader = ExtResource("2_tswyo")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.2
+shader_parameter/resolution = Vector2i(200, 200)
+shader_parameter/albedo = ExtResource("9_apj1w")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vkpmb"]
+
+[sub_resource type="Sky" id="Sky_51531"]
+sky_material = SubResource("ProceduralSkyMaterial_vkpmb")
+
+[sub_resource type="Environment" id="Environment_o5h4l"]
+background_mode = 2
+sky = SubResource("Sky_51531")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_bclq2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="base" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="floor" type="StaticBody3D" parent="SubViewportContainer/SubViewport/base"]
+transform = Transform3D(4.94465, 0, 0, 0, 4.94465, 0, 0, 0, 6.41118, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/floor"]
+
+[node name="Suelo" type="CSGBox3D" parent="SubViewportContainer/SubViewport/base/floor/MeshInstance3D"]
+transform = Transform3D(-3.49691e-08, 0, -0.6, 0, 0.328, 0, 0.8, 0, -2.62268e-08, 0, 0, 0)
+use_collision = true
+size = Vector3(7.59741, 0.0688477, 13.0225)
+material = SubResource("ShaderMaterial_n5bw1")
+
+[node name="Player" parent="SubViewportContainer/SubViewport/base" instance=ExtResource("6_gnuaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2665, 0.566992, -9.3132e-10)
+
+[node name="tentWood" type="StaticBody3D" parent="SubViewportContainer/SubViewport/base"]
+transform = Transform3D(2.90874, 0, 0, 0, 2.90874, 0, 0, 0, 2.90874, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/base/tentWood"]
+shape = SubResource("CylinderShape3D_hpdw3")
+
+[node name="TentWood" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/tentWood/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86154, 0)
+material_override = SubResource("ShaderMaterial_rpt3v")
+mesh = ExtResource("4_fvrsb")
+skeleton = NodePath("../../../../../..")
+
+[node name="largeTent" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base"]
+transform = Transform3D(2.90874, 0, 0, 0, 2.90874, 0, 0, 0, 2.90874, 0, 6.44172, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/base/largeTent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42703, 0)
+
+[node name="LargeTent" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/largeTent/CollisionShape3D"]
+material_override = SubResource("ShaderMaterial_poasv")
+mesh = ExtResource("5_jealn")
+skeleton = NodePath("../../../../../..")
+
+[node name="enviro" type="Node" parent="SubViewportContainer/SubViewport/base"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport/base/enviro"]
+transform = Transform3D(1, 0, 0, 0, 0.149484, 0.988764, 0, -0.988764, 0.149484, 0, 0, 0)
+light_color = Color(1, 1, 0.854902, 1)
+light_energy = 1000.0
+light_indirect_energy = 5.332
+light_volumetric_fog_energy = 7.758
+spot_range = 41.7157
+spot_angle = 29.2691
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/base/enviro"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(1, 1, 0.694118, 1)
+light_energy = 5.802
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/base/enviro"]
+light_color = Color(0.827451, 1, 1, 1)
+light_energy = 16.0
+omni_range = 18.4732
+
+[node name="seats" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base"]
+transform = Transform3D(2.14883, 0, 0, 0, 1.3847, 0, 0, 0, 2.14883, 1.13764, 5.90247, -1.47726)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/base/seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.561273, -4.66347, 0.707691)
+shape = SubResource("CylinderShape3D_dyi2r")
+
+[node name="Seats" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/base/seats/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.170824, 0, 0.146419)
+material_override = SubResource("ShaderMaterial_rgf57")
+mesh = ExtResource("10_in5rr")
+skeleton = NodePath("../../../../../..")
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/base"]
+environment = SubResource("Environment_o5h4l")
+
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]

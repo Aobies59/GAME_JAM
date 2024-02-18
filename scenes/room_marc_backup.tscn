@@ -2,6 +2,7 @@
 
 [ext_resource type="Shader" path="res://scenes/postProcessingFilter.gdshader" id="1_cikkn"]
 [ext_resource type="Shader" path="res://shaders/modelShader.gdshader" id="2_1uxuj"]
+[ext_resource type="Environment" uid="uid://dyxjiiavgh3uk" path="res://shaders/enviroment.tres" id="2_uxt4i"]
 [ext_resource type="Texture2D" uid="uid://cqrkaau8y3fh3" path="res://assets/celling/celling_basecolor.png" id="3_0p4js"]
 [ext_resource type="Texture2D" uid="uid://dq71eqcwnm16u" path="res://assets/floor/floor_basecolor.png" id="4_fq10q"]
 [ext_resource type="Material" uid="uid://bhw71jm570h4u" path="res://assets/wall/wall.tres" id="5_jplb5"]
@@ -29,36 +30,6 @@ shader_parameter/enabled = true
 shader_parameter/dithering = true
 shader_parameter/colors = 12
 shader_parameter/dither_size = 4
-
-[sub_resource type="Environment" id="Environment_fl7v1"]
-background_color = Color(0.580392, 0.431373, 0.211765, 1)
-background_energy_multiplier = 0.0
-ambient_light_source = 2
-ambient_light_color = Color(0.0352941, 0.113725, 0.133333, 1)
-ambient_light_energy = 4.73
-tonemap_mode = 3
-tonemap_exposure = 0.24
-tonemap_white = 16.0
-ssr_max_steps = 10
-ssr_depth_tolerance = 8.31
-ssao_enabled = true
-ssao_radius = 0.83
-ssao_intensity = 8.54
-ssao_detail = 0.0
-ssao_horizon = 0.0
-ssao_sharpness = 1.0
-fog_enabled = true
-fog_light_color = Color(0.521569, 0.552941, 0.588235, 1)
-fog_light_energy = 0.67
-fog_density = 0.0075
-fog_height = -323.37
-fog_height_density = 16.0
-volumetric_fog_density = 0.1658
-volumetric_fog_albedo = Color(0, 0.305882, 0.305882, 1)
-volumetric_fog_emission_energy = 0.0
-volumetric_fog_gi_inject = 0.12
-volumetric_fog_anisotropy = -0.9
-volumetric_fog_length = 1024.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_kf3yj"]
 
@@ -136,7 +107,7 @@ render_target_update_mode = 4
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/Node3D"]
-environment = SubResource("Environment_fl7v1")
+environment = ExtResource("2_uxt4i")
 camera_attributes = SubResource("CameraAttributesPractical_kf3yj")
 
 [node name="Casa" type="Node" parent="SubViewportContainer/SubViewport/Node3D"]

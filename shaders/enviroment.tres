@@ -1,0 +1,37 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://dyxjiiavgh3uk"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_rnihm"]
+
+[sub_resource type="Sky" id="Sky_q4cs0"]
+sky_material = SubResource("PanoramaSkyMaterial_rnihm")
+
+[resource]
+background_color = Color(1, 1, 1, 1)
+sky = SubResource("Sky_q4cs0")
+ambient_light_color = Color(0.0352941, 0.113725, 0.133333, 1)
+ambient_light_energy = 10.96
+tonemap_mode = 3
+tonemap_exposure = 0.24
+tonemap_white = 16.0
+ssr_max_steps = 10
+ssr_depth_tolerance = 8.31
+ssao_enabled = true
+ssao_radius = 0.83
+ssao_intensity = 8.54
+ssao_detail = 0.0
+ssao_horizon = 0.0
+ssao_sharpness = 1.0
+glow_enabled = true
+glow_intensity = 5.85
+fog_enabled = true
+fog_light_color = Color(0.521569, 0.552941, 0.588235, 1)
+fog_light_energy = 0.67
+fog_density = 0.0075
+fog_height = -323.37
+fog_height_density = 16.0
+volumetric_fog_density = 0.1658
+volumetric_fog_albedo = Color(0, 0.305882, 0.305882, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.12
+volumetric_fog_anisotropy = -0.9
+volumetric_fog_length = 1024.0
