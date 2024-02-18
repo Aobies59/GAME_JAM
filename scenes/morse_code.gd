@@ -6,7 +6,7 @@ const passwords = {"gunner": "__. .._ _. _. . ._.", "strong": "... _ ._. ___ _. 
 "clever": "_._. ._.. . ..._ . ._."}
 
 func update_text():
-	$ColorRect/Label.text = morse_code_text
+	$Window/ColorRect/Label.text = morse_code_text
 	var all_codes_done = true
 	for password in passwords.keys():
 		if morse_code_text == passwords[password] and PlayerInfo.codes[password]:
@@ -15,6 +15,7 @@ func update_text():
 		if PlayerInfo.codes[password]:
 			all_codes_done = false
 	if all_codes_done:
+		#TODO: end of the game
 		print("Congrats! All codes done")
 			
 func append_text(text: String):
@@ -24,17 +25,21 @@ func append_text(text: String):
 	update_text()
 
 func _on_button_pressed():
-	# button for the dot
-	append_text(".")
-
-func _on_button_2_pressed():
 	# button for the slash
 	append_text("_")
 
+func _on_button_2_pressed():
+	# button for the dot
+	append_text(".")
+	
+func _on_button_3_pressed():
+	# button for the space
+	append_text(" ")
 
 func _on_del_button_pressed():
 	morse_code_text = morse_code_text.substr(0, len(morse_code_text) - 1)
 	update_text()
 
-func _on_button_3_pressed():
-	append_text(" ")
+
+func _on_texture_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/base_tent.tscn")

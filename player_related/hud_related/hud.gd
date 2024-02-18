@@ -65,7 +65,10 @@ var collectables = {"Orb": preload("res://world_related/collectables/test_collec
 "Clever_Paper": preload("res://world_related/collectables/clever_paper.tscn"),
 "Strong_Paper": preload("res://world_related/collectables/strong_paper.tscn"),
 "Gunner_Paper": preload("res://world_related/collectables/clever_paper.tscn"),
-"Gacha_Ball": preload("res://world_related/collectables/gacha_ball.tscn")}
+"Gacha_Ball": preload("res://world_related/collectables/gacha_ball.tscn"),
+"Rubiks_Cube": preload("res://world_related/collectables/collectable_rubiks_cube.tscn"),
+"Pen": preload("res://world_related/collectables/collectable_pen.tscn"),
+"Lamp": preload("res://world_related/collectables/collectable_lamp.tscn")}
 func collect(item):
 	# CloseObjects.object_in_hand = object's collectable name
 	# inventory[selected_slot] = objects preloaded node
@@ -131,12 +134,14 @@ func hide_collected_item(item_index):
 
 var mouse_mode = Input.MOUSE_MODE_CAPTURED
 func pause():
+	Broadcast.send("pause")
 	mouse_mode = Input.get_mouse_mode()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$PauseMenu.visible = true
 	PlayerInfo.paused = true
 	
 func unpause():
+	Broadcast.send("unpause")
 	Input.set_mouse_mode(mouse_mode)
 	$PauseMenu.visible = false
 	PlayerInfo.paused = false

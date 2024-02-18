@@ -1,12 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://d02o1tkricryo"]
+[gd_scene load_steps=9 format=3 uid="uid://d02o1tkricryo"]
 
 [ext_resource type="Script" path="res://scenes/morse_code.gd" id="1_qkq4d"]
+[ext_resource type="Texture2D" uid="uid://dvkyup6v7x2po" path="res://assets/ui/windows/sun_password_window.svg" id="2_lf6c7"]
+[ext_resource type="FontFile" uid="uid://tf5dto8n3iqd" path="res://assets/ui/windows/W95FA.otf" id="3_wxd0s"]
+[ext_resource type="Texture2D" uid="uid://7hg42xem3hwm" path="res://assets/ui/windows/sun_general_button_unpressed.svg" id="4_l7gln"]
+[ext_resource type="Texture2D" uid="uid://gw8g7c725isl" path="res://assets/ui/windows/sun_general_button_pressed.svg" id="5_thd5c"]
+[ext_resource type="Texture2D" uid="uid://vgwkuj0vbqqq" path="res://assets/translate.png" id="6_5gl5b"]
+[ext_resource type="Texture2D" uid="uid://ktcy608my48t" path="res://assets/ui/windows/sun/window_sun_close.svg" id="6_06xes"]
+[ext_resource type="Texture2D" uid="uid://d2c23483esjmp" path="res://assets/ui/windows/sun/window_sun_close_pressed.svg" id="7_lv70i"]
 
 [node name="MorseCode" type="Node2D"]
 position = Vector2(923, 459)
 script = ExtResource("1_qkq4d")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -959.0
+offset_top = -484.0
+offset_right = 1115.0
+offset_bottom = 676.0
+color = Color(0, 0, 0, 1)
+
+[node name="Window" type="Node2D" parent="."]
+position = Vector2(-178, -71)
+scale = Vector2(0.8, 0.8)
+
+[node name="SunPasswordWindow" type="Sprite2D" parent="Window"]
+position = Vector2(25, 66.25)
+texture = ExtResource("2_lf6c7")
+
+[node name="ColorRect" type="ColorRect" parent="Window"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -18,9 +40,9 @@ offset_right = 662.0
 offset_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.176471, 0.176471, 0.176471, 1)
+color = Color(0.176471, 0.176471, 0.176471, 0)
 
-[node name="Label" type="Label" parent="ColorRect"]
+[node name="Label" type="Label" parent="Window/ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,74 +55,149 @@ offset_right = 20.0
 offset_bottom = 55.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_wxd0s")
 theme_override_font_sizes/font_size = 80
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="TextureButton" parent="Window"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -239.0
-offset_top = 99.0
-offset_right = -90.0
-offset_bottom = 248.0
+offset_left = -273.0
+offset_top = 268.0
+offset_right = -56.0
+offset_bottom = 417.0
 grow_horizontal = 2
 grow_vertical = 2
+texture_normal = ExtResource("4_l7gln")
+texture_pressed = ExtResource("5_thd5c")
+
+[node name="Label" type="Label" parent="Window/Button"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.5
+offset_top = -7.0
+offset_right = 20.5
+offset_bottom = 59.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 100
+theme_override_fonts/font = ExtResource("3_wxd0s")
+theme_override_font_sizes/font_size = 70
+text = "-"
+
+[node name="Button2" type="TextureButton" parent="Window"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = 268.0
+offset_right = 173.0
+offset_bottom = 417.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_l7gln")
+texture_pressed = ExtResource("5_thd5c")
+
+[node name="Label2" type="Label" parent="Window/Button2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_top = -7.0
+offset_right = 17.5
+offset_bottom = 59.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_wxd0s")
+theme_override_font_sizes/font_size = 70
 text = "."
 
-[node name="Button2" type="Button" parent="."]
+[node name="Button3" type="TextureButton" parent="Window"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 108.0
-offset_top = 99.0
-offset_right = 257.0
-offset_bottom = 248.0
+offset_left = 187.0
+offset_top = 268.0
+offset_right = 404.0
+offset_bottom = 417.0
 grow_horizontal = 2
 grow_vertical = 2
+texture_normal = ExtResource("4_l7gln")
+texture_pressed = ExtResource("5_thd5c")
+
+[node name="Label3" type="Label" parent="Window/Button3"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -49.5
+offset_top = 10.0
+offset_right = 50.5
+offset_bottom = 76.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 100
-text = "_"
+theme_override_fonts/font = ExtResource("3_wxd0s")
+theme_override_font_sizes/font_size = 40
+text = "Space"
 
-[node name="Button3" type="Button" parent="."]
+[node name="DelButton" type="TextureButton" parent="Window"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -63.0
-offset_top = 99.0
-offset_right = 86.0
-offset_bottom = 248.0
+offset_left = 523.0
+offset_top = -239.0
+offset_right = 740.0
+offset_bottom = -174.0
 grow_horizontal = 2
 grow_vertical = 2
+texture_normal = ExtResource("4_l7gln")
+texture_pressed = ExtResource("5_thd5c")
+
+[node name="Label4" type="Label" parent="Window/DelButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -23.5
+offset_top = 14.0
+offset_right = 76.5
+offset_bottom = 80.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 100
+theme_override_fonts/font = ExtResource("3_wxd0s")
+theme_override_font_sizes/font_size = 40
+text = "Del"
 
-[node name="DelButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 265.0
-offset_top = 100.0
-offset_right = 356.0
-offset_bottom = 134.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "DEL"
+[node name="TextureButton" type="TextureButton" parent="Window"]
+offset_left = 768.75
+offset_top = -361.25
+offset_right = 828.75
+offset_bottom = -301.25
+texture_normal = ExtResource("6_06xes")
+texture_pressed = ExtResource("7_lv70i")
+stretch_mode = 0
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
-[connection signal="pressed" from="DelButton" to="." method="_on_del_button_pressed"]
+[node name="Translate" type="Sprite2D" parent="."]
+position = Vector2(626, 396)
+rotation = -0.26512
+scale = Vector2(0.382516, 0.382516)
+texture = ExtResource("6_5gl5b")
+
+[connection signal="pressed" from="Window/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Window/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Window/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Window/DelButton" to="." method="_on_del_button_pressed"]
+[connection signal="pressed" from="Window/TextureButton" to="." method="_on_texture_button_pressed"]

@@ -11,6 +11,14 @@ func _ready():
 	add_child(timer)
 	Broadcast.listen("disable_round_timer", self, "_on_disable_round_timer_received")
 	Broadcast.listen("bad_target_hit", self, "_on_bad_target_hit_received")
+	Broadcast.listen("pause", self, "_on_pause_recieved")
+	Broadcast.listen("unpause", self, "_on_unpause_received")
+	
+func _on_pause_recieved(_params):
+	timer.set_paused(true)
+	
+func _on_unpause_received(_params):
+	timer.set_paused(false)
 	
 func _on_bad_target_hit_received(_params):
 	PlayerInfo.shooting_finished = false

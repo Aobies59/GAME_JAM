@@ -18,9 +18,9 @@ func connect_broadcast_messages():
 	Broadcast.listen("drop", self, "_on_drop_message_received")
 	Broadcast.listen("sun_visible", self, "_on_sun_visible_received")
 	Broadcast.listen("bad_target_hit", self, "_on_bad_target_hit_received")
-	Broadcast.listen("looking_at_sun", self, "_on_looking_at_sun_received")
-	Broadcast.listen("not_looking_at_sun", self, "_on_not_looking_at_sun_received")
 	Broadcast.listen("open_gacha_ball", self, "_on_open_gacha_ball_received")
+	Broadcast.listen("request_object", self, "_on_request_object_received")
+	Broadcast.listen("correct_object", self, "_on_correct_object_received")
 
 func _on_congrats_message_received(_params):
 	display_popup("Congrats!")
@@ -39,18 +39,18 @@ func _on_advance_round_received(_params):
 	
 func _on_bad_target_hit_received(_params):
 	display_popup("I wouldn't hit that one!")
-
-var looking_at_sun = false
-func _on_looking_at_sun_received(_params):
-	looking_at_sun = true
-	
-func _on_not_looking_at_sun_received(_params):
-	looking_at_sun = false
 	
 var strong_paper = preload("res://world_related/collectables/strong_paper.tscn")
 func _on_open_gacha_ball_received(_params):
 	var relative_position = self.position - $CamRoot/Camera3D.get_global_transform().basis.z
 	$HUD.drop(relative_position, false, strong_paper)
+	
+func _on_request_object_received(params):
+	var requested_object = params["object"]
+	display_popup("I request a " + requested_object)
+	
+func _on_correct_object_received(_params):
+	display_popup("Perfect...")
 
 var speed = 5.0
 var interactable_object = null
@@ -159,9 +159,9 @@ func handle_other_inputs():
 		clicking = false
 		if hammer_in_use:
 			var power = HAMMER_LOAD_TIME - hammer_timer.time_left
-			swing_hammer(power)
+			swing_hammer(power)	
 			
-	if Input.is_action_just_pressed("interact") and looking_at_sun and CloseObjects.object_in_hand != null:
+	if Input.is_action_just_pressed("interact") and $CamRoot.rotation_degrees.x >= 55 and CloseObjects.object_in_hand != null:
 		Broadcast.send("sun_give", {"item": CloseObjects.object_in_hand})
 		
 	scroll_inventory_slots()
@@ -179,6 +179,9 @@ var objects_in_front: Array
 func handle_interact_inputs():
 	if something_open:
 		return
+		
+	if Input.is_action_just_pressed("interact") and CloseObjects.object_in_hand != null and $CamRoot.rotation_degrees.x == 75:
+		Broadcast.send("present_object", {"object": CloseObjects.object_in_hand})
 	if Input.is_action_just_pressed("interact") and interactable_object != null:
 	# if the object is interactable, interact with it
 		if interactable_object.name.begins_with("interactable") and interactable_object.interactable:
@@ -189,6 +192,8 @@ func handle_interact_inputs():
 			# only update the inventory space if the object was collected succesfully
 			if $HUD.collect(interactable_object) == 0:
 				inventory_space -= 1
+			if CloseObjects.object_in_hand == "Gacha_Ball":
+				interactable_object.gravity_scale = 1
 	
 	# handle second interact button
 	if Input.is_action_just_pressed("interact2") and len(objects_in_front) == 0 and is_on_floor():

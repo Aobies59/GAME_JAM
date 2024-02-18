@@ -13,3 +13,6 @@ var paused = false
 var clever_open = false
 var strong_open = false
 var gunner_open = false
+
+# rounds related
+var round_number = 1

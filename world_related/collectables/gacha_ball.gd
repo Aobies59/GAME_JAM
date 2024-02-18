@@ -7,3 +7,6 @@ func _ready():
 	
 func _on_open_gacha_ball_received(_params):
 	self.queue_free()
+
+func _on_tree_change():
+	self.gravity_scale = 1
